@@ -75,7 +75,8 @@
   width="600" 
   height="450" 
   style="border:0;" 
-  allowfullscreen="">
+  allowfullscreen="" 
+  loading="lazy">
 </iframe>
 
   <!-- HTML JavaScript Button -->
@@ -89,16 +90,27 @@
     <p>This is a responsive layout example.</p>
   </div>
 
-  <!-- HTML Forms -->
-  <form action="/submit" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username"><br><br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email"><br><br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password"><br><br>
-    <input type="submit" value="Submit">
-  </form>
+  <!-- HTML Graphics -->
+  <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;"></canvas>
+
+  <!-- HTML SVG -->
+  <svg width="100" height="100">
+    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+  </svg>
+
+  <!-- HTML Media -->
+  <video width="320" height="240" controls>
+    <source src="movie.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <audio controls>
+    <source src="audio.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- HTML Plug-ins -->
+  <embed src="example.swf" width="200" height="200">
 
   <footer>
     <p>&lt; &copy; 2021 KTT Telematics &gt;</p>
