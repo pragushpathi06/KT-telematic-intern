@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target Attribute Example</title>
+</head>
+<body>
+
+    <h2>Target Attribute in Anchor Tags</h2>
+
+    <!-- Opens in a new tab -->
+    <p><a href="https://www.google.com" target="_blank">Open Google in a new tab</a></p>
+
+    <!-- Opens in the same tab (default behavior) -->
+    <p><a href="about.html" target="_self">Open About Page in the same tab</a></p>
+
+    <!-- Opens in the parent frame (only works inside iframes) -->
+    <p><a href="https://www.example.com" target="_parent">Open Example in Parent Frame</a></p>
+
+    <!-- Opens in the full body (useful for breaking out of nested iframes) -->
+    <p><a href="https://www.wikipedia.org" target="_top">Open Wikipedia in Full Screen</a></p>
+
+    <!-- Opens in a named iframe -->
+    <iframe name="myFrame" width="400" height="200"></iframe>
+    <p><a href="https://www.bing.com" target="myFrame">Load Bing inside iframe</a></p>
+
+</body>
+</html>

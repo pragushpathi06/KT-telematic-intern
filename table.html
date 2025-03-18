@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .table1 {
+            width: 50%;
+            /* border-cllapse: collapse; */
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+       .table1 th, .table3 th {
+            background-color: #f2f2f2;
+        }
+        .table2  caption,.table3 caption {
+            padding: 10px;
+            font-size:larger;
+            font-weight: bold;
+            border: 1px solid black;
+            background-color:burlywood;
+        }
+        .table2 , .table3 {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 50%;
+            
+        }
+        .table1 {
+            margin-bottom: 20px;
+        }
+        .table2 {
+            margin-top: 20px;
+        }
+        .table3 {
+            margin-top: 50px;
+        }
+        p {
+            font-size: larger;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Attributes - align, bgcolor, border, cellpadding, cellspacing, summary, width
+    </h1>
+    <h1>Visual layout of table contents</h1>
+    <p>caption , thead , colgroup , col ,th ,tbody ,tr , td , tfoot</p>
+    <table class="table1" border="1">  
+        <caption>Tyre Details</caption>
+        <thead>
+            <tr>
+                <th scope="col">Brand</th>
+                <th scope="col">Tyre Size</th>
+                <th scope="col">Rim Diameter (inches)</th>
+                <th scope="col">Tyre Width (mm)</th>
+                <th scope="col">Aspect Ratio</th>
+                <th scope="col">Section Width (mm)</th>
+                <th scope="col">Tyre Type</th>
+                <th scope="col">Speed Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">Pragushpathi</td>
+                <td>205/55R16</td>
+                <td>16</td>
+                <td>205</td>
+                <td>55</td>
+                <td>215</td>
+                <td>Radial</td>
+                <td>V (240 km/h)</td>
+            </tr>
+            <tr>
+                <td scope="row">Bridgestone</td>
+                <td>195/65R15</td>
+                <td>15</td>
+                <td>195</td>
+                <td>65</td>
+                <td>205</td>
+                <td>Radial</td>
+                <td>H (210 km/h)</td>
+            </tr>
+            <tr>
+                <td scope="row">Angelina Jolie</td>
+                <td>225/50R17</td>
+                <td>17</td>
+                <td>225</td>
+                <td>50</td>
+                <td>235</td>
+                <td>Radial</td>
+                <td>W (270 km/h)</td>
+            </tr>
+            <tr>
+                <td  scope="row">Scarlett Johansson</td>
+                <td>235/40R18</td>
+                <td>18</td>
+                <td>235</td>
+                <td>40</td>
+                <td>245</td>
+                <td>Radial</td>
+                <td>Y (300 km/h)</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td  colspan="8" style="text-align: center; font-size:larger;">The tyre details provided above are not accurate</td>
+            </tr>
+        </tfoot>
+    </table>
+    <br>
+    <br>
+    <table class="table2" border="1">
+        <caption>Tyre Details</caption>
+        <thead>
+            <tr>
+                <th scope="col">Brand</th>
+                <th scope="col">Tyre Size</th>
+                <th scope="col">Rim Diameter (inches)</th>
+                <th scope="col">Tyre Width (mm)</th>
+                <th scope="col">Aspect Ratio</th>
+                <th scope="col">Section Width (mm)</th>
+                <th scope="col">Tyre Type</th>
+                <th scope="col">Speed Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">Pragushpathi</td>
+                <td>205/55R16</td>
+                <td>16</td>
+                <td>205</td>
+                <td>55</td>
+                <td>215</td>
+                <td>Radial</td>
+                <td>V (240 km/h)</td>
+            </tr>
+            <tr>
+                <td scope="row">Bridgestone</td>
+                <td>195/65R15</td>
+                <td>15</td>
+                <td>195</td>
+                <td>65</td>
+                <td>205</td>
+                <td>Radial</td>
+                <td>H (210 km/h)</td>
+            </tr>
+            <tr>
+                <td scope="row">Angelina Jolie</td>
+                <td>225/50R17</td>
+                <td>17</td>
+                <td>225</td>
+                <td>50</td>
+                <td>235</td>
+                <td>Radial</td>
+                <td>W (270 km/h)</td>
+            </tr>
+            <tr>
+                <td  scope="row">Scarlett Johansson</td>
+                <td>235/40R18</td>
+                <td>18</td>
+                <td>235</td>
+                <td>40</td>
+                <td>245</td>
+                <td>Radial</td>
+                <td>Y (300 km/h)</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td  colspan="8" style="text-align: center; font-size:larger;">The tyre details provided above are not accurate</td>
+            </tr>
+        </tfoot>
+    </table>
+    <table class="table3" border="1">
+        <caption>
+          Tyre current status
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col" rowspan="2">Brand</th>
+            <th scope="col" rowspan="2">Tyre ID</th>
+            <th scope="col" colspan="2">Tyre life period</th>
+            <th scope="col" rowspan="2">Tyre Amount</th>
+          </tr>
+          <tr>
+            <th scope="col">Manufaturing date </th>
+            <th scope="col">Expiry date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">CEAT Tyre</th>
+            <td>427311</td>
+            <td><time datetime="2010-06-03">June 3, 2010</time></td>
+            <td><time datetime="2015-06-05">June 5, 2015</time></td>
+            <td>15000.00</td>
+          </tr>
+          <tr>
+            <th scope="row">MRF</th>
+            <td>533175</td>
+            <td><time datetime="2011-01-13">January 13, 2011</time></td>
+            <td><time datetime="2017-04-08">April 8, 2017</time></td>
+            <td>23000.00</td>
+          </tr>
+          <tr>
+            <th scope="row">APPOLO</th>
+            <td>601942</td>
+            <td><time datetime="2012-07-23">July 23, 2012</time></td>
+            <td><time datetime="2017-04-08">April 8, 2017</time></td>
+            <td>25000.00</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row" colspan="4">Total Amount</th>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+      
+    
+</body>
+</html>

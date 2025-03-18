@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container2 {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        .container1 {
+            width: 30%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #333;
+        }
+        .gender-block {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            gap: 10px;
+        }
+        .Interests-block {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            gap: 10px;
+        }
+        /* label {
+            display: block;
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border: none;
+        }
+        input[type="reset"] {
+            background: orange;
+            color: white;
+        }
+        input[type="button"] {
+            background: blue;
+            color: white;
+        }
+        input, select {
+            width: 95%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        } */
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 95%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+        input[type="submit"], input[type="reset"], input[type="button"] {
+            width: auto;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background: green;
+            color: white;
+        }
+        input[type="reset"] {
+            background: orange;
+            color: white;
+        }
+        input[type="button"] {
+            background: blue;
+            color: white;
+        }
+
+
+        </style>
+</head>
+<body>
+
+    <div class="container1">
+        <h1>Form</h1>
+        <p>Fill in the form below:</p>
+    <form action="form.php" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+    <br>
+    <br>
+    <h1></h1>
+    <div class="container2 ">
+        <h1>Form 2</h1>
+        <form>
+            <h2>All Input Types Example</h2>
+    
+            <label for="text">Name:</label>
+            <input type="text" id="text" name="text" placeholder="Enter your name">
+    
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+    
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+    
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+    
+            <label for="website">Website:</label>
+            <input type="url" id="website" name="website" placeholder="Enter your website URL">
+    
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="1" max="100">
+    
+            <label for="search">Search:</label>
+            <input type="search" id="search" name="search" placeholder="Search here">
+    
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob">
+    
+            <label for="appointment">Appointment Date & Time:</label>
+            <input type="datetime-local" id="appointment" name="appointment">
+
+            <label for="Quantity">Quantity:</label>
+            <input type="number" id="Quantity" name="Quantity" min="1" max="10">    
+
+            <label for="time">Preferred Time:</label>
+            <input type="time" id="time" name="time">
+    
+            <label for="month">Birth Month:</label>
+            <input type="month" id="month" name="month">
+    
+            <label for="week">Select a Week:</label>
+            <input type="week" id="week" name="week">
+    
+            <label for="color">Favorite Color:</label>
+            <input type="color" id="color" name="color">
+            <div class="gender-block">
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+            </div>
+            
+            <div class="Interests-block">
+                <label>Interests:</label>
+                <input type="checkbox" id="sports" name="interests" value="sports">
+                <label for="sports">Sports</label>
+                <input type="checkbox" id="music" name="interests" value="music">
+                <label for="music">Music</label>
+                <input type="checkbox" id="travel" name="interests" value="travel">
+                <label for="travel">Travel</label>
+            </div>
+            <label for="country">Select type of car</label>
+            <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>  
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+    
+            <label for="range">Volume Control:</label>
+            <input type="range" id="range" name="range" min="1" max="100">
+    
+            <label for="resume">Upload Resume:</label>
+            <input type="file" id="resume" name="resume">
+    
+            <input type="hidden" id="hidden" name="hiddenValue" value="12345">
+    
+
+            <label for="fileInput">Choose an image:</label>
+            <input type="file" id="fileInput" accept="image/*">
+            <br><br>
+            <img id="previewImage" src="#" alt="Preview" width="100" style="display: none;">
+            <br><br>
+
+
+
+
+
+    
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+            <input type="button" value="Click Me" onclick="alert('Button Clicked!')">
+    
+        </form>
+    </div>     
+    <!-- <svg
+            viewBox="0 0 17 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.8153 10.3439C12.6061 9.2673 13.0732 7.9382 13.0732 6.5C13.0732 2.91015 10.163 0 6.57318 0C2.98333 0 0.0731812 2.91015 0.0731812 6.5C0.0731812 10.0899 2.98333 13 6.57318 13C8.01176 13 9.3412 12.5327 10.4179 11.7415L10.4171 11.7422C10.4466 11.7822 10.4794 11.8204 10.5156 11.8566L14.3661 15.7071C14.7566 16.0976 15.3898 16.0976 15.7803 15.7071C16.1708 15.3166 16.1708 14.6834 15.7803 14.2929L11.9298 10.4424C11.8936 10.4062 11.8553 10.3734 11.8153 10.3439ZM12.0732 6.5C12.0732 9.53757 9.61075 12 6.57318 12C3.53561 12 1.07318 9.53757 1.07318 6.5C1.07318 3.46243 3.53561 1 6.57318 1C9.61075 1 12.0732 3.46243 12.0732 6.5Z"
+              fill="currentColor"
+            ></path>
+          </svg>  
+           
+          <svg
+          stroke="currentColor"
+          fill="currentColor"
+          stroke-width="0"
+          viewBox="0 0 640 512"
+          focusable="false"
+          class="chakra-icon css-9gdywz"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"
+          ></path>
+        </svg>  -->
+</body>
+</html>
