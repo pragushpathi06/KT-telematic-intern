@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+            transform: rotateY(180deg);
+        }
+
+        .monkey_rider {
+            border: 2px solid black;
+            width: 100%;
+            height: 500px;
+            position: relative;
+        }
+
+        .monkey_pic img {
+            margin-top: 400pX;
+            animation: monkey 9s linear 0.3s infinite;
+        }
+
+        @keyframes monkey {
+            0% {
+                transform: translate(0, 0) rotateY(180deg);
+            }
+
+            25% {
+                transform: translate(400px, 0) rotateY(180deg) rotateZ(30deg);
+            }
+
+            50% {
+                /* transform: translate(50vw, 2px)  rotateZ(180deg); */
+                transform: translate(800px, -225px) rotateY(180deg) rotateZ(0deg);
+                /* transform: rotateX(160deg); */
+                /* animation: monkey1 3s linear 0.3s infinite;                 */
+                /* animation: monkey1 duration timing-function delay iteration-count direction fill-mode;  */
+            }
+            55%{
+                transform: translate(800px, -225px) rotateY(180deg) rotateZ(360deg);
+            }
+            /* 60%{
+                transform: translate(850px, -225px) rotateY(180deg) rotateZ(360deg);
+            } */
+            /* 65%{
+                transform: translate(900px, -225px) rotateY(180deg)rotateZ(360deg);
+            } */
+
+            75% {
+                transform: translate(1300px, 0) rotateY(180deg) rotateZ(360deg);
+            }
+
+            100% {
+                transform: translate(1700px, 0) rotateY(180deg);
+            }
+
+
+        }
+
+        .monkey_pic1 img{
+            animation: monkey1 2s linear 0.3s infinite;
+        }
+
+        @keyframes monkey1 {
+            from {
+                transform: rotateZ(0deg) ;
+            }
+
+            to {
+                transform: rotateZ(360deg);
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="monkey_rider">
+        <div class="monkey_pic">
+            <img src="/css_practice/89bq_3hq1_210802-removebg-preview.png" alt="monkey riding bike image">
+        </div>
+        <br>
+        
+    </div>
+    <div class="monkey_rider1">
+        <div class="monkey_pic1">
+            <img src="/css_practice/89bq_3hq1_210802-removebg-preview.png" alt="monkey riding bike image">
+        </div>
+    </div>
+</body>
+
+</html>

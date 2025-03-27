@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Movie Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Roboto, sans-serif;
+        }
+        
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .header-block {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: aliceblue;
+        }
+        
+        .header-block img {
+            height: 50px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 5px;
+        }
+        
+        .signin-block button {
+            background-color: rgb(248, 68, 100);
+            padding: 5px 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .nav-block {
+            background-color: blanchedalmond;
+            padding: 10px;
+            text-align: center;
+        }
+        .nav-block a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        
+        .recommended-movies {
+            padding: 20px;
+        }
+        
+        .recommended-movies h2 {
+            color: #333;
+        }
+        
+        .movie-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .movie-card {
+            width: 200px;
+            background: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        
+        .movie-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        /* @media screen and (max-width: 600px) {
+            .header-block {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-block {
+                text-align: center;
+            }
+            .movie-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            .movie-card {
+                width: 90%;
+            }
+        } */
+    </style>
+</head>
+<body>
+    <div class="header-block">
+        <img src="pngwing.com.png" alt="Logo">
+        <div class="search-box">
+            <input type="text" placeholder="Search for Movies, Events, Plays...">
+        </div>
+        <div class="signin-block">
+            <button>Sign in</button>
+        </div>
+    </div>
+
+    <div class="nav-block">
+        <nav>
+            <a href="#">Movies</a>
+            <a href="#">Stream</a>
+            <a href="#">Events</a>
+            <a href="#">Plays</a>
+            <a href="#">Sports</a>
+            <a href="#">Activities</a>
+        </nav>
+    </div>
+
+    <div class="recommended-movies">
+        <h2>Recommended Movies</h2>
+        <div class="movie-list">
+            <div class="movie-card">
+                <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC/et00430623-gxyubexxhw-portrait.jpg">
+                <p><strong>Dragon</strong></p>
+                <p>Comedy/Drama/Thriller</p>
+            </div>
+            <div class="movie-card">
+                <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC/et00437649-jveyefuvfu-portrait.jpg">
+                <p><strong>Perusu</strong></p>
+                <p>Comedy/Drama</p>
+            </div>
+            <div class="movie-card">
+                <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC/et00435187-pnklrhzfmp-portrait.jpg">
+                <p><strong>Asthram - The Secret</strong></p>
+                <p>Comedy/Thriller</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
