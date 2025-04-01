@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function login(){
+
+        let name=prompt('enter your name');
+        let password=prompt('enter your password');
+
+        const username = 'pragushpathi';
+        const password1 = '1234';
+
+            if(username === name && password1 === password){
+                alert('you have successfully login');
+                document.getElementById('text').innerText=`Long time no see ${ name} dude....!`;
+            }
+            else{
+                alert('opps.... wrong password');
+            }
+    }
+    </script>
+</head>
+<body>
+    <h1>JavaScript</h1>
+    <h2 id="text">click the button for login</h2><br>
+    <button onclick="login()">Login</button>
+    
+</body>
+</html>
