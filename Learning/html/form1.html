@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyre Details Form</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 100px;
+            padding: 0px;
+        }
+        .container {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 95%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Tyre Details Form</h2>
+        <form action="/table.html" method="post" target="_self">
+            <label for="tyreNo">Tyre No:</label>
+            <input type="text" id="tyreNo" name="tyreNo" placeholder="Enter Tyre Number" pattern="[0-9]{4}[A-]" required>
+
+            <label for="make">Make:</label>
+            <input type="text" id="make" name="make" placeholder="Enter Make" required>
+
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" placeholder="Enter Model" required>
+
+            <label for="tyreSize">Tyre Size:</label>
+            <input type="text" id="tyreSize" name="tyreSize" placeholder="Enter Tyre Size (e.g., 225/45R17)" 
+       pattern="[0-9]{3}/[0-9]{2}[A-Z]{}[0-9]{2}" required>
+
+            <label for="createdDate">Created Date:</label>
+            <input type="date" id="createdDate" name="createdDate" required>
+
+            <label for="retreadDate">Retread Date:</label>
+            <input type="date" id="retreadDate" name="retreadDate">
+
+            <label for="condition">Condition:</label>
+            <select id="condition" name="condition">
+                <option value="new">New</option>
+                <option value="used">Used</option>
+                <option value="retreaded">Retreaded</option>
+                <option value="damaged">Damaged</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+<!-- Sample Values Pre-filled:
+Tyre No: 1234A
+Make: Michelin
+Model: Pilot Sport 4S
+Tyre Size: 225/45R17
+Created Date: 2024-03-18
+Retread Date: (Empty, can be filled)
+Condition: New (Default selected) -->
+</body>
+</html>
