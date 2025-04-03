@@ -13,6 +13,10 @@
 //     // console.log("\n");
 // }
 
+const { futimesSync } = require("fs");
+
+
+
 // Object
 
 // creating Object
@@ -49,26 +53,95 @@ const obj={
 
 // delete obj.action;
 
-Object.assign(obj,{college:'bit',
-    city:'Madurai'
-})
+// Object.assign(obj,{college:'bit',
+//     city:'Madurai'
+// })
 // const {obj_behavior:myVariable}=obj;
 
 // console.log(myVariable.routine.morning) ;
  
 
-function behavior({college}){
-    const readlineSync = require('readline-sync');
-    console.log(`${college} is worst one...`);
-    const val=readlineSync.question("type True or false :");
-    return val==false?'Your are the ${college}an':'you are fake';
+// function behavior({college}){
+//     const readlineSync = require('readline-sync');
+//     console.log(`${college} is worst one...`);
+//     const val=readlineSync.question("type True or false :");
+//     return val==false?'Your are the ${college}an':'you are fake';
     
-}
+// }
 // console.log(behavior(obj));
 
-for(const val in obj){
-    console.log(obj[val]);
-    
+// for(const val in obj){
+//     console.log(obj[val]);
+// }
+
+const obj1={
+    name:'Atom',
+    show:function(){
+        const display =() =>{
+            console.log(this.name); 
+        }
+        display();
+    }
+};
+// console.log(obj1.show());
+
+function Person(name){
+    this.name=name;
 }
 
+// const p1=new Person('mickey');
+// console.log(p1.name);
 
+const car={
+    carName:'Audi',
+    getBrand:function(){
+        console.log(this.carName);   
+    }
+}
+// console.log(car.getBrand());
+
+function Person(name, age){
+    this.name=name;
+    this.age=age;
+    this.greets =function(){
+        return `hello my name is ${this.name} and i am ${this.age} years old`
+    }
+}
+const p1=new Person('pragush',22);
+const p2=new Person('michael jackson',66);
+
+// console.log(p2.greets());
+
+
+// Optional Chaining
+
+// const user = {
+//     name:'Alice',
+//     address:{
+//         city:'madurai'
+//     }
+// }
+
+// console.log(user.address.city);
+// // console.log(user.contact.email);
+
+// console.log(user?.address?.city);
+// console.log(user?.contact?.email);
+// console.log(user);
+
+const user=[{name:'pragushpathi'},{name:'madonna sebastian'}] 
+
+// console.log(user?.[0]?.name);
+// console.log(user?.[2]?.name);
+
+const clonedObj = structuredClone(user);
+// console.log(clonedObj);
+// console.log(Object.keys(obj));
+// console.log(Object.values(obj));
+
+// const ft=Object.entries(obj)
+// console.log(ft);
+
+// console.log(Object.hasOwn(obj, "age"));
+const frozenObj = Object.freeze({ name: "Sam" });
+console.log(frozenObj.name); 

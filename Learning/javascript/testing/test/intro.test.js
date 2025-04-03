@@ -1,5 +1,5 @@
 const assert = require('assert');
-const fact = require('../src/javascript3');  // Ensure this path is correct
+const fact = require('../src/javascript3');  
 
 describe('Factorial Function', function () {
     it('should return 1 for input 0', function () {
