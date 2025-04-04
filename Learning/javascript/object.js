@@ -1,6 +1,6 @@
-import data from '../javascript/rows1.json' assert{ type:'json'};
+// import data from '../javascript/rows1.json' assert{ type:'json'};
 
-console.log(data);
+// console.log(data);
 
 import fs from 'fs';
 
@@ -48,4 +48,5 @@ for (let index = 0; index < col.length; index++) {
 
 console.log( typeof col);
 console.log(col);
+
 
