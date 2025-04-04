@@ -7,6 +7,7 @@
 // data type in javascript ---- 
 //primitive - String number bigint boolean null undefined symbol
 // non-primitive - object
+
 const name ='john';
 const age=21;
 const rating=4.5;

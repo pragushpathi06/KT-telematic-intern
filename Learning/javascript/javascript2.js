@@ -1,30 +1,28 @@
 
-// // let count=1;
-// // cut:for(let i=0;i<=1;i++){
-// //     for(let j=0;j<=1;j++){
-// //             for(let k=0;k<=1;k++){
-// //                 console.log("hi"+""+count++);
-// //                 if(k===1) break cut;
-// //             }
-// //         // console.log("hi1");
-// //         // console.log("\n");
-// //     }
-// //     // console.log("hi2");
-// //     // console.log("\n");
-// // }
+// let count=1;
+// for(let i=0;i<=1;i++){
+//     cut: for(let j=0;j<=1;j++){
+//             for(let k=0;k<=1;k++){
+//                 console.log("hi"+""+count++);
+//                 if(k===1) break cut;
+//             }
+//         console.log("hi1");
+//         console.log("\n");
+//     }
+//     console.log("hi2");
+//     console.log("\n");
+// }
 
-// const { log } = require("console");
-// const { futimesSync } = require("fs");
 
 
 
 // // Object
 
-// // creating Object
+// creating Object
 
 // const obj={
 //     name:'Pragushpathi',
-//     age : 22,
+//     String : 22,
 //     obj_behavior: {
 //                 alive:true,
 //                 mark:72,
@@ -39,41 +37,43 @@
 //         return `Time for ${obj.obj_behavior.routine.afternoon}`
 //     }
 // }
-
-// // console.log(obj["obj_behavior"]);
-// // console.log(obj.obj_behavior.hobbies[3]);
-// // console.log(obj.action());
-// // const person=Object.create(obj);
+// console.log(obj.String);
 
 
-// // person.college='Bit'
-// // console.log(obj);
+// console.log(obj["obj_behavior"]);
+// console.log(obj.obj_behavior.hobbies[3]);
+// console.log(obj.action());
+// const person=Object.create(obj);
 
-// // console.log(Object.keys(obj));
+
+// person.college='Bit'
+// console.log(obj);
+
+// console.log(Object.keys(obj));
 
 
-// // delete obj.action;
+// delete obj.action;
 
-// // Object.assign(obj,{college:'bit',
-// //     city:'Madurai'
-// // })
-// // const {obj_behavior:myVariable}=obj;
+// Object.assign(obj,{college:'bit',
+//     city:'Madurai'
+// })
+// const {obj_behavior:myVariable}=obj;
 
-// // console.log(myVariable.routine.morning) ;
+// console.log(myVariable.routine.morning) ;
  
 
-// // function behavior({college}){
-// //     const readlineSync = require('readline-sync');
-// //     console.log(`${college} is worst one...`);
-// //     const val=readlineSync.question("type True or false :");
-// //     return val==false?'Your are the ${college}an':'you are fake';
+// function behavior({college}){
+//     const readlineSync = require('readline-sync');
+//     console.log(`${college} is worst one...`);
+//     const val=readlineSync.question("type True or false :");
+//     return val==false?'Your are the ${college}an':'you are fake';
     
-// // }
-// // console.log(behavior(obj));
+// }
+// console.log(behavior(obj));
 
-// // for(const val in obj){
-// //     console.log(obj[val]);
-// // }
+// for(const val in obj){
+//     console.log(obj[val]);
+// }
 
 // const obj1={
 //     name:'Atom',
@@ -84,14 +84,14 @@
 //         display();
 //     }
 // };
-// // console.log(obj1.show());
+// console.log(obj1.show());
 
 // function Person(name){
 //     this.name=name;
 // }
 
-// // const p1=new Person('mickey');
-// // console.log(p1.name);
+// const p11=new Person('mickey');
+// console.log(p1.name);
 
 // const car={
 //     carName:'Audi',
@@ -111,47 +111,51 @@
 // const p1=new Person('pragush',22);
 // const p2=new Person('michael jackson',66);
 
-// // console.log(p2.greets());
+// console.log(p2.greets());
 
 
 // // Optional Chaining
 
-// // const user = {
-// //     name:'Alice',
-// //     address:{
-// //         city:'madurai'
-// //     }
-// // }
+// const user = {
+//     name:'Alice',
+//     address:{
+//         city:'madurai'
+//     }
+// }
 
-// // console.log(user.address.city);
-// // // console.log(user.contact.email);
+// console.log(user.address.city);
+// // console.log(user.contact.email);
 
-// // console.log(user?.address?.city);
-// // console.log(user?.contact?.email);
-// // console.log(user);
+// console.log(user?.address?.city);
+// console.log(user?.contact?.email);
+// console.log(user);
 
-// const user=[{name:'pragushpathi'},{name:'madonna sebastian'}] 
+// const user21=[{name:'pragushpathi'},{name:'madonna sebastian'}] 
 
-// // console.log(user?.[0]?.name);
-// // console.log(user?.[2]?.name);
+// console.log(user?.[0]?.name);
+// console.log(user?.[2]?.name);
 
 // const clonedObj = structuredClone(user);
-// // console.log(clonedObj);
-// // console.log(Object.keys(obj));
-// // console.log(Object.values(obj));
+// console.log(clonedObj);
+// console.log(Object.keys(obj));
+// console.log(Object.values(obj));
 
-// // const ft=Object.entries(obj)
-// // console.log(ft);
+// const ft=Object.entries(obj)
+// console.log(ft);
 
-// // console.log(Object.hasOwn(obj, "age"));
+// console.log(Object.hasOwn(obj, "age"));
 // const frozenObj = Object.freeze({ name: "Sam" });
 // console.log(frozenObj.name); 
 
-// // Converts an object to a JSON string.
+
+
+
+
+// Converts an object to a JSON string.
 // console.log(JSON.stringify(obj));
 
-// // Converts a JSON string back to an object.
-// // console.log(JSON.parse(obj));
+// Converts a JSON string back to an object.
+// console.log(JSON.parse(obj));
 
 // // Symbol
 // //  When creating hidden object properties (e.g., metadata, private data).
@@ -182,6 +186,12 @@
 // // number --valueOf() or toString() 
 // // default
 
+// Hint	Method Order
+// "string"	obj[Symbol.toPrimitive]("string") → obj.toString() → obj.valueOf()
+// "number"	obj[Symbol.toPrimitive]("number") → obj.valueOf() → obj.toString()
+// "default"	obj[Symbol.toPrimitive]("default") → obj.valueOf() → obj.toString()
+
+
 // let user4 = {
 //     name: "John",
 //     money: 1000,
@@ -203,4 +213,4 @@
 //     }
 //   };
 //   console.log(obj5+2);
-  
+
