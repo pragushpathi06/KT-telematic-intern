@@ -1,5 +1,6 @@
-import { log } from 'console';
+// import { log } from 'console';
 import fs from 'fs';
+import { log } from 'util';
 
 const rawData1 = fs.readFileSync(new URL('../javascript/sampleData.json', import.meta.url), 'utf8');
 const sampleData = JSON.parse(rawData1);
@@ -29,7 +30,7 @@ for (const ele of array) {
     }
 }
 // console.log(array);
-
+ 
 // console.log(Object.keys(clone));
 const countNum=()=>{
     let temp={}
@@ -47,29 +48,120 @@ const columns1=countNum();
 //         console.log(true);
 //     }
 // }
-// for (const key in columns1[0] ) {
-//     if (Object.prototype.hasOwnProperty.call(object, key)) {
-//         const element = object[key];
-        
-//     }
-// }
-
 // console.log(Object.values(columns1.columns[0]));
 
-let arrTemp={
-}
-for (const element of columns1.columns) {
-    if(element?.id === 565386694){
 
-        // console.log(element.id);
-        // console.log(element.id.cachedContents);
-        // console.log(Object.keys(element));
-        // for (const key in element) {
-        //     if(Object.keys())
-        //     element[key]);
-        // }
+for (const element of columns1.columns) {
+    if(element?.id === 565386694 && element?.cachedContents){
+        for (const key in element?.cachedContents) {
+             if(key==='top') {
+                  let arrTemp=element?.cachedContents[key];
+                  for (const ele1 in arrTemp) {
+                    if(arrTemp[ele1].count === '4085') {
+                    arrTemp[ele1].count='23423424';
+                    // console.log(arrTemp);
+                    }
+                }
+            }
+        }
     }
 }
 
-console.log(arrTemp);
 
+
+// 17 Array method 
+// .toString();
+// .join();
+// .concat();
+// .splice();
+// .slice();
+// .indexOf();
+// .lastIndex();
+// .foreach();
+// .map();
+// .filter();
+// .reduce();
+// .some();
+// .every();
+// .flat();
+// .find();
+// .findindex();
+// .sort();
+
+let name =()=>{
+    for (const key of array) {
+        // console.log(key);
+        if(key?.flags) return (Object.values(key?.flags));
+        // console.log('-----');
+    }
+};
+// console.log(Object.keys(name));
+console.log(name());
+
+let val= name().toString();
+console.log(val);
+
+console.log('------');
+console.log(name().join(' and '));
+
+let name2 =()=>{
+    for (const key of array) {
+        // console.log(key);
+        if(key?.tags) return (Object.values(key.tags));
+        // console.log('-----');
+    }
+};
+
+console.log('------');
+let joining=name().concat(name2());
+console.log(joining);
+
+console.log('-----');
+console.log(joining.splice(1,5));
+
+console.log('-----');
+console.log(joining.slice(1,5));
+console.log(joining);
+console.log(joining.splice(1,2,'pragushpathi'));
+console.log(joining);
+
+
+console.log('------');
+let nameCopy=[... joining]
+console.log(nameCopy === joining);
+console.log('------');
+
+console.log(joining.indexOf('pragushpathi'));
+joining.push('pragushpathi');
+
+console.log(joining.lastIndexOf('pragushpathi'));
+console.log('------');
+
+
+joining.push(nameCopy);
+console.log(joining);
+console.log(joining.flat());
+joining=joining.flat();
+
+console.log('------');
+joining.forEach(n=>{
+    if(n.charAt(0)==='p'){
+    console.log(n);
+    }
+})
+
+console.log('------');
+let names = joining.map((n) => {
+    if (n.charAt(0) === 'p') {
+      return 'Pragushpathi';
+    }
+    return n;
+  });
+console.log(names);
+
+  
+
+
+
+
+ 
