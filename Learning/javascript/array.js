@@ -1,6 +1,6 @@
 // import { log } from 'console';
 import fs from 'fs';
-import { log } from 'util';
+
 
 const rawData1 = fs.readFileSync(new URL('../javascript/sampleData.json', import.meta.url), 'utf8');
 const sampleData = JSON.parse(rawData1);
@@ -50,16 +50,16 @@ const columns1=countNum();
 // }
 // console.log(Object.values(columns1.columns[0]));
 
-
+let arrTemp
 for (const element of columns1.columns) {
     if(element?.id === 565386694 && element?.cachedContents){
         for (const key in element?.cachedContents) {
              if(key==='top') {
-                  let arrTemp=element?.cachedContents[key];
+                  arrTemp=element?.cachedContents[key];
                   for (const ele1 in arrTemp) {
                     if(arrTemp[ele1].count === '4085') {
                     arrTemp[ele1].count='23423424';
-                    // console.log(arrTemp);
+                    console.log(arrTemp);
                     }
                 }
             }
@@ -80,8 +80,7 @@ for (const element of columns1.columns) {
 // .foreach();
 // .map();
 // .filter();
-// .reduce();
-// .some();
+// .reduce(); 
 // .every();
 // .flat();
 // .find();
@@ -99,10 +98,10 @@ let name =()=>{
 console.log(name());
 
 let val= name().toString();
-console.log(val);
+console.log('Array as string using .toString() -', val);
 
 console.log('------');
-console.log(name().join(' and '));
+console.log("Join array with '-' using .join() - " ,name().join(' and '));
 
 let name2 =()=>{
     for (const key of array) {
@@ -114,13 +113,13 @@ let name2 =()=>{
 
 console.log('------');
 let joining=name().concat(name2());
-console.log(joining);
+console.log("Concatenate arrays using .concat() - " +joining);
 
 console.log('-----');
-console.log(joining.splice(1,5));
+console.log("Using .splice() to replace 1 item at index 1 - Removed: " +joining.splice(1,5));
 
 console.log('-----');
-console.log(joining.slice(1,5));
+console.log("Using .slice() from index 1 to 5 - " +joining.slice(1,5));
 console.log(joining);
 console.log(joining.splice(1,2,'pragushpathi'));
 console.log(joining);
@@ -140,7 +139,7 @@ console.log('------');
 
 joining.push(nameCopy);
 console.log(joining);
-console.log(joining.flat());
+console.log("Flatten array using .flat() -",joining.flat());
 joining=joining.flat();
 
 console.log('------');
@@ -157,11 +156,80 @@ let names = joining.map((n) => {
     }
     return n;
   });
-console.log(names);
+console.log("Mapped array replacing values starting with 'p' -",names);
 
-  
+console.log('-----------');
+
+let posts=[
+    {title:'post 1', author: 'Dan'},
+    {title:'post 2', author: 'Dan'},
+    {title:'post 3', author: 'Sarah'},
+];
+let danPost=posts.filter((p)=>p.author === 'Sarah');
+console.log("Filter posts where author is Dan -",danPost);
+
+console.log('-----------');
+let num=[1,2,3,4,5,6,7];
+console.log("Sum using .reduce() - " ,num.reduce((total,current)=> total+current));
+console.log("Sum with initial value 10 using .reduce() - " ,num.reduce((total,current)=> total+current,10));
+
+
+console.log('-----------');
+console.log(num.every((a) => a>0));
+
+console.log('------------');
+let karr =[... arrTemp];
+console.log(karr);
 
 
 
+console.log('------------');
+console.log(
+    "First item > 3 using .find() - " ,
+    karr.find((s)=> s.item === 'Pembina')
+);
 
- 
+
+console.log('------------');
+console.log(karr.push( { item: 'International Falls', count: '4158' }));
+console.log(karr);
+console.log('------------');
+console.log(karr.pop());
+console.log(karr);
+console.log('------------');
+console.log(karr.unshift({ item: 'International Falls', count: '4158' }));
+console.log(karr);
+console.log('------------');
+console.log(karr.shift());
+console.log(karr);
+console.log('------------');
+
+
+//iterables
+
+let print1=(start=0, end=10,step=1)=>{
+    let current =start;
+    return {next:() =>{
+        if(current<end){
+            let val=current;
+            current +=step;
+            return {
+                val, done:false 
+            }
+        }
+        else{
+            return {
+                val: undefined,done:true
+            }
+        }
+    }
+  }
+}
+
+const iter = print1(4,100,3);
+
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
