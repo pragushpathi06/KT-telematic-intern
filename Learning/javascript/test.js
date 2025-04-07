@@ -16,3 +16,6 @@ user2.age=60;
 console.log(user2.age);
 console.log(object1.age);
 
+// import sampleData from './sampleData.json' assert{type:'json'};
+
+// console.log(sampleData.meta.view.clientContext.inheritedVariables);
