@@ -242,3 +242,53 @@ FROM intern_details A
 JOIN intern_details B 
   ON A.city = B.city 
   AND A.intern_id <> B.intern_id;
+
+
+----subquery
+
+SELECT name, (SELECT MAX("Cgpa") FROM intern_details) AS max_cgpa
+FROM intern_details;
+
+-----Column Subquery
+SELECT name
+FROM intern_details
+WHERE intern_id IN (
+  SELECT intern_id
+  FROM intern_project
+);
+
+------Row Subquery
+
+SELECT name
+FROM intern_details
+WHERE (intern_id, city) = (
+  SELECT intern_id, city
+  FROM intern_details
+  WHERE name = 'Sneha'
+);
+
+-------table subquery
+SELECT *
+FROM (
+  SELECT intern_id, "Cgpa"
+  FROM intern_details
+  WHERE "Cgpa" > 9
+) AS high_cgpa_interns;
+
+
+---view
+CREATE VIEW intern_summary AS
+SELECT intern_id, name, "10th_mark", "12th_mark", "Cgpa"
+FROM intern_details
+WHERE "Cgpa" > 8.5;
+
+---------Modifying Views (Replace)
+CREATE OR REPLACE VIEW intern_summary AS
+SELECT intern_id, name, city, "Cgpa"
+FROM intern_details
+WHERE "Cgpa" > 9.0;
+
+
+
+------Dropping Views
+DROP VIEW intern_summary;
