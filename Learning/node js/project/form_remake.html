@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 12px;
+            box-sizing: border-box;
+
+        }
+    </style>
+</head>
+
+<body style="border: 1px solid black;">
+    <h1 style="text-align: center;">AADHAAR ENROLMENT / CORRECTION FORM</h1>
+    <p style="color: rgb(235, 75, 75);"><i>Aadhaar Enroment is free and voluntary .Correction without 96 hours of
+            enrolment is also free . No charges are applicable for form and aadhaar enrolment . incase of Correction
+            provide your EID,Name and only tht field which needs Correction</i></p>
+    <p>In case of Correction provide your EID NO here:</p>
+    <p style="text-align: center;"> Please follow the instruction overleaf while filling up the form.Use capital letters
+        only.</p>
+    <div class="form" style="width: 50%; height: fit-content; margin: auto; border: 1px solid black; padding: 12px;">
+        <form action="/Project/bookmyshow/index.html" method="post" target="_self">
+            <label for="Pre-Enrolment ID :">Pre-Enrolment ID </label>
+            <input type="text" name="pre_enrolment_id" id="pre_enrolment_id" required maxlength="14">
+            <label for="NPR Receipt/TIN Number :">NPR Receipt/TIN Number </label>
+            <input type="text" name="npr_receipt_tin_number" id="npr_receipt_tin_number" required min="11"
+                maxlength="11"><br><br>
+
+            <label for="Full Name">Full Name:</label>
+            <input type="text" name="full_name" id="full_name" required style="width: 85%;"><br><br>
+            <div class="gender-block">
+                <label for="Gender">Gender:</label>
+                <input type="radio" name="Gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" name="Gender" value="female">
+                <label for="Female">Female</label>
+            </div>
+
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" required>
+
+            <label for="Date of Birth">Date of Birth</label>
+            <input type="date" name="dob" id="dob" required><br><br>
+
+            <fieldset>
+                <legend for="Address">Address Details</legend>
+                <div class="relation-block">
+                    <label for="Relation">Relation:</label>
+                    <input type="checkbox" name="Relation" id="C/O" value="C/O">
+                    <label for="C/O"><abbr title="Care of">C/O</abbr></label>
+                    <input type="checkbox" name="Relation" id="S/O" value="S/O">
+                    <label for="S/O"><abbr title="son of">S/O</abbr></label>
+                    <input type="checkbox" name="Relation" id="D/O" value="D/O">
+                    <label for="D/O"><abbr title="daughter of">D/O</abbr></label>
+                    <input type="checkbox" name="Relation" id="W/O" value="W/O">
+                    <label for="W/O"><abbr title="wife of">W/O</abbr></label>
+                    <input type="checkbox" name="Relation" id="H/O" value="H/O">
+                    <label for="H/O"><abbr title="husband of">H/O</abbr></label>
+                </div>
+                <label for="House No.">House No/Bldg.Aplt:</label>
+                <input type="text" name="House No." id="House No." required style="width: 25%; margin: auto;">
+                <label for="Street/Road/Lane">Street/Road/Lane:</label>
+                <input type="text" name="street" id="street" required style="width: 35%; margin: auto;"><br><br>
+
+                <label for="Landmark">Landmark:</label>
+                <input type="text" name="Landmark" id="Landmark" required style="width: 25%; margin: auto;">
+                <label for="Area/Locality/Sector">Area/Locality/Sector:</label>
+                <input type="text" name="Area/Locality/Sector" id="Area/Locality/Sector" required
+                    style="width: 35%; margin: auto;"><br><br>    
+                <label for="Village/Town/City">Village/Town/City:</label>
+                <input type="text" name="Village/Town/City" id="Village/Town/City" required
+                    style="width: 25%; margin: auto;">
+                <label for="Post Office">Post Office:</label>
+                <input type="text" name="Post Office" id="Post Office" required
+                    style="width: 35%; margin: auto;"><br><br>
+
+                <!-- <select name="District" id="District" required>
+                        <option value="Madurai">Madurai</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Coimbatore">Coimbatore</option>
+                        <option value="Trichy">Trichy</option>
+                        <option value="Tirunelveli">Tirunelveli</option>
+                    </select> -->
+                <label for="District">District:</label>
+                <input list="districts" name="district" id="district" required>
+                <datalist id="districts">
+                    <option value="Madurai">
+                    <option value="Chennai">
+                    <option value="Coimbatore">
+                    <option value="Trichy">
+                    <option value="Tirunelveli">
+                </datalist>
+                <label for="Sub-District">Sub-District:</label>
+                <select name="Sub-District" id="Sub-District" required>
+                    <option value="Madurai East">Madurai East</option>
+                    <option value="Madurai North,">Madurai North</option>
+                    <option value="Madurai South">Madurai South</option>
+                    <option value="Madurai West">Madurai West</option>
+                    <option value="Thirumangalam">Thirumangalam</option>
+                </select>
+                <!-- <label for="state">State</label>
+                <select name="state" id="state" required>
+                    <option value="Tamil Nadu">Tamilnadu</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                </select> -->
+                <label for="state">State</label>
+                <input list="states" name="state" id="state" required>
+                <datalist id="states">
+                    <option value="Tamil Nadu">
+                    <option value="Kerala">
+                    <option value="Karnataka">
+                    <option value="Andhra Pradesh">
+                </datalist>
+
+                <!-- <input list="State" name="State" id="State">
+                    <datalist id="State">
+                        <option value="Tamil Nadu"></option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    </datalist> -->
+            </fieldset><br><br>
+
+            <fieldset>
+                <legend for="contact details">Contact Deatils</legend>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required style="width: 25%;">
+                <label for="mobile">Mobile</label>
+                <input list="mobiles" name="mobile" id="mobile" required maxlength="2" pattern="[0-9]{2}"
+                    style="width:8%;">
+                <datalist id="mobiles">
+                    <option value="91">
+                    <option value="92">
+                    <option value="93">
+                    <option value="94">
+                </datalist>
+                <input type="tel" name="mobile" id="mobile" requied style="width: 25%;">
+
+                <label for="pincode">Pincode</label>
+                <input tpye="number" name="pincode" id="pincode" required style="width: 13%;">
+            </fieldset><br><br>
+            <div class="details">
+                <label for="details of">Details of:</label>
+                <label for="Father">Father</label>
+                <input type="radio" name="details of" id="Father" value="Father">
+                <label for="Mother">Mother</label>
+                <input type="radio" name="details of" id="Mother" value="Mother">
+                <label for="Guardian">Guardian</label>
+                <input type="radio" name="details of" id="Guardian" value="Guardian">
+                <label for="Husband">Husband</label>
+                <input type="radio" name="details of" id="Husband" value="Husband">
+                <label for="Wife">Wife</label>
+                <input type="radio" name="details of" id="Wife" value="Wife"><br><br>
+            </div>
+            <label for="name">Name:</label>
+            <input type="text" name="nameof" id="nameof" required style="width: 85%;"><br><br>
+            <label for="EID/Aadhaar Number">EID/Aadhaar Number:</label>
+            <input type="number" name="EID/AadhaarNumber" id="EID/AadhaarNumber" required maxlength="12"
+                style="width: 75%;"><br><br>
+
+            <fieldset>
+                <legend for="Document Details">Document Details</legend>
+                <label for="For Document Based">For Document Based:</label>
+                <input type="checkbox" name="Proof of Identity," id="Proof of Identity," value="Proof of Identity,">
+                <label for="Proof of Identity"><abbr title="Proof of Identity">POI</abbr></label>
+                <input type="checkbox" name="Proof of Address" id="Proof of Address" value="Proof of Address">
+                <label for="Proof of Address"><abbr title="Proof of Address">POA</abbr></label>
+                <input type="checkbox" name="Date of Birth" id="Date of Birth" value="Date of Birth">
+                <label for="Date of Birth"><abbr title="Date of Birth">DOB</abbr></label>
+                <input type="checkbox" name="Proof of Relationship" id="Proof of Relationship"
+                    value="Proof of Relationship">
+                <label for="Proof oFf Relationship"><abbr title="Proof of Relationship">POR</abbr></label>
+                <br><br>
+                <input type="file" name="files" multiple accept=".pdf">
+                <br><br>
+            </fieldset>
+            <p>I hereby confirm the Identity and address of <input type="text" style="height: 2px;"> as being true,
+                correction and accurate.</p>
+            <br>
+            <br>
+            <label for="Introducer/HoF's Name">Introducer/HoF's Name</label>
+            <input type="text" name="Introducer/HoF's Name" id="Introducer/HoF's Name" required
+                style="width: 15%; height: 2px;">
+            <label for="Signaturn of Introducer/HoF">Signaturn of Introducer/HoF</label>
+            <input type="file" name="files" accept=".pdf">
+            <button type="submit" style="margin-left: 10px;">submit</button>
+        </form>
+    </div>
+    <p style="margin-left: 400px ;"><strong>Constent</strong></p>
+    <p style="margin-left: 400px ;">I confirm that information (including biometrics) provided by me to the UIDAI and
+        the information contained here in is my own and is true , correct and accurate.</p><br>
+    <br>
+    <div class="signature" style="margin-left: 1000px;">
+        <label for="Applicant's Signature/Thumbprint">Applicant's Signature/Thumbprint</label>
+        <input type="file" name="files" accept=".pdf">
+    </div>
+</body>
+
+</html>
