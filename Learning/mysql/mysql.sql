@@ -1,4 +1,4 @@
-CREATE DATABASE ktt-learning;
+-- CREATE DATABASE ktt-learning;
 
 
 -- create table
@@ -12,24 +12,24 @@ CREATE TABLE intern_details (
   personal_mail_id VARCHAR(50) unique,
   phone_number BIGINT,
   "10th_mark" FLOAT CHECK ("10th_mark" BETWEEN 0 AND 100),
-  "12th_mark" FLOAT CHECK ("12th_mark" BETWEEN 0 AND 100),
-  "Cgpa" FLOAT ("Cgpa" BETWEEN 0 AND 10),
-  permanent_address VARCHAR(100),
-  city VARCHAR(30),
-  state VARCHAR(30),
-  nationality VARCHAR(20) default 'Indian'
-);
+  "12th_mark" FLOAT CHECK ("12th_mark" BETWEEN 0 AND 100));
+--   "Cgpa" FLOAT ("Cgpa" BETWEEN 0 AND 10),
+--   permanent_address VARCHAR(100),
+--   city VARCHAR(30),
+--   state VARCHAR(30),
+--   nationality VARCHAR(20) default 'Indian'
+-- );
 
 
 -- INSERT
 
-insert into intern_details(
-   intern_id, name, gender, dob, college_mail_id, personal_mail_id, phone_number,
-  "10th_mark", "12th_mark","Cgpa", permanent_address, city, state, nationality
-) values (
-  'intern01','Pragushpathi','M','2002-10-06','pragushpathi.ct21@bitsathy.ac.in','pragushpathi06102002@gmail.com',
-9895959834,64,79.6,7.81,'123 Main Street','Madurai','TamilNadu','Indian'
-);
+-- insert into intern_details(
+--    intern_id, name, gender, dob, college_mail_id, personal_mail_id, phone_number,
+--   "10th_mark", "12th_mark","Cgpa", permanent_address, city, state, nationality
+-- ) values (
+--   'intern01','Pragushpathi','M','2002-10-06','pragushpathi.ct21@bitsathy.ac.in','pragushpathi06102002@gmail.com',
+-- 9895959834,64,79.6,7.81,'123 Main Street','Madurai','TamilNadu','Indian'
+-- );
 
 INSERT INTO intern_details (
   intern_id, name, gender, dob, college_mail_id, personal_mail_id, phone_number,
@@ -128,7 +128,7 @@ delete from intern_details where intern_id!='intern01';
 
 select * from intern_details where personal_mail_id is null and permanent_address is null and city is null and  state is null;
 
-select * from intern_details where personal_mail_id is null or permanent_address is null or city is null or state is null;4
+select * from intern_details where personal_mail_id is null or permanent_address is null or city is null or state is null;
 
 -- keyword SELECT, INSERT, UPDATE, DELETE
 -- 
@@ -149,11 +149,11 @@ create table student(roll_no int Primary key, name varchar(20), age DATE, city v
 
 truncate table student;
 
-alter table intern_details add column role varchar(15) default 'intern'
+-- alter table intern_details add column role varchar(15) default 'intern'
 
-select * from intern_details order by intern_id DESC limit 2
+-- select * from intern_details order by intern_id DESC limit 2;
 
-select * from intern_details where "10th_mark" = (select max("10th_mark") from intern_details);
+-- select * from intern_details where "10th_mark" = (select max("10th_mark") from intern_details);
 
 select count(*) from intern_details
 
@@ -259,13 +259,13 @@ WHERE intern_id IN (
 
 ------Row Subquery
 
-SELECT name
-FROM intern_details
-WHERE (intern_id, city) = (
-  SELECT intern_id, city
-  FROM intern_details
-  WHERE name = 'Sneha'
-);
+-- SELECT name
+-- FROM intern_details
+-- WHERE (intern_id, city) = (
+--   SELECT intern_id, city
+--   FROM intern_details
+--   WHERE name = 'Sneha'
+-- );
 
 -------table subquery
 SELECT *
@@ -277,16 +277,16 @@ FROM (
 
 
 ---view
-CREATE VIEW intern_summary AS
-SELECT intern_id, name, "10th_mark", "12th_mark", "Cgpa"
-FROM intern_details
-WHERE "Cgpa" > 8.5;
+-- CREATE VIEW intern_summary AS
+-- SELECT intern_id, name, "10th_mark", "12th_mark", "Cgpa"
+-- FROM intern_details
+-- WHERE "Cgpa" > 8.5;
 
 ---------Modifying Views (Replace)
-CREATE OR REPLACE VIEW intern_summary AS
-SELECT intern_id, name, city, "Cgpa"
-FROM intern_details
-WHERE "Cgpa" > 9.0;
+-- CREATE OR REPLACE VIEW intern_summary AS
+-- SELECT intern_id, name, city, "Cgpa"
+-- FROM intern_details
+-- WHERE "Cgpa" > 9.0;
 
 
 
