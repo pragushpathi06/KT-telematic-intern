@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Intern Portal Dashboard</title>
+  <link rel="stylesheet" href="./css/dashboard.css"/>
+  <link rel="icon" href="./image/download.png" type="image/png" sizes="16x16">
+
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="./Javascript/dashboard.js"></script>
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <aside class="side-bar">
+      <div class="logo-title-block">
+        <img src="../Frontend/image/download-removebg-preview.png" alt="Intern Portal Logo" class="logo" />
+        <h1>INTERN PORTAL</h1>
+      </div>
+      <nav class="sidebar">
+        <ul class="module-list">
+          <li><a href="#">Dashboard</a></li>
+          <li class="dropdown">
+            <a href="#">Study Material ▾</a>
+            <ul class="dropdown-content">
+              <li><a href="#">Full Stack Developer</a></li>
+              <li><a href="#">Android Developer</a></li>
+              <li><a href="#">Software Testing</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Work Log</a></li>
+          <li><a href="#">Intern Project</a></li>
+          <li><a href="#">Company Overview</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="body-main">
+      <header class="sub-title-block">
+        <div class="sub-title">
+          <h2>Dashboard</h2>
+        </div>
+      </header>
+
+      <section class="block">
+        <div class="card">
+          <div class="content" style="display: block;">
+            <p>Attendance</p>
+            <p style="color: rgb(33, 233, 93);font-size: 50px;">12 .3</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <p>Full Stack Developer</p>
+            <canvas id="myDoughnutChart" style="width: 100px; height: 100px;"></canvas>
+          </div> 
+        </div>
+        <div class="card">
+          <div class="content" style="display: block;">
+            <p>Monthly Evaluation</p>
+            <p style="color: rgb(33, 233, 93);font-size: 50px;">72</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content" style="display: block;">
+            <p>Monthly Feedback</p>
+            <p style="color: orange;"> Need to improve</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-container">
+        <div id="chartdiv" style="width: 100%; height: 300px;"></div>
+      </section>
+
+      <section class="centre-body">
+        <div class="centre-body-content">
+          <article class="card1">
+            <p class="card1-text">Full Stack Developer</p>
+          </article>
+          <article class="card1">
+            <p class="card1-text">Android Developer</p>
+          </article>
+          <article class="card1">
+            <p class="card1-text">Software Testing</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+  </div>
+</body>
+</html>

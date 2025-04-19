@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f6fc;
+}
+
+.container {
+  width: 80%;
+  max-width: 1100px;
+  height: 70%;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.inner-container {
+  display: flex;
+  height: 100%;
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header-block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.left{
+  padding: 40px;
+  width: 50%;
+}
+
+.logo {
+  width: 150px;
+  margin-right: 10px;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0;
+  color: #333;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.login-form label {
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+
+.login-form input {
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  background-color: #28c1b8;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.google-btn {
+  margin-top: 15px;
+  padding: 10px;
+  width: 100%;
+  background-color: #f1f3f4;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  
+}
+
+.forgot {
+  text-align: right;
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.separator {
+  margin: 20px 0;
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+}
+
+.right-img {
+  width: 100%;
+  height: 100%;
+}
