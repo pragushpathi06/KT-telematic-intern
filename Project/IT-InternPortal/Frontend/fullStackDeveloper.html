@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern Portal Login</title>
+    <link rel="stylesheet" href="./css/fullStackDeveloper.css">
+    <script >
+        document.addEventListener("DOMContentLoaded", function () {
+        const dropdown = document.querySelector(".dropdown");
+        dropdown.querySelector("a").addEventListener("click", function (e) {
+        e.preventDefault(); 
+        dropdown.classList.toggle("active");
+    });
+  });
+
+    </script>
+</head>
+<body>
+    <div class="dashboard-container">
+    <aside class="side-bar">
+        <div class="logo-title-block">
+          <img src="../Frontend/image/download-removebg-preview.png" alt="Intern Portal Logo" class="logo" />
+          <h1>INTERN PORTAL</h1>
+        </div>
+        <nav class="sidebar">
+          <ul class="module-list">
+            <li><a href="#">Dashboard</a></li>
+            <li class="dropdown">
+              <a href="#">Study Material ▾</a>
+              <ul class="dropdown-content">
+                <li><a href="./fullStackDeveloper.html">Full Stack Developer</a></li>
+                <li><a href="#">Android Developer</a></li>
+                <li><a href="#">Software Testing</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Work Log</a></li>
+            <li><a href="#">Intern Project</a></li>
+            <li><a href="#">Company Overview</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="body-main">
+        <header class="sub-title-block">
+          <div class="sub-title">
+            <h2>Dashboard</h2>
+          </div>
+        </header>
+        <section class="body-content-block">
+            <div class="body-content-card">
+              <div class="content" style="display: block;">
+                <p>Attendance</p>
+                <p style="color: rgb(236, 58, 58);font-size: 50px;">12.5 Days</p>
+              </div>
+            </div>
+           
+          </section>
+      </main>
+      
+    </div>
+</body>
+</html>
