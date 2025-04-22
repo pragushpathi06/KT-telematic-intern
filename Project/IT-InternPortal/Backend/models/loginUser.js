@@ -1,11 +1,12 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('/');
+const sequelize = require('../config/database');
 
 const LoginUser = sequelize.define('login_user', {
   id: {
     type: DataTypes.INTEGER,
+    autoIncrement: true, 
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
   name: DataTypes.STRING,
   email: DataTypes.STRING,
@@ -13,9 +14,8 @@ const LoginUser = sequelize.define('login_user', {
   token: DataTypes.STRING,
   role: DataTypes.STRING,
 }, {
-  tableName: 'login_user',   // match your table name exactly
-  freezeTableName: true,     // prevent pluralization
-  timestamps: false          // don't expect createdAt/updatedAt
+  tableName: 'login_user',
+  timestamps: false,
 });
 
 module.exports = LoginUser;
