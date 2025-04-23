@@ -1,4 +1,5 @@
-const LoginUser = require('../models/loginUser');
+const { StudyMaterial , User } = require('../models/index');
+// const LoginUser = require('../models/loginUser');
 const bcrypt = require('bcrypt');
 
 
@@ -7,7 +8,7 @@ exports.registerUser = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await LoginUser.create({
+    const newUser = await StudyMaterial .create({
       name,
       email,
       password,
@@ -21,18 +22,14 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-
-exports.loginUser = async (req, res) => {
+exports.StudyMaterial  = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await LoginUser.findOne({ where: { email } });
+    const user = await StudyMaterial .findOne({ where: { email } });
     if (!user) return res.status(404).json({ error: "User not found" });
 
     const match = await bcrypt.compare(password, user.password);
-    console.log(password);
-    console.log(user.password);
-    console.log(user.token);
     if (!match) return res.status(401).json({ error: "Invalid credentials" });
 
     res.status(200).json({ message: "Login successful", user });
@@ -44,7 +41,7 @@ exports.loginUser = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await LoginUser.findAll();
+    const users = await StudyMaterial .findAll();
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -56,7 +53,7 @@ exports.getAllUsers = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     try {
       const { id } = req.params;
-      const deletedCount = await LoginUser.destroy({ where: { id } });
+      const deletedCount = await StudyMaterial .destroy({ where: { id } });
   
       if (deletedCount === 0) {
         return res.status(404).json({ message: "User not found" });
@@ -67,4 +64,19 @@ exports.deleteUser = async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   };
+``
+
+  exports.getLoginUsersWithUserDetails = async (req, res) => {
+    try {
+      const loginUsers = await StudyMaterial .findAll({
+        include: {
+          model: User,
+          // attributes: ['userid', 'first_name', 'personal_email','joined_date','city','profile_picture_url'], 
+        }
+      });
   
+      res.status(200).json(loginUsers);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch data', details: error.message });
+    }
+  };

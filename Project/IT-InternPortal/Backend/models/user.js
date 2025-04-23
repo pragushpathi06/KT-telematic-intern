@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 const sequelize =require('../config/database')
 
-const User=sequelize.define('users',{
+const User=sequelize.define('user',{
     userid:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -72,8 +72,15 @@ const User=sequelize.define('users',{
             isUrl:true,
         }
     },
+    password: {
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    role:{
+        type:DataTypes.STRING
+    },
     status:{
-        type: DataTypes.STRING(10),
+        type: DataTypes.ENUM("Active", "Inactive"),
         allowNull:false,
         defaultValue: 'Active',
     },
