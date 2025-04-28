@@ -20,7 +20,7 @@
       </div>
       <nav class="sidebar">
         <ul class="module-list">
-          <li><a href="#">Dashboard</a></li>
+          <li><a href="./dashboard.html">Dashboard</a></li>
           <li class="dropdown">
             <a href="#">Study Material ▾</a>
             <ul class="dropdown-content">
@@ -50,12 +50,12 @@
             <p style="color: rgb(236, 58, 58);font-size: 50px;">12.5 Days</p>
           </div>
         </div>
-        <div class="card">
+        <!-- <div class="card">
           <div class="content">
             <p>Full Stack Developer</p>
             <canvas id="myDoughnutChart" style="width: 100px; height: 100px;"></canvas>
           </div> 
-        </div>
+        </div> -->
         <div class="card">
           <div class="content" style="display: block;">
             <p>Monthly Evaluation</p>
@@ -71,7 +71,9 @@
       </section>
 
       <section class="chart-container">
-        <div id="chartdiv" style="width: 100%; height: 300px;"></div>
+        <div class="graph"><canvas id="myBarChart" width="400" height="300"></canvas></div>
+        <div class="graph"><canvas id="horizontalBarChart" width="400" height="300"></canvas></div>
+        
       </section>
 
       <section class="centre-body">

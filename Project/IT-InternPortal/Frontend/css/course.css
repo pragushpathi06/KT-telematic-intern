@@ -119,72 +119,19 @@
     margin-bottom: 30px;
   }
   
-  .body-content-card {
-    /* background-color: #ffffff; */
-    /* color: white; */
-    height:auto;
-    border-radius: 10px;
+  .body-content-block {
+    background-color: #ffffff;
     padding: 20px;
-    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
-    transition: transform 0.2s ease; 
-    justify-content: center;
-    align-items: center;
-  }
-  .content {
-    justify-content: center;
-    align-items: center;
-    
-  }
-
-
-  .body-content-card {
-    height: auto;
     border-radius: 10px;
-    padding: 20px;
-    transition: transform 0.2s ease;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
-  
-  .content {
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .button-container {
+  .filter-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    position: relative;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: end;
+    margin-bottom: 20px;
   }
-  
-  .button-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    gap: 4px;
+  .filter-container select {
+    min-width: 200px;
   }
-  
-  .custom-button {
-    background-color: #ffeb3b;
-    color: black;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 10px;
-    font-size: 28px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-bottom: 0;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .custom-button:hover {
-    background-color: #212121;
-    color: white;
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
-  }
-  

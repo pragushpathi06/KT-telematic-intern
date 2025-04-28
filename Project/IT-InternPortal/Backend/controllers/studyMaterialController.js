@@ -1,82 +1,126 @@
-const { StudyMaterial , User } = require('../models/index');
-// const LoginUser = require('../models/loginUser');
+const { StudyMaterial, User } = require('../models/index');
 const bcrypt = require('bcrypt');
 
 
-exports.registerUser = async (req, res) => {
-  const { name, email, password, token, role } = req.body;
+exports.registerStudyMaterial = async (req, res) => {
+  const { topic, reference,status, youtube_link, tech ,role } = req.body;
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await StudyMaterial .create({
-      name,
-      email,
-      password,
-      token:hashedPassword,
-      role
+    const newStudyMaterial = await StudyMaterial.create({
+      topic,
+      reference,
+      youtube_link,
+      status,
+      tech,
+      role,
     });
 
-    res.status(201).json({ message: "User Registered Successfully", data: newUser });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-exports.StudyMaterial  = async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const user = await StudyMaterial .findOne({ where: { email } });
-    if (!user) return res.status(404).json({ error: "User not found" });
-
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.status(401).json({ error: "Invalid credentials" });
-
-    res.status(200).json({ message: "Login successful", user });
-  } catch (error) {
-    res.status(500).json({ error: "Login error", details: error.message });
-  }
-};
-
-
-exports.getAllUsers = async (req, res) => {
-  try {
-    const users = await StudyMaterial .findAll();
-    res.status(200).json(users);
+    res.status(201).json({ message: "Study Material Registered Successfully", data: newStudyMaterial });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
 
+exports.bulkRegisterStudyMaterials = async (req, res) => {
+  const studyMaterials = req.body; // Direct array of study materials
 
-exports.deleteUser = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const deletedCount = await StudyMaterial .destroy({ where: { id } });
-  
-      if (deletedCount === 0) {
-        return res.status(404).json({ message: "User not found" });
+  try {
+    // Check if studyMaterials is an array and not empty
+    if (!Array.isArray(studyMaterials) || studyMaterials.length === 0) {
+      return res.status(400).json({ error: "Please provide a non-empty array of study materials" });
+    }
+
+    // Create the study materials in bulk
+    const newStudyMaterials = await StudyMaterial.bulkCreate(studyMaterials);
+
+    // Send a response with the success message
+    res.status(201).json({
+      message: "Study Materials Registered Successfully",
+      data: newStudyMaterials
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+exports.getAllStudyMaterials = async (req, res) => {
+  try {
+    const studyMaterials = await StudyMaterial.findAll();
+    res.status(200).json(studyMaterials);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Delete 
+exports.deleteStudyMaterial = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedCount = await StudyMaterial.destroy({ where: { studyMaterialId: id } });
+
+    if (deletedCount === 0) {
+      return res.status(404).json({ message: "Study Material not found" });
+    }
+
+    res.status(200).json({ message: "Study Material deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Get study materials with user details
+
+exports.getStudyMaterialsWithUserDetails = async (req, res) => {
+  try {
+    const studyMaterials = await StudyMaterial.findAll({
+      include: {
+        model: User,  // Include related User details
+        attributes: ['userid', 'name', 'email'], // You can specify attributes if needed
       }
-  
-      res.status(200).json({ message: "User deleted successfully" });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
-``
+    });
 
-  exports.getLoginUsersWithUserDetails = async (req, res) => {
-    try {
-      const loginUsers = await StudyMaterial .findAll({
-        include: {
-          model: User,
-          // attributes: ['userid', 'first_name', 'personal_email','joined_date','city','profile_picture_url'], 
-        }
-      });
+    res.status(200).json(studyMaterials);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch study materials', details: error.message });
+  }
+};
+
+exports.updateStudyMaterial = async (req, res) => {
+  try {
+    const { studymaterialid } = req.params;
+    let { status } = req.body;
+
+    
+    const allowedStatus = ['not completed', 'on going', 'completed'];
+
   
-      res.status(200).json(loginUsers);
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch data', details: error.message });
+    if (status) {
+      status = status
+        .toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+
+      if (!allowedStatus.includes(status)) {
+        return res.status(400).json({ error: `Invalid status value. Allowed values: ${allowedStatus.join(', ')}` });
+      }
     }
-  };
+
+    const material = await StudyMaterial.findByPk(studymaterialid);
+    if (!material) {
+      return res.status(404).json({ error: 'Study material not found' });
+    }
+
+    material.status = status;
+    await material.save();
+
+    res.json({ message: 'Status updated successfully' });
+
+  } catch (error) {
+    console.error('Error updating status:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};

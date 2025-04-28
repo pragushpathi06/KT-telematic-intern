@@ -2,14 +2,25 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/studyMaterialController');
 
-router.post('/register', controller.registerUser);
+// Route to register study material
+router.post('/add', controller.registerStudyMaterial);
 
-router.post('/login', controller.loginUser);
+// Route to register study material
+router.post('/addBulk', controller.bulkRegisterStudyMaterials);
 
-router.get('/user', controller.getAllUsers);
+// Route to get all study materials
+router.get('/all', controller.getAllStudyMaterials);
 
-router.delete('/user/:id', controller.deleteUser);
+// Route to delete a study material
+router.delete('/:id', controller.deleteStudyMaterial);
 
-router.get('/getAllUserDetails',controller.getLoginUsersWithUserDetails);
+
+// Route to delete a study material
+router.put('/updateStatus/:id', controller.updateStudyMaterial);
+
+
+
+// Route to get study materials with user details
+router.get('/withUserDetails', controller.getStudyMaterialsWithUserDetails);
 
 module.exports = router;

@@ -1,21 +1,11 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const StudyMaterial = sequelize.define('login_user', {
-    studyMaterialId: {
+const StudyMaterial = sequelize.define('StudyMaterial', {  // Model name is 'StudyMaterial'
+    studymaterialid: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,  
-    },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false, 
-      references: {
-        model: 'users',  
-        key: 'userid',   
-      },
-      onDelete: 'CASCADE', 
-      onUpdate: 'CASCADE', 
     },
     topic: {
       type: DataTypes.STRING,
@@ -32,6 +22,10 @@ const StudyMaterial = sequelize.define('login_user', {
     status: {
       type: DataTypes.ENUM('not completed', 'on going', 'completed'),
       defaultValue: 'not completed', 
+    },
+    tech:{
+      type: DataTypes.STRING,
+      allowNull: false, 
     },
     role: {
       type: DataTypes.STRING,

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern Portal Login</title>
+    <link rel="stylesheet" href="./css/course.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script defer src="./Javascript/course.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+    <aside class="side-bar">
+        <div class="logo-title-block">
+          <img src="../Frontend/image/download-removebg-preview.png" alt="Intern Portal Logo" class="logo" />
+          <h1>INTERN PORTAL</h1>
+        </div>
+        <nav class="sidebar">
+          <ul class="module-list">
+            <li><a href="./dashboard.html">Dashboard</a></li>
+            <li class="dropdown">
+              <a href="#">Study Material ▾</a>
+              <ul class="dropdown-content">
+                <li><a href="./fullStackDeveloper.html">Full Stack Developer</a></li>
+                <li><a href="#">Android Developer</a></li>
+                <li><a href="#">Software Testing</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Work Log</a></li>
+            <li><a href="#">Intern Project</a></li>
+            <li><a href="#">Company Overview</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="body-main">
+        <header class="sub-title-block">
+          <div class="sub-title">
+            <h2>Basic Of Computer</h2>
+          </div>
+        </header>
+        <section class="body-content-block">
+            <div class="container py-5">
+                <div class="card shadow-lg">
+                  <div class="card-header bg-primary text-white text-center">
+                    <h2>Study Materials</h2>
+                  </div>
+                  <div class="card-body">
+              
+                    <!--  Filter Dropdown -->
+                    <div class="filter-container d-flex flex-wrap justify-content-end gap-3 mb-4">
+                        <select id="statusFilter" class="form-select" style="width: 200px;">
+                          <option value="All">All Status</option>
+                          <option value="Completed">Completed</option>
+                          <option value="On Going">On Going</option>
+                          <option value="Not Completed">Not Completed</option>
+                        </select>
+                      
+                        <select id="topicFilter" class="form-select" style="width: 200px;">
+                          <option value="All">All Topics</option>
+                          <option value="Computer Basics">Computer Basics</option>
+                          <option value="HTML">HTML</option>
+                          <option value="CSS">CSS</option>
+                          <option value="JavaScript">JavaScript</option>
+                          <option value="Sql">Sql</option>
+                          <option value="Node.js">Node js</option>
+                          <option value="Sequelize">Sequelize</option>
+                        </select>
+                      
+                        <select id="referenceFilter" class="form-select" style="width: 200px;">
+                          <option value="All">All References</option>
+                          <option value="Full stack">Full Stack Developer</option>
+                          <option value="Android Developer">Android Developer</option>
+                          <option value="Software Testing">Software Testing</option>
+                        </select>
+                      
+                    </div>
+
+                    <!-- Table -->
+                    <table class="table table-hover table-bordered text-center align-middle" id="studyTable">
+                        <thead class="table-primary">
+                          <tr>
+                            <th>Sno</th>
+                            <th>Topic</th>
+                            <th>Reference</th>
+                            <th>YouTube Link</th>
+                            <th>Tech</th> 
+                            <th>Mark Completed</th>
+                            <th>Role</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+              
+                  </div>
+                </div>
+              </div>
+              
+            
+          </section>
+      </main>
+      
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</html>

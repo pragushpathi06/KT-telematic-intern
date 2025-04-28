@@ -19,6 +19,7 @@ const User=sequelize.define('user',{
     personal_email:{
         type: DataTypes.STRING(60),
         allowNull:false,
+        unique: true,
         validate:{
             isEmail:true,
         }
@@ -26,6 +27,7 @@ const User=sequelize.define('user',{
     college_email:{
         type: DataTypes.STRING(60),
         allowNull:false,
+        unique: true,
         validate:{
             isEmail:true,
         }

@@ -1,18 +1,26 @@
 const express = require('express');
 const sequelize = require('./config/database');
-const loginUserRoutes = require('./routes/studyMaterialRoutes');
+const studyMaterialRoutes = require('./routes/studyMaterialRoutes');
 const userRoutes=require('./routes/userRoutes')
- 
+const cors = require('cors');
+// const authRoutes = require('./routes/authRoutes');
+
 
 const app = express();
 app.use(express.json());
 
 const PORT = 3000;
+app.use(cors());
+
+//  Use the auth routes under '/api'
+// app.use('/api', authRoutes);
 
 //login
-app.use('/api/login', loginUserRoutes); 
+app.use('/api/studyMaterial',studyMaterialRoutes); 
 //user
 app.use('/api/users',userRoutes);
+
+
 
 
 
