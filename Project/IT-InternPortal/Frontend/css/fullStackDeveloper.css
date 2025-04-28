@@ -38,12 +38,14 @@
     padding: 20px;
     background-color: #1e272e;
     border-bottom: 1px solid #3c4048;
+    cursor: pointer;
   }
   
   .logo-title-block img {
     width: 40px;
     height: 40px;
     margin-right: 10px;
+    cursor: pointer;
   }
   
   .logo-title-block h1 {

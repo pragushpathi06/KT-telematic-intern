@@ -37,12 +37,14 @@ p{
   padding: 20px;
   background-color: #1e272e;
   border-bottom: 1px solid #3c4048;
+  cursor: pointer;
 }
 
 .logo-title-block img {
   width: 40px;
   height: 40px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .logo-title-block h1 {
@@ -175,7 +177,7 @@ p{
 .graph{
   width: 100%;
   height: 400px;
-  /* background-color: #2f3542;   */
+  /* background-color: #2f3542;   */  
 }
 canvas {
   width: 100%;   
@@ -183,7 +185,7 @@ canvas {
 }
 
 
-.centre-body {
+/* .centre-body {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
@@ -215,7 +217,104 @@ canvas {
   font-weight: 500;
   color: #2f3542;
   line-height: 60px;
+} */
+
+
+
+/* Overall Body Styling */
+.centre-body {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
 }
 
+/* Content Grid Layout */
+.centre-body-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
 
+/* Card Styling */
+.card1 {
+  background-color: #f1f2f6;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.5s ease, width 0.5s ease, height 0.5s ease;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  height: 90px; 
+}
 
+/* Card Hover Effect */
+/* .card1:hover {
+  background-color: #dcdde1;
+} */
+
+.subtopic{
+  padding: 10px;
+  border-radius: 10px;
+  background-color:  #ffffff;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.subtopic:hover {
+  color: #ffffff;
+  background-color:#3c4048;
+}
+
+/* Card Text Styling */
+.card1-text {
+  font-size: 24px;
+  font-weight: 500;
+  color: #2f3542;
+  line-height: 60px;
+  margin: 0;
+}
+
+/* Expanded Card Styling */
+.card1.expanded {
+  width: 100%;
+  height: auto;
+  /* padding-left: 0px; */
+  /* padding-right: 0px; */
+  padding-bottom: 10px; /* Space for the content */
+}
+
+/* Subtopic Details - inside card, not as a list */
+.card1-details {
+  display: none;
+  margin-top: 15px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  color: #2f3542;
+}
+
+.card1-details .subtopic {
+  margin-bottom: 15px;
+  font-size: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.card1-details .subtopic .completion {
+  font-size: 18px;
+  color: #4caf50;
+  float: right;
+  font-weight: bold;
+}
+
+/* Show the subtopics when card is expanded */
+.card1.expanded .card1-details {
+  display: block;
+}
+
+/* Card Content - Prevent text overflow */
+.card1 .card1-text {
+  word-wrap: break-word;
+}

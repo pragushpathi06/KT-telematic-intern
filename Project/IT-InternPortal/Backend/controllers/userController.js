@@ -1,7 +1,9 @@
 // const User = require('../models/user');
 const { Op } = require("sequelize");
-const { LoginUser, User } = require('../models/index');
+const { User } = require('../models/index');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 exports.registerUser = async (req,res) => {
     const {first_name , last_name, personal_email ,college_email , phone_number ,joined_date ,gender ,address ,city , state, pincode ,profile_picture_url,password,role ,status} = req.body;
@@ -128,6 +130,37 @@ exports.updateUser = async (req,res) => {
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
+}
+
+exports.loginUser = async (req,res) => {
+  try {
+    const {email,password} =req.body;
+    const user =await User.findOne({
+      where:{personal_email:email}
+    });
+    if (!user){
+      return res.status(404).json('Email not found');
+    }
+
+    const passwordValid = await bcrypt.compare(password,user.password);
+    
+    if(!passwordValid){
+      return res.status(404).json('Incorrect email and password'+" "+password+user.password)
+    }
+    const token = jwt.sign({id:user.userid},"f6$4Jd!p0#Wq9m@Z" ,{
+      expiresIn : "1h"
+    });
+    res.status(200).send({
+      id:user.userid,
+      name:user.first_name,
+      email:user.personal_email,
+      accessToken :token
+    })
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send('login error');
+  }
 }
 
 // exports.getAllUsersDetails = async (req, res) => {

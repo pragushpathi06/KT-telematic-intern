@@ -6,6 +6,57 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  function expandCard(card) {
+    const allCards = document.querySelectorAll('.card1');
+    allCards.forEach(item => {
+      if (item !== card) {
+        item.classList.remove('expanded');
+      }
+    });
+    
+    card.classList.toggle('expanded');
+  }
+  
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const token = localStorage.getItem('accessToken'); // Retrieve the token from localStorage
+
+  if (!token) {
+    alert('You are not logged in!');
+    window.location.href = '../index.html'; // Redirect to login page if token is not available
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost:3000/api/users/protected', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
+      },
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log(result); // Handle the response from the protected API route
+
+      // Optionally, display data in your frontend (for example, showing a dashboard)
+      document.getElementById('dashboard').innerText = `Welcome, ${result.name}`;
+    } else {
+      console.error('Authentication failed or session expired');
+      alert('Authentication failed. Please log in again.');
+      window.location.href = '../index.html'; // Redirect to login if authentication fails
+    }
+  } catch (error) {
+    console.error('Error during the request:', error);
+    alert('Error during the request. Please try again later.');
+  }
+});
+
   // const data = {
   //   datasets: [{
   //     label: 'My First Dataset',
