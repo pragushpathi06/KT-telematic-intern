@@ -15,18 +15,8 @@ router.put('/updateUser/:id',controller.updateUser);
 
 router.post('/login', controller.loginUser);
 
-router.get('/protected', authenticateToken, (req, res) => {
-    // If the request reaches here, the token is valid
-    res.json({
-      message: 'This is a protected route!',
-      name: req.user.first_name, // Send user data from the token payload
-    });
-  });
+router.get('/protected', authenticateToken,controller.protected );
 
-
-// router.get('/protected', authenticateJWT, (req, res) => {
-//     res.status(200).json({ message: 'This is a protected route', user: req.user });
-// });
 
 
 

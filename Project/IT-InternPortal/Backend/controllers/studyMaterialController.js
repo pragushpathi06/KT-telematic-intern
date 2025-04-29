@@ -1,5 +1,5 @@
 const { StudyMaterial, User } = require('../models/index');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 
 exports.registerStudyMaterial = async (req, res) => {

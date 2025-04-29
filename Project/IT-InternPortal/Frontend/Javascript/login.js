@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
       try {
-
         const response = await fetch('http://localhost:3000/api/users/login', {
           method: 'POST',
           headers: {
@@ -28,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
           const result = await response.json();  
           console.log('Login successful:', result);
           localStorage.setItem('accessToken', result.accessToken);
-          window.location.href = '../dashboard.html';
-
+          localStorage.setItem('userId', result.user_id);
+          window.location.href = 'dashboard.html'; 
         } else {
           const errorResult = await response.json();
           alert('Login failed: ' + errorResult.message);

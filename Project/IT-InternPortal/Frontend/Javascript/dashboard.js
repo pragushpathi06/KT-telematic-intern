@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     const dropdown = document.querySelector(".dropdown");
     dropdown.querySelector("a").addEventListener("click", function (e) {
@@ -5,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
       dropdown.classList.toggle("active");
     });
   });
+
 
   function expandCard(card) {
     const allCards = document.querySelectorAll('.card1');
@@ -16,19 +18,15 @@ document.addEventListener("DOMContentLoaded", function () {
     
     card.classList.toggle('expanded');
   }
+  // console.log("---");
+  // console.log(localStorage.getItem('userId'))
   
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('accessToken'); // Retrieve the token from localStorage
 
   if (!token) {
     alert('You are not logged in!');
-    window.location.href = '../index.html'; // Redirect to login page if token is not available
+    window.location.href = '/Frontend/index.html'; // Redirect to login page if token is not available
     return;
   }
 
@@ -49,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       console.error('Authentication failed or session expired');
       alert('Authentication failed. Please log in again.');
-      window.location.href = '../index.html'; // Redirect to login if authentication fails
+      window.location.href = '/Frontend/index.html'; // Redirect to login if authentication fails
     }
   } catch (error) {
     console.error('Error during the request:', error);
@@ -81,59 +79,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-const ctx = document.getElementById('myBarChart').getContext('2d');
-const myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Full stack', 'Android Developer', 'Software Testing'],
-        datasets: [{
-            label: 'Completion',
-            data: [12, 90, 10],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-        y: {
-            beginAtZero: true,
-            min: 0,
-            max: 100
-        }
-    }
-    }
-});
-
-const ctxHorizontal = document.getElementById('horizontalBarChart').getContext('2d');
-const horizontalBarChart = new Chart(ctxHorizontal, {
-    type: 'bar',
-    data: {
-        labels: ['Basic of computer', 'HTML', 'CSS', 'JavaScript', 'Sql', 'Node js','Sequelize'],
-        datasets: [{
-            label: 'Completion',
-            data: [20, 40, 60, 80, 95, 50,80 ],
-            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        indexAxis: 'y', // Make it horizontal
-        scales: {
-            x: {
-                beginAtZero: true,
-                min: 0,
-                max: 100
-            }
-        }
-    }
-});
+// const ctx = document.getElementById('myBarChart').getContext('2d');
+// const myBarChart = new Chart(ctx, {
+//     type: 'bar',
+//     data: {
+//         labels: ['Full stack', 'Android Developer', 'Software Testing'],
+//         datasets: [{
+//             label: 'Completion',
+//             data: [12, 90, 10],
+//             backgroundColor: [
+//                 'rgba(255, 99, 132, 0.5)',
+//                 'rgba(153, 102, 255, 0.5)',
+//                 'rgba(255, 159, 64, 0.5)'
+//             ],
+//             borderColor: [
+//                 'rgba(255, 99, 132, 1)',
+//                 'rgba(153, 102, 255, 1)',
+//                 'rgba(255, 159, 64, 1)'
+//             ],
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {
+//         scales: {
+//         y: {
+//             beginAtZero: true,
+//             min: 0,
+//             max: 100
+//         }
+//     }
+//     }
+// });

@@ -1,214 +1,97 @@
-am5.ready(function() {
 
-    // Set up data
-    var data = [{
-      category: "Critical",
-      value: 19,
-      sliceSettings: {
-        fill: am5.color(0xdc4534),
+async function fetchRoleCompletionChart() {
+  try {
+    const response = await fetch('http://localhost:3000/api/userProgress/completed-role/28');
+    const data = await response.json();
+
+    const labels = [...new Set([...data.map(item => item.Role), 'Android Developer', 'Software Tester'])];
+    const counts = data.map(item => parseInt(item.completedCount));
+    const backgroundColors = [
+      'rgba(255, 99, 132, 0.5)',
+      'rgba(153, 102, 255, 0.5)',
+      'rgba(255, 159, 64, 0.5)'
+    ];
+
+    const borderColors = [
+      'rgba(255, 99, 132, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+    ];
+
+    const ctx = document.getElementById('myBarChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Completion',
+          data: counts,
+          backgroundColor: backgroundColors.slice(0, labels.length),
+          borderColor: borderColors.slice(0, labels.length),
+          borderWidth: 1
+        }]
       },
-      breakdown: [{
-        category: "Sales inquiries",
-        value: 29
-      }, {
-        category: "Support requests",
-        value: 40
-      }, {
-        category: "Bug reports",
-        value: 11
-      }, {
-        category: "Other",
-        value: 9
-      }]
-    }, {
-      category: "Acceptable",
-      value: 71,
-      sliceSettings: {
-        fill: am5.color(0xd7a700),
-      },
-      breakdown: [{
-        category: "Sales inquiries",
-        value: 22
-      }, {
-        category: "Support requests",
-        value: 30
-      }, {
-        category: "Bug reports",
-        value: 11
-      }, {
-        category: "Other",
-        value: 10
-      }]
-    }, {
-      category: "Good",
-      value: 120,
-      sliceSettings: {
-        fill: am5.color(0x68ad5c),
-      },
-      breakdown: [{
-        category: "Sales inquiries",
-        value: 60
-      }, {
-        category: "Support requests",
-        value: 35
-      }, {
-        category: "Bug reports",
-        value: 15
-      }, {
-        category: "Other",
-        value: 10
-      }]
-    }]
-    
-    // Create root element
-    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-    var root = am5.Root.new("chartdiv");
-    
-    
-    // Set themes
-    // https://www.amcharts.com/docs/v5/concepts/themes/
-    root.setThemes([
-      am5themes_Animated.new(root)
-    ]);
-    
-    // Create wrapper container
-    var container = root.container.children.push(am5.Container.new(root, {
-      width: am5.p100,
-      height: am5.p100,
-      layout: root.horizontalLayout
-    }));
-    
-    
-    // ==============================================
-    // Column chart
-    // ==============================================
-    
-    // Create chart
-    // https://www.amcharts.com/docs/v5/charts/xy-chart/
-    var columnChart = container.children.push(am5xy.XYChart.new(root, {
-      width: am5.p50,
-      panX: false,
-      panY: false,
-      wheelX: "none",
-      wheelY: "none",
-      layout: root.verticalLayout
-    }));
-    
-    // Create axes
-    // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-    var yRenderer = am5xy.AxisRendererY.new(root, {});
-    var yAxis = columnChart.yAxes.push(am5xy.CategoryAxis.new(root, {
-      categoryField: "category",
-      renderer: yRenderer
-    }));
-    
-    yRenderer.grid.template.setAll({
-      location: 1
-    })
-    
-    var xAxis = columnChart.xAxes.push(am5xy.ValueAxis.new(root, {
-      renderer: am5xy.AxisRendererX.new(root, {
-        strokeOpacity: 0.1
-      })
-    }));
-    
-    
-    // Add series
-    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-    var columnSeries = columnChart.series.push(am5xy.ColumnSeries.new(root, {
-      name: name,
-      xAxis: xAxis,
-      yAxis: yAxis,
-      valueXField: "value",
-      categoryYField: "category"
-    }));
-    
-    columnSeries.columns.template.setAll({
-      tooltipText: "{categoryY}: {valueX}"
-    });
-    
-    //series.data.setAll(data);
-    
-    // Make stuff animate on load
-    // https://www.amcharts.com/docs/v5/concepts/animations/
-    columnChart.appear(1000, 100);
-    
-    
-    // ==============================================
-    // Column chart
-    // ==============================================
-    
-    var pieChart = container.children.push(
-      am5percent.PieChart.new(root, {
-        width: am5.p50,
-        innerRadius: am5.percent(50)
-      })
-    );
-    
-    // Create series
-    var pieSeries = pieChart.series.push(
-      am5percent.PieSeries.new(root, {
-        valueField: "value",
-        categoryField: "category"
-      })
-    );
-    
-    pieSeries.slices.template.setAll({
-      templateField: "sliceSettings",
-      strokeOpacity: 0
-    });
-    
-    var currentSlice;
-    pieSeries.slices.template.on("active", function(active, slice) {
-      if (currentSlice && currentSlice != slice && active) {
-        currentSlice.set("active", false)
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100
+          }
+        }
       }
-    
-      var color = slice.get("fill");
-    
-      label1.setAll({
-        fill: color,
-        text: root.numberFormatter.format(slice.dataItem.get("valuePercentTotal"), "#.'%'")
-      });
-    
-      label2.set("text", slice.dataItem.get("category"));
-    
-      columnSeries.columns.template.setAll({
-        fill: slice.get("fill"),
-        stroke: slice.get("fill")
-      });
-    
-      columnSeries.data.setAll(slice.dataItem.dataContext.breakdown);
-      yAxis.data.setAll(slice.dataItem.dataContext.breakdown);
-    
-      currentSlice = slice;
     });
-    
-    pieSeries.labels.template.set("forceHidden", true);
-    pieSeries.ticks.template.set("forceHidden", true);
-    
-    pieSeries.data.setAll(data);
-    
-    // Add label
-    var label1 = pieChart.seriesContainer.children.push(am5.Label.new(root, {
-      text: "",
-      fontSize: 35,
-      fontweight: "bold",
-      centerX: am5.p50,
-      centerY: am5.p50
-    }));
-    
-    var label2 = pieChart.seriesContainer.children.push(am5.Label.new(root, {
-      text: "",
-      fontSize: 12,
-      centerX: am5.p50,
-      centerY: am5.p50,
-      dy: 30
-    }));
-    
-    // Pre-select first slice
-    pieSeries.events.on("datavalidated", function() {
-      pieSeries.slices.getIndex(0).set("active", true);
+
+  } catch (error) {
+    console.error('Failed to load chart data:', error);
+  }
+}
+
+fetchRoleCompletionChart();
+
+
+
+
+
+
+
+async function fetchChartData() {
+  try {
+    const response = await fetch('http://localhost:3000/api/userProgress/completed-topics/28');
+    const data = await response.json();
+
+    // Transform API response to Chart.js format
+    const labels = data.map(item => item.tech);
+    const counts = data.map(item => parseInt(item.completedCount));
+
+    // Render the chart
+    const ctxHorizontal = document.getElementById('horizontalBarChart').getContext('2d');
+    new Chart(ctxHorizontal, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Completed Topics',
+          data: counts,
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        scales: {
+          x: {
+            beginAtZero: true,
+            min: 0
+          }
+        }
+      }
     });
-    }); // end 
-    // am5.ready()
+  } catch (error) {
+    console.error('Error loading chart data:', error);
+  }
+}
+
+// Load the chart on page load
+fetchChartData();

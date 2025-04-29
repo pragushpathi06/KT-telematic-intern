@@ -2,6 +2,7 @@ const express = require('express');
 const sequelize = require('./config/database');
 const studyMaterialRoutes = require('./routes/studyMaterialRoutes');
 const userRoutes=require('./routes/userRoutes')
+const userProgress = require('./routes/userProgressRouter');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
@@ -16,11 +17,12 @@ app.use(bodyParser.json());
 
 //login
 app.use('/api/studyMaterial',studyMaterialRoutes); 
+
 //user
 app.use('/api/users',userRoutes);
 
-
-
+//userProgress
+app.use('/api/userProgress',userProgress);
 
 
 

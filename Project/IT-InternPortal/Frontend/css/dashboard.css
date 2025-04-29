@@ -185,40 +185,6 @@ canvas {
 }
 
 
-/* .centre-body {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.centre-body-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-
-.card1 {
-  background-color: #f1f2f6;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s ease;
-  text-align: center;
-}
-
-.card1:hover {
-  background-color: #dcdde1;
-}
-
-.card1-text {
-  font-size: 16px;
-  font-weight: 500;
-  color: #2f3542;
-  line-height: 60px;
-} */
-
 
 
 /* Overall Body Styling */

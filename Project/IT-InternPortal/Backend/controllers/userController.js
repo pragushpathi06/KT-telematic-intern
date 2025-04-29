@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
+
 exports.registerUser = async (req,res) => {
     const {first_name , last_name, personal_email ,college_email , phone_number ,joined_date ,gender ,address ,city , state, pincode ,profile_picture_url,password,role ,status} = req.body;
     try {
@@ -117,19 +118,29 @@ exports.deleteUser = async (req,res) => {
 
 
 exports.updateUser = async (req,res) => {
-    try {
-        const {id}=req.params;
-        const [updateCount]= await User.update(req.body, {
-            where: { userid: id },
-          });
-        if (updateCount === 0) {
-            return res.status(404).json({ message: "User not found" });
-          }
-        const updatedUser = await User.findByPk(id);
-        res.status(200).json({ message: "User updated", data: updatedUser });
-    } catch (error) {
-        res.status(500).json({ error: error.message })
+  try {
+    const { id } = req.params;
+    const updateData = { ...req.body };
+    
+    if (updateData.password) {
+      const saltRounds = 10;
+      updateData.password = await bcrypt.hash(updateData.password, saltRounds);
     }
+
+    const [updateCount] = await User.update(updateData, {
+      where: { userid: id },
+    });
+
+    if (updateCount === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const updatedUser = await User.findByPk(id);
+    res.status(200).json({ message: 'User updated', data: updatedUser });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
 
 exports.loginUser = async (req,res) => {
@@ -147,11 +158,11 @@ exports.loginUser = async (req,res) => {
     if(!passwordValid){
       return res.status(404).json('Incorrect email and password'+" "+password+user.password)
     }
-    const token = jwt.sign({id:user.userid},"f6$4Jd!p0#Wq9m@Z" ,{
-      expiresIn : "1h"
+    const token = jwt.sign({ user_id:user.userid ,first_name: user.first_name },"f6$4Jd!p0#Wq9m@Z" ,{
+      expiresIn : "1d"
     });
     res.status(200).send({
-      id:user.userid,
+      user_id:user.userid,
       name:user.first_name,
       email:user.personal_email,
       accessToken :token
@@ -160,6 +171,19 @@ exports.loginUser = async (req,res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).send('login error');
+  }
+}
+
+exports.protected =async (req,res) => {
+  if (req.user && req.user.first_name) { // Check if the user data is available
+    res.json({
+      message: 'This is a protected route!',
+      name:req.user.first_name  // Send the user's first name from the token
+    });
+  } else {
+    res.status(400).json({
+      message: 'User data is missing in the token.'
+    });
   }
 }
 
