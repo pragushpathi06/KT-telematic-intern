@@ -5,7 +5,7 @@ const authenticateToken = require('../middlewares/auth');
 
 router.post('/register',controller.registerUser);
 
-router.post('/bulkRegister',controller.BulkRegisterUser)
+router.post('/bulkRegister',controller.BulkRegisterUser);
 
 router.get('/getUser', controller.getAllUsers);
 

@@ -8,18 +8,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+  function applyTopicFilterFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const topicFromURL = params.get("topic");
+
+    if (topicFromURL) {
+        document.getElementById("topicFilter").value = topicFromURL;
+        filterRows(); 
+    }
+}
+
+
+
+
 const statusFilter = document.getElementById('statusFilter');
 const topicFilter = document.getElementById('topicFilter');
 const referenceFilter = document.getElementById('referenceFilter');
 const table = document.getElementById('studyTable').getElementsByTagName('tbody')[0];
 
+const userId = + localStorage.getItem('userId');
 
 async function fetchStudyMaterials() {
     try {
         // localStorage.setItem('userId', result.id);
         console.log(localStorage.getItem('userId'));
         
-        let userId = + localStorage.getItem('userId');
+        
         // console.log(+ userId);
         // userId=28
         // console.log(+ userId);
@@ -27,7 +41,7 @@ async function fetchStudyMaterials() {
             fetch('http://localhost:3000/api/studyMaterial/all'),
             fetch('http://localhost:3000/api/userProgress/getAll')
         ]);
-    
+        
 
         const studyMaterials = await studyRes.json();
         const userProgress = await progressRes.json();
@@ -41,7 +55,8 @@ async function fetchStudyMaterials() {
         });
 
         if (studyRes.ok && progressRes.ok) {
-            populateTable(studyMaterials, userId, completedMap);
+            populateTable(studyMaterials, completedMap);
+            applyTopicFilterFromURL();
         } else {
             console.error('Failed to fetch data');
         }
@@ -50,7 +65,8 @@ async function fetchStudyMaterials() {
     }
 }
 
-function populateTable(studyMaterials, userId, completedMap) {
+
+function populateTable(studyMaterials, completedMap) {
     table.innerHTML = '';
     let id = 1;
 
@@ -58,10 +74,9 @@ function populateTable(studyMaterials, userId, completedMap) {
         const row = table.insertRow();
         row.insertCell(0).innerText = id++;
         row.insertCell(1).innerText = studyMaterial.topic;
-        row.insertCell(2).innerText = studyMaterial.reference;
+        row.insertCell(2).innerHTML = `<a href="${studyMaterial.reference}" target="_blank">${studyMaterial.reference}</a>`;
         row.insertCell(3).innerHTML = `<a href="${studyMaterial.youtube_link}" target="_blank" class="btn btn-sm btn-outline-primary">Watch</a>`;
         row.insertCell(4).innerText = studyMaterial.tech;
-
   
         const checkboxCell = row.insertCell(5);
 
@@ -71,8 +86,10 @@ function populateTable(studyMaterials, userId, completedMap) {
             const completeBtn = document.createElement('button');
             completeBtn.className = 'btn btn-outline-primary btn-sm';
             completeBtn.innerText = 'Mark as Completed';
+            completeBtn.id = ''
 
     completeBtn.addEventListener('click', async () => {
+        if (confirm("Are you sure you have completed this topic?")){
         try {
             const response = await fetch('http://localhost:3000/api/userProgress/create', {
                 method: 'POST',
@@ -93,11 +110,12 @@ function populateTable(studyMaterials, userId, completedMap) {
         } catch (err) {
             console.error('Error marking as completed:', err);
         }
+    }
     });
 
     checkboxCell.appendChild(completeBtn);
 }
-        row.insertCell(6).innerText = studyMaterial.role;
+        // row.insertCell(6).innerText = studyMaterial.role;
     });
 }
 
@@ -113,17 +131,34 @@ function filterRows() {
     let id=1;
 
     for (let i = 0; i < rows.length; i++) {
-        const statusCell = rows[i].getElementsByTagName('td')[4]; // Assuming status is in the 5th column (index 4)
-        const topicCell = rows[i].getElementsByTagName('td')[4]; // Assuming topic is in the 2nd column (index 1)
-        const referenceCell = rows[i].getElementsByTagName('td')[6]; // Assuming reference is in the 3rd column (index 2)
+        const statusCell = rows[i].getElementsByTagName('td')[5]; 
+        const topicCell = rows[i].getElementsByTagName('td')[4];
+        const referenceCell = rows[i].getElementsByTagName('td')[6];
        
 
-        const statusText = statusCell ? statusCell.innerText.trim().toLowerCase() : '';
+        // const statusText = statusCell ? statusCell.innerText.trim().toLowerCase() : '';
+        // console.log(statusText +" " +selectedStatus +" ");
         const topicText = topicCell ? topicCell.innerText.trim().toLowerCase() : '';
         const referenceText = referenceCell ? referenceCell.innerText.trim().toLowerCase() : '';
 
+        let statusText = '';
+
+        if (statusCell) {
+            const statusBtn = statusCell.querySelector('button');
+            if (statusBtn) {
+                statusText = statusBtn.innerText.trim().toLowerCase(); // 'Completed' or 'Mark as Completed'
+            }
+        }
+
+        let normalizedStatus = '';
+        if (statusText === 'completed') {
+            normalizedStatus = 'completed';
+        } else {
+            normalizedStatus = 'not completed';
+        }
+
         if (
-            (selectedStatus === 'all' || statusText.includes(selectedStatus)) &&
+            (selectedStatus === 'all' || normalizedStatus === selectedStatus) &&
             (selectedTopic === 'all' || topicText.includes(selectedTopic)) &&
             (selectedReference === 'all' || referenceText.includes(selectedReference))
         ) {

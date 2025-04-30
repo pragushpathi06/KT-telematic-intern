@@ -51,6 +51,7 @@
   .logo-title-block h1 {
     font-size: 18px;
     font-weight: 600;
+    margin-bottom: 0px;
   }
   
   
@@ -60,6 +61,7 @@
   
   .module-list {
     list-style: none;
+    padding-left: 0;
   }
   
   .module-list li {
@@ -91,10 +93,10 @@
   .dropdown.active .dropdown-content {
     display: block;
   }
-  
   .dropdown-content a {
     font-size: 14px;
   }
+  
   .body-main {
     flex: 1;
     padding: 20px;

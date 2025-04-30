@@ -228,10 +228,10 @@ canvas {
   background-color:  #ffffff;
   transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
-.subtopic:hover {
+/* .subtopic:hover {
   color: #ffffff;
   background-color:#3c4048;
-}
+} */
 
 /* Card Text Styling */
 .card1-text {
@@ -283,4 +283,67 @@ canvas {
 /* Card Content - Prevent text overflow */
 .card1 .card1-text {
   word-wrap: break-word;
+}
+
+.welcome-content {
+  display: flex;
+  flex-direction: row;         
+  align-items: center;         
+  gap: 8px;                    
+}
+
+#dashboard1, #dashboard {
+  margin: 0;                  
+  white-space: nowrap;        
+}
+
+@media (max-width: 600px) {
+  .welcome-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+  }
+}
+
+.logout-button{
+    display: flex;
+    justify-content: center;
+    align-items:end;
+    margin-bottom: 40px;
+    height: 100vh; 
+}
+
+#logout{
+  padding: 10px 20px;
+  background-color:  #ff1e1e;
+  width: 60%;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#logout:hover{
+  background-color: whitesmoke;
+  color: #1e272e;
+  font-weight: 700;
+  transform: scale(1.05);
+}
+
+.progress-bar-container {
+  height: 8px;
+  background-color: #ddd;
+  border-radius: 4px;
+  margin-top: 5px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
 }

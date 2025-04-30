@@ -1,7 +1,9 @@
+let userId = + localStorage.getItem('userId');
+
 
 async function fetchRoleCompletionChart() {
   try {
-    const response = await fetch('http://localhost:3000/api/userProgress/completed-role/28');
+    const response = await fetch(`http://localhost:3000/api/userProgress/completed-role/${userId}`);
     const data = await response.json();
 
     const labels = [...new Set([...data.map(item => item.Role), 'Android Developer', 'Software Tester'])];
@@ -53,16 +55,19 @@ fetchRoleCompletionChart();
 
 
 
-
-
 async function fetchChartData() {
   try {
-    const response = await fetch('http://localhost:3000/api/userProgress/completed-topics/28');
+    const response = await fetch(`http://localhost:3000/api/userProgress/completed-topics/${userId}`);
     const data = await response.json();
 
     // Transform API response to Chart.js format
-    const labels = data.map(item => item.tech);
-    const counts = data.map(item => parseInt(item.completedCount));
+  const labels = data.map(item => item.tech);
+  const completedCounts = data.map(item => parseInt(item.completedCount));
+  const totalCounts = data.map(item => parseInt(item.totalCount));
+  const percentProgress = completedCounts.map((completed, i) => {
+  const total = totalCounts[i] || 1; 
+    return ((completed / total) * 100).toFixed(0); 
+  });
 
     // Render the chart
     const ctxHorizontal = document.getElementById('horizontalBarChart').getContext('2d');
@@ -72,7 +77,7 @@ async function fetchChartData() {
         labels: labels,
         datasets: [{
           label: 'Completed Topics',
-          data: counts,
+          data: completedCounts,
           backgroundColor: 'rgba(54, 162, 235, 0.6)',
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1
@@ -80,14 +85,29 @@ async function fetchChartData() {
       },
       options: {
         indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const index = context.dataIndex;
+                const completed = context.dataset.data[index];
+                const total = totalCounts[index];
+                const percent = percentProgress[index];
+                return `Completed: ${completed} / Total topics - ${total} / (${percent}%)`;
+              }
+            }
+          }
+        },
         scales: {
           x: {
             beginAtZero: true,
-            min: 0
+            min:0,
+            max:20
           }
         }
       }
-    });
+    });    
   } catch (error) {
     console.error('Error loading chart data:', error);
   }

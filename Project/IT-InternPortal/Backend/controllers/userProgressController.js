@@ -105,34 +105,84 @@ exports.deleteUserProgress = async (req, res) => {
 };
 
 
+// exports.getCompletedTopicCountsByUser = async (req, res) => {
+//     try {
+//         const { user_id } = req.params;
+    
+//         const results = await UserProgress.findAll({
+//           attributes: [
+//             [Sequelize.col('StudyMaterial.tech'), 'tech'], // fixed here
+//             [Sequelize.fn('COUNT', Sequelize.col('user_progress.id')), 'completedCount']
+//             [Sequelize.fn('COUNT', Sequelize.col('StudyMaterial.tech')), 'TotalCount']
+
+//           ],
+//           include: [
+//             {
+//               model: StudyMaterial,
+//               attributes: [] 
+//             }
+//           ],
+//           where: {
+//             user_id,
+//             status: 'Completed'
+//           },
+//           group: ['StudyMaterial.tech'] // fixed here
+//         });
+    
+//         res.status(200).json(results);
+//       } catch (error) {
+//         console.error('Error fetching completed topic counts:', error);
+//         res.status(500).json({ message: 'Server error' });
+//       }
+//   };
+
 exports.getCompletedTopicCountsByUser = async (req, res) => {
-    try {
-        const { user_id } = req.params;
-    
-        const results = await UserProgress.findAll({
-          attributes: [
-            [Sequelize.col('StudyMaterial.tech'), 'tech'], // fixed here
-            [Sequelize.fn('COUNT', Sequelize.col('user_progress.id')), 'completedCount']
-          ],
-          include: [
-            {
-              model: StudyMaterial,
-              attributes: [] // don't need extra columns
-            }
-          ],
-          where: {
-            user_id,
-            status: 'Completed'
-          },
-          group: ['StudyMaterial.tech'] // fixed here
-        });
-    
-        res.status(200).json(results);
-      } catch (error) {
-        console.error('Error fetching completed topic counts:', error);
-        res.status(500).json({ message: 'Server error' });
-      }
-  };
+  try {
+    const { user_id } = req.params;
+
+    // 1. Get completed topics grouped by tech
+    const completedTopics = await UserProgress.findAll({
+      attributes: [
+        [Sequelize.col('StudyMaterial.tech'), 'tech'],
+        [Sequelize.fn('COUNT', Sequelize.col('user_progress.id')), 'completedCount']
+      ],
+      include: [
+        {
+          model: StudyMaterial,
+          attributes: []
+        }
+      ],
+      where: {
+        user_id,
+        status: 'Completed'
+      },
+      group: ['StudyMaterial.tech']
+    });
+
+    const totalTopics = await StudyMaterial.findAll({
+      attributes: [
+        ['tech', 'tech'],
+        [Sequelize.fn('COUNT', Sequelize.col('tech')), 'totalCount']
+      ],
+      group: ['tech']
+    });
+
+    const merged = totalTopics.map(total => {
+      const match = completedTopics.find(c => c.dataValues.tech === total.dataValues.tech);
+      return {
+        tech: total.dataValues.tech,
+        totalCount: parseInt(total.dataValues.totalCount),
+        completedCount: match ? parseInt(match.dataValues.completedCount) : 0
+      };
+    });
+
+    res.status(200).json(merged);
+  } catch (error) {
+    console.error('Error fetching topic progress:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
   
   exports.getCompletedRoleCountsByUser = async (req, res) => {
     try {
