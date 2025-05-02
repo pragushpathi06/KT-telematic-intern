@@ -91,10 +91,7 @@ exports.BulkRegisterUser = async (req, res) => {
 exports.getAllUsers = async (req,res) => {
     try {
         const getUser = await User.findAll();
-        res.status(200).json({
-            message:'User list',
-            data: getUser
-        })
+        res.status(200).json(getUser)
     } catch (error) {
         res.status(500).json({
             error:error.message

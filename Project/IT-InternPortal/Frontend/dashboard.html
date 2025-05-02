@@ -8,6 +8,8 @@
   <link rel="icon" href="./image/download.png" type="image/png" sizes="16x16">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
   <script defer src="./Javascript/dashboard.js"></script>
   <script defer src="./Javascript/chart.js"></script>
 </head>
@@ -41,7 +43,6 @@
       <div class="logout-button">
         <button type="button" id="logout">Log out</button>
       </div>
-      
     </aside>
 
     <main class="body-main">
@@ -79,101 +80,16 @@
         <div class="card">
           <div class="content" style="display: block;">
             <p>Monthly Feedback</p>
-            <p style="color: orange;">Need to improve</p>
+            <p style="color: orange; margin-top: 10px;">Need to improve</p>
           </div>
         </div>
       </section>
 
       <section class="chart-container">
-        <div class="graph"><canvas id="myBarChart" width="400" height="300"></canvas></div>
-        <div class="graph"><canvas id="horizontalBarChart" width="400" height="300"></canvas></div>  
+        <div class="graph"><canvas id="myBarChart" width="450" height="300"></canvas></div>
+        <div class="graph"><canvas id="horizontalBarChart" width="450" height="300"></canvas></div>  
       </section>
 
-      <!-- <section class="centre-body">
-        <div class="centre-body-content">
-          <div class="card1">
-            <p class="card1-text">Full Stack Developer</p>
-          </div>
-          <div class="card1">
-            <p class="card1-text">Android Developer</p>
-          </div>
-          <div class="card1">
-            <p class="card1-text">Software Testing</p>
-          </div>
-        </div>
-      </section> -->
-      <!-- <section class="centre-body"> 
-        <div class="centre-body-content" id="progressCards">
-          <div class="card1" onclick="expandCard(this)">
-            <p class="card1-text">Full Stack Developer</p>
-            <div class="card1-details">
-              <div class="subtopic">
-                <span>Basics of Computer</span>
-                <span class="completion">80%</span>
-              </div>
-              <div class="subtopic">
-                <span>HTML</span>
-                <span class="completion">75%</span>
-              </div>
-              <div class="subtopic">
-                <span>CSS</span>
-                <span class="completion">70%</span>
-              </div>
-              <div class="subtopic">
-                <span>JavaScript</span>
-                <span class="completion">60%</span>
-              </div>
-              <div class="subtopic">
-                <span>SQL</span>
-                <span class="completion">90%</span>
-              </div>
-              <div class="subtopic">
-                <span>Node js</span>
-                <span class="completion">70%</span>
-              </div>
-            </div>
-          </div>
-          <div class="card1" onclick="expandCard(this)">
-            <p class="card1-text">Android Developer</p>
-            <div class="card1-details">
-              <div class="subtopic">
-                <span>Java</span>
-                <span class="completion">85%</span>
-              </div>
-              <div class="subtopic">
-                <span>Android SDK</span>
-                <span class="completion">80%</span>
-              </div>
-              <div class="subtopic">
-                <span>SQLite</span>
-                <span class="completion">70%</span>
-              </div>
-              <div class="subtopic">
-                <span>UI/UX</span>
-                <span class="completion">60%</span>
-              </div>
-            </div>
-          </div>
-          <div class="card1" onclick="expandCard(this)">
-            <p class="card1-text">Software Testing</p>
-            <div class="card1-details">
-              <div class="subtopic">
-                <span>Manual Testing</span>
-                <span class="completion">90%</span>
-              </div>
-              <div class="subtopic">
-                <span>Automation Testing</span>
-                <span class="completion">75%</span>
-              </div>
-              <div class="subtopic">
-                <span>Bug Tracking</span>
-                <span class="completion">85%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-       -->
        <section class="centre-body"> 
         <div class="centre-body-content" id="progressCards">
           <div class="card1" onclick="expandCard(this)">
