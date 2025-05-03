@@ -99,6 +99,37 @@ exports.getAllUsers = async (req,res) => {
     }
   }
 
+exports.getSingleUser = async (req,res) => {
+    try {
+        const {id} = req.params;
+        const getUser = await User.findByPk(id);
+        res.status(200).json(getUser)
+    } catch (error) {
+        res.status(500).json({
+            error:error.message
+        })
+    }
+  }
+
+
+exports.getOneUser = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const user = await User.findByPk(id ,{
+        attributes: ['role']
+      });
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User progress not found' });
+      }
+      res.status(200).json({
+        role:user.role
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error fetching user' });
+  }
+};
 
 exports.deleteUser = async (req,res) => {
     try {
@@ -133,7 +164,7 @@ exports.updateUser = async (req,res) => {
     }
 
     const updatedUser = await User.findByPk(id);
-    res.status(200).json({ message: 'User updated', data: updatedUser });
+    res.status(200).json(updatedUser);
 
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Intern Portal Dashboard</title>
+  <link rel="stylesheet" href="/Frontend/css/dashboard.css"/>
+  <link rel="stylesheet" href="./css/internDetails.css" />
+  <link rel="icon" href="/Frontend/image/download.png" type="image/png" sizes="16x16">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+
+  <!-- <script defer src="./Javascript/dashboard.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
+
+ 
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <!-- <button class="menu-toggle" id="menuBtn">
+      <i class="fas fa-bars"></i> -->
+    <!--   -->
+    <aside class="side-bar">
+      <div class="logo-title-block">
+        <img src="/Frontend/image/download-removebg-preview.png" alt="Intern Portal Logo" class="logo" />
+        <h1>INTERN PORTAL</h1>
+      </div>
+      <nav class="sidebar">
+        <ul class="module-list">
+          <li><a href="./admin.html">Dashboard</a></li>
+          <!-- <li class="dropdown">
+            <a href="#">Study Material ▾</a>
+            <ul class="dropdown-content">
+              <li><a href="#">Full Stack Developer</a></li>
+              <li><a href="#">Android Developer</a></li>
+              <li><a href="#">Software Testing</a></li>
+            </ul>
+          </li> -->
+          <li><a href="#">Intern Details</a></li>
+          <li><a href="./studyMaterialDetails.html">Study Material Details</a></li>
+          <!-- <li><a href="#">Company Overview</a></li> -->
+        </ul>
+      </nav>
+      <div class="logout-button">
+        <button  type="button" id="logout">Log out</button>
+      </div>
+    </aside>
+
+    <main class="body-main">
+      <header class="sub-title-block">
+        <div class="sub-title">
+          <h2 >INTERN DETAILS</h2>        
+        </div>
+    </header>
+        <section>
+          <button class="butn" onclick="openAddUserModal()">Add New User</button>
+            <table id="example" class="display responsive nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+                <tbody></tbody>
+              </table>
+              
+
+              <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+              <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+              <div id="editModal" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <h3>Edit User</h3>
+                  <form id="editForm">
+                    <input type="hidden" id="userid">
+              
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name"><br><br>
+              
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name"><br><br>
+              
+                    <label for="personal_email">Personal Email:</label>
+                    <input type="email" id="personal_email"><br><br>
+              
+                    <label for="college_email">College Email:</label>
+                    <input type="email" id="college_email"><br><br>
+              
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" id="phone_number"><br><br>
+              
+                    <label for="joined_date">Joined Date:</label>
+                    <input type="date" id="joined_date"><br><br>
+              
+                    <label for="gender">Gender:</label>
+                    <input type="text" id="gender"><br><br>
+              
+                    <label for="address">Address:</label>
+                    <input type="text" id="address"><br><br>
+              
+                    <label for="city">City:</label>
+                    <input type="text" id="city"><br><br>
+              
+                    <label for="state">State:</label>
+                    <input type="text" id="state"><br><br>
+              
+                    <label for="pincode">Pincode:</label>
+                    <input type="text" id="pincode"><br><br>
+              
+                    <label for="profile_picture_url">Profile Picture URL:</label>
+                    <input type="url" id="profile_picture_url"><br><br>
+              
+                    <label for="role">Role:</label>
+                    <input type="text" id="role"><br><br>
+              
+                    <label for="status">Status:</label>
+                    <input type="text" id="status"><br><br>
+                    
+                    <button type="submit">Save Changes</button>
+                  </form>
+                </div>
+              </div>
+
+              <div id="addModal" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <h3>Add New User</h3>
+                  <form id="addForm">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="add_first_name"><br><br>
+              
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="add_last_name"><br><br>
+              
+                    <label for="personal_email">Personal Email:</label>
+                    <input type="email" id="add_personal_email"><br><br>
+              
+                    <label for="college_email">College Email:</label>
+                    <input type="email" id="add_college_email"><br><br>
+              
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" id="add_phone_number"><br><br>
+              
+                    <label for="joined_date">Joined Date:</label>
+                    <input type="date" id="add_joined_date"><br><br>
+              
+                    <label for="gender">Gender:</label>
+                    <input type="text" id="add_gender"><br><br>
+              
+                    <label for="address">Address:</label>
+                    <input type="text" id="add_address"><br><br>
+              
+                    <label for="city">City:</label>
+                    <input type="text" id="add_city"><br><br>
+              
+                    <label for="state">State:</label>
+                    <input type="text" id="add_state"><br><br>
+              
+                    <label for="pincode">Pincode:</label>
+                    <input type="text" id="add_pincode"><br><br>
+              
+                    <label for="profile_picture_url">Profile Picture URL:</label>
+                    <input type="url" id="add_profile_picture_url"><br><br>
+
+                    <label for="password">Password</label>
+                    <input type="password" id="add_password"><br><br>
+              
+                    <label for="role">Role:</label>
+                    <input type="text" id="add_role"><br><br>
+              
+                    <label for="status">Status:</label>
+                    <input type="text" id="add_status"><br><br>
+              
+                    <button type="submit">Add User</button>
+                  </form>
+                </div>
+              </div>
+              
+              <div id="deleteModal" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <h3>Are you sure you want to delete this user?</h3>
+                  <button id="confirmDelete">Delete</button>
+                  <button id="cancelDelete">Cancel</button>
+                </div>
+              </div>        
+        </section>
+    </main>
+
+  </div>
+  <script src="./Javascript/internDetails.js"></script>
+</body>
+</html>

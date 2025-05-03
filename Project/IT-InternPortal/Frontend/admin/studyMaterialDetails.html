@@ -5,15 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Intern Portal Dashboard</title>
   <link rel="stylesheet" href="/Frontend/css/dashboard.css"/>
-  <link rel="stylesheet" href="./css/admin.css" />
+  <!-- <link rel="stylesheet" href="./css/internDetails.css" /> -->
   <link rel="icon" href="/Frontend/image/download.png" type="image/png" sizes="16x16">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
-
-  <!-- <script defer src="./Javascript/dashboard.js"></script> -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
-
 </head>
 
 <body>
@@ -28,7 +21,7 @@
       </div>
       <nav class="sidebar">
         <ul class="module-list">
-          <li><a href="#">Dashboard</a></li>
+          <li><a href="./admin.html">Dashboard</a></li>
           <!-- <li class="dropdown">
             <a href="#">Study Material ▾</a>
             <ul class="dropdown-content">
@@ -38,27 +31,26 @@
             </ul>
           </li> -->
           <li><a href="./internDetails.html">Intern Details</a></li>
-          <li><a href="./studyMaterialDetails.html">Study Material Details</a></li>
+          <li><a href="#">Study Material Details</a></li>
           <!-- <li><a href="#">Company Overview</a></li> -->
         </ul>
       </nav>
       <div class="logout-button">
-        <button type="button" id="logout">Log out</button>
+        <button  type="button" id="logout">Log out</button>
       </div>
     </aside>
 
     <main class="body-main">
       <header class="sub-title-block">
-        <div class="sub-title" >
-          <h2 style="margin-bottom: 0;">ADMIN DASHBOARD</h2>        
+        <div class="sub-title">
+          <h2>STUDY MATERIAL DETAILS</h2>        
         </div>
       </header>
       <section>
-
       </section>
-            
     </main>
+
   </div>
-  <script src="./Javascript/admin.js"></script>
+  <script src="./Javascript/internDetails.js"></script>
 </body>
 </html>

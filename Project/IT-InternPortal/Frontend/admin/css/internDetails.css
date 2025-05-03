@@ -1,0 +1,207 @@
+  table.dataTables_length{
+    background-color: #333;
+  }
+  table.dataTable {
+    border-radius: 8px;
+    overflow: hidden;
+    border: #333;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  table.dataTable thead {
+    background-color: #2f80ed;
+    color: white;
+  }
+  
+  table.dataTable tfoot input {
+    width: 100%;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .btn-group button {
+    margin: 0 2px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .btn-view { background-color: #3498db; }
+  .btn-edit { background-color: #f39c12; }
+  .btn-delete { background-color: #e74c3c; }
+  
+
+
+.btn-group button {
+  margin: 0 3px;
+  padding: 6px 12px;
+  font-size: 13px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: opacity 0.3s;
+}
+
+.btn-view { background-color: #2980b9; }
+.btn-edit { background-color: #f39c12; }
+.btn-delete { background-color: #e74c3c; }
+
+.btn-group button:hover {
+  opacity: 0.85;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: auto;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 30px 40px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-content h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #34495e;
+}
+
+.modal-content label {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-top: 12px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border 0.3s;
+}
+
+.modal-content input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.modal-content button[type="submit"] {
+  background-color: #2f80ed;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-content button[type="submit"]:hover {
+  background-color: #1e5fd0;
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #333;
+}
+
+#confirmDelete {
+  background-color: #e74c3c;
+  color: white;
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: none;
+}
+
+#cancelDelete {
+  background-color: #bdc3c7;
+  color: white;
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: none;
+}
+
+#confirmDelete:hover {
+  background-color: #c0392b;
+}
+
+#cancelDelete:hover {
+  background-color: #95a5a6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.butn{
+  background-color: #4CAF50; /* Green */
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  float: right;
+}
+
+butn:hover {
+  background-color: #45a049;
+}
+
+.modal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal .close:hover,
+.modal .close:focus {
+  color: black;
+  text-decoration: none;
+}
+

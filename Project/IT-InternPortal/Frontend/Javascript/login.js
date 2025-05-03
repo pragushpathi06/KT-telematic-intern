@@ -28,7 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log('Login successful:', result);
           localStorage.setItem('accessToken', result.accessToken);
           localStorage.setItem('userId', result.user_id);
-          window.location.href = 'dashboard.html'; 
+          try {
+            const responseRole=await fetch(`http://localhost:3000/api/users/getRoleUser/${result.user_id}`)
+            const roleResult = await responseRole.json();
+            if (roleResult.role === 'admin') {
+              window.location.href = '/Frontend/admin/admin.html'
+            }
+            else{
+              window.location.href = 'dashboard.html';
+            }
+          } catch (error) {
+            window.location.href = 'dashboard.html';
+            console.error('Error fetching role data:', error);
+          }
+          
         } else {
           const errorResult = await response.json();
           alert('Login failed: ' + errorResult.message);
