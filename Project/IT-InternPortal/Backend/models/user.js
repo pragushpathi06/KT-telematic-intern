@@ -35,9 +35,10 @@ const User=sequelize.define('user',{
     phone_number:{
         type: DataTypes.STRING,
         allowNull:false,
+        unique:true,
         validate:{
             isNumeric:true,
-            len:[10,15],
+            len:[8,10],
         }
     },
     joined_date:{

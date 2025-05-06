@@ -1,6 +1,6 @@
 // const { User, StudyMaterial,UserProgress } = require('../models/index'); // adjust the path if needed
 const { sequelize } = require('../models');
-const { Sequelize } = require('sequelize'); // ✅ Add this
+const { Sequelize } = require('sequelize');
 const { User, UserProgress, StudyMaterial } = require('../models');
 
 
@@ -9,7 +9,6 @@ exports.createUserProgress = async (req, res) => {
   try {
     const { user_id, studymaterialid, status } = req.body;
 
-    // Check if the user already has a progress entry for this study material
     const existing = await UserProgress.findOne({
       where: { user_id, studymaterialid }
     });
@@ -18,7 +17,6 @@ exports.createUserProgress = async (req, res) => {
       return res.status(400).json({ message: 'This user already has progress recorded for this study material.' });
     }
 
-    // If no existing progress, create new entry
     const newProgress = await UserProgress.create({
       user_id,
       studymaterialid,
@@ -31,6 +29,7 @@ exports.createUserProgress = async (req, res) => {
     res.status(500).json({ message: 'Error creating user progress' });
   }
 };
+
 
 
 exports.getAllUserProgress = async (req, res) => {

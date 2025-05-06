@@ -17,6 +17,8 @@ router.put('/updateUser/:id',controller.updateUser);
 
 router.post('/login', controller.loginUser);
 
+router.get('/check',controller.check);
+
 router.get('/protected', authenticateToken,controller.protected );
 
 router.get('/getRoleUser/:id',controller.getOneUser);

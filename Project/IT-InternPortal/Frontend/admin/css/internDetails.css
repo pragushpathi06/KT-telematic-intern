@@ -21,7 +21,15 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
-  
+  .dataTables_wrapper .dataTables_filter input {
+    padding: 5px;
+    margin-left: 0.5em;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    
+}
+
   .btn-group button {
     margin: 0 2px;
     padding: 5px 10px;
@@ -87,13 +95,29 @@
   color: #34495e;
 }
 
-.modal-content label {
+.modal-content label select {
   font-weight: 600;
   color: #333;
   display: block;
   margin-top: 12px;
 }
 
+option{
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-top: 12px;
+}
+
+#add_role , #add_status , #role_select ,#status_select ,#add_gender,#gender_select{
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  transition: border 0.3s;
+}
 .modal-content input {
   width: 100%;
   padding: 10px;
@@ -108,7 +132,7 @@
   outline: none;
 }
 
-.modal-content button[type="submit"] {
+.modal-content button[type="submit"] , button[type="reset"]{
   background-color: #2f80ed;
   color: white;
   border: none;
@@ -121,7 +145,7 @@
   transition: background-color 0.3s;
 }
 
-.modal-content button[type="submit"]:hover {
+.modal-content button[type="submit"],button[type="reset"]:hover {
   background-color: #1e5fd0;
 }
 
@@ -205,3 +229,6 @@ butn:hover {
   text-decoration: none;
 }
 
+.important {
+  color: red;
+}

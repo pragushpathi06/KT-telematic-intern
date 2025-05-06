@@ -14,8 +14,8 @@
   
 
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
- 
 </head>
 
 <body>
@@ -56,7 +56,7 @@
         </div>
     </header>
         <section>
-          <button class="butn" onclick="openAddUserModal()">Add New User</button>
+          <button class="butn" onclick="openAddUserModal()"><i class="fa fa-plus" style="font-size: 15px;"></i>    Add User</button>
             <table id="example" class="display responsive nowrap" style="width:100%">
                 <thead>
                   <tr>
@@ -109,17 +109,23 @@
                     <input type="email" id="college_email"><br><br>
               
                     <label for="phone_number">Phone Number:</label>
-                    <input type="text" id="phone_number"><br><br>
+                    <input type="tel" id="phone_number" maxlength="10" minlength="8" pattern="^\d{10}$"><br><br>
               
                     <label for="joined_date">Joined Date:</label>
-                    <input type="date" id="joined_date"><br><br>
+                    <input type="date" id="joined_date" name="joined_date">
+                    <span id="add_joined_date_error" style="color: red;"></span><br><br>
               
                     <label for="gender">Gender:</label>
-                    <input type="text" id="gender"><br><br>
+                    <input type="text" id="gender_input" readonly style="display: none;">
+                    <select id="gender_select">
+                      <option value="">-- Select Gender --</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select><br><br>
               
                     <label for="address">Address:</label>
                     <input type="text" id="address"><br><br>
-              
+                    
                     <label for="city">City:</label>
                     <input type="text" id="city"><br><br>
               
@@ -133,11 +139,23 @@
                     <input type="url" id="profile_picture_url"><br><br>
               
                     <label for="role">Role:</label>
-                    <input type="text" id="role"><br><br>
-              
-                    <label for="status">Status:</label>
-                    <input type="text" id="status"><br><br>
+                    <input type="text" id="role_input" readonly style="display: none;">
+                    <select id="role_select">
+                      <option value="">-- Select Role --</option>
+                      <option value="full stack developer">Full stack developer</option>
+                      <option value="software tester">Software tester</option>
+                      <option value="android developer">Android developer</option>
+                      <option value="admin">Admin</option>
+                    </select><br><br>
                     
+                    <label for="status">Status:</label>
+                    <input type="text" id="status_input" readonly style="display: none;">
+                    <select id="status_select" required>
+                      <option value="">-- Select Status --</option>
+                      <option value="Inactive">Inactive</option>
+                      <option value="Active">Active</option>
+                    </select><br><br>
+
                     <button type="submit">Save Changes</button>
                   </form>
                 </div>
@@ -148,52 +166,74 @@
                   <span class="close">&times;</span>
                   <h3>Add New User</h3>
                   <form id="addForm">
-                    <label for="first_name">First Name:</label>
-                    <input type="text" id="add_first_name"><br><br>
+                    <label for="first_name"><span class="important">*</span>First Name:</label>
+                    <input type="text" id="add_first_name" required><br><br>
               
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" id="add_last_name"><br><br>
+                    <label for="last_name"><span class="important">*</span>Last Name:</label>
+                    <input type="text" id="add_last_name" required><br><br>
               
-                    <label for="personal_email">Personal Email:</label>
-                    <input type="email" id="add_personal_email"><br><br>
-              
-                    <label for="college_email">College Email:</label>
-                    <input type="email" id="add_college_email"><br><br>
-              
-                    <label for="phone_number">Phone Number:</label>
-                    <input type="text" id="add_phone_number"><br><br>
-              
-                    <label for="joined_date">Joined Date:</label>
-                    <input type="date" id="add_joined_date"><br><br>
-              
-                    <label for="gender">Gender:</label>
-                    <input type="text" id="add_gender"><br><br>
-              
-                    <label for="address">Address:</label>
-                    <input type="text" id="add_address"><br><br>
-              
-                    <label for="city">City:</label>
-                    <input type="text" id="add_city"><br><br>
-              
-                    <label for="state">State:</label>
-                    <input type="text" id="add_state"><br><br>
-              
-                    <label for="pincode">Pincode:</label>
-                    <input type="text" id="add_pincode"><br><br>
-              
-                    <label for="profile_picture_url">Profile Picture URL:</label>
-                    <input type="url" id="add_profile_picture_url"><br><br>
+                    
+                    <label for="college_email"><span class="important">*</span>College Email:</label>
+                    <input type="email" id="add_college_email" placeholder="Enter college email" onblur="checkAvailability(this.value, 'college_email', 'check-college')" required>
+                    <span id="check-college"></span><br><br>
 
-                    <label for="password">Password</label>
-                    <input type="password" id="add_password"><br><br>
+                    <label for="personal_email"><span class="important">*</span>Personal Email:</label>
+                    <input type="email" id="add_personal_email" placeholder="Enter personal email" onblur="checkAvailability(this.value, 'personal_email', 'check-personal-email')" required>
+                    <span id="check-personal-email"></span><br><br>
+                    
+                    <label for="phone_number"><span class="important">*</span>Phone Number:</label>
+                    <input type="tel" id="add_phone_number" pattern="^\d{10}$" maxlength="10" placeholder="Enter Phone number" onblur="checkAvailability(this.value, 'phone_number', 'check-phone')" required>
+                    <span id="check-phone"></span><br><br>
+
               
-                    <label for="role">Role:</label>
-                    <input type="text" id="add_role"><br><br>
+                    <label for="joined_date"><span class="important">*</span>Joined Date:</label>
+                    <input type="date" id="add_joined_date" required><br><br>
+
+                    <label for="gender"><span class="important">*</span>Gender:</label>
+                    <!-- <input type="text" id="add_gender" required> -->
+                    <select id="add_gender">
+                      <option value="">-- Select Gender --</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select><br><br>
               
-                    <label for="status">Status:</label>
-                    <input type="text" id="add_status"><br><br>
+                    <label for="address"><span class="important">*</span>Address:</label>
+                    <input type="text" id="add_address" required><br><br>
               
-                    <button type="submit">Add User</button>
+                    <label for="city"><span class="important">*</span>City:</label>
+                    <input type="text" id="add_city" required><br><br>
+              
+                    <label for="state"><span class="important">*</span>State:</label>
+                    <input type="text" id="add_state" required><br><br>
+              
+                    <label for="pincode"><span class="important">*</span>Pincode:</label>
+                    <input type="text" id="add_pincode" required><br><br>
+              
+                    <label for="profile_picture_url"><span class="important">*</span>Profile Picture URL*:</label>
+                    <input type="url" id="add_profile_picture_url" required><br><br>
+
+                    <label for="password"><span class="important">*</span>Password</label>
+                    <input type="password" id="add_password" required><br><br>
+              
+                    <label for="add_role"><span class="important">*</span>Role:</label>
+                    <select id="add_role" required>
+                      <option value="">-- Select Role --</option>
+                      <option value="full stack developer">Full stack developer</option>
+                      <option value="software tester">Software tester</option>
+                      <option value="android developer">Android developer</option>
+                      <option value="admin">Admin</option>
+                    </select><br><br>
+
+                    <label for="status"><span class="important">*</span>Status:</label>
+                    <select id="add_status" required>
+                      <option value="">-- Select Status --</option>
+                      <option value="Inactive">Inactive</option>
+                      <option value="Active">Active</option>
+                    </select><br><br>
+
+              
+                    <button type="submit" id="submit-btn" disabled>Add User</button>
+                    <button type="reset" id="reset-btn">Reset</button>
                   </form>
                 </div>
               </div>

@@ -187,7 +187,7 @@ canvas {
 
 
 
-/* Overall Body Styling */
+
 .centre-body {
   background-color: #ffffff;
   padding: 20px;
@@ -196,14 +196,14 @@ canvas {
   margin-top: 30px;
 }
 
-/* Content Grid Layout */
+
 .centre-body-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
-/* Card Styling */
+
 .card1 {
   background-color: #f1f2f6;
   padding: 15px;

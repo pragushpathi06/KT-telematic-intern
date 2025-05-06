@@ -105,7 +105,7 @@ Chart.register(ChartDataLabels);
                 const index = context.dataIndex;
                 const total = totalCounts[context.dataIndex];
                 const percent = percentProgress[index]
-                return `Total-Topics: ${total} - %${percent}`;
+                return `Total-Topics: ${total} `;
               }
             },
             tooltip: {

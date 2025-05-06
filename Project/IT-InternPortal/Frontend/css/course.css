@@ -53,7 +53,33 @@
     font-weight: 600;
     margin-bottom: 0px;
   }
+  .logout-button{
+    display: flex;
+    justify-content: center;
+    align-items:end;
+    margin-bottom: 40px;
+    height: 100vh; 
+  }
   
+  #logout{
+    padding: 10px 20px;
+    background-color:  #ff1e1e;
+    width: 60%;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  #logout:hover{
+    background-color: whitesmoke;
+    color: #1e272e;
+    font-weight: 700;
+    transform: scale(1.05);
+  }
   
   .sidebar {
     padding: 20px 0px 0px 20px;

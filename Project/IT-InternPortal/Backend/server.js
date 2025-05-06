@@ -15,6 +15,9 @@ const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, '../Frontend')));
+
+
 //login
 app.use('/api/studyMaterial',studyMaterialRoutes); 
 
@@ -36,3 +39,16 @@ sequelize.authenticate()
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
   })
   .catch((err) => console.error("Unable to connect to DB:", err));
+
+
+
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  });
+
+  
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(` Backend running at http://192.168.110.36:${PORT}`);
+  });
+
+  

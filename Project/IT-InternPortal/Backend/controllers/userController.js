@@ -5,33 +5,33 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
+exports.registerUser = async (req,res) => { 
 
-exports.registerUser = async (req,res) => {
-    const {first_name , last_name, personal_email ,college_email , phone_number ,joined_date ,gender ,address ,city , state, pincode ,profile_picture_url,password,role ,status} = req.body;
-    try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await User.create({
-            first_name, 
-            last_name, 
-            personal_email,
-            college_email, 
-            phone_number,
-            joined_date ,
-            gender,
-            address,
-            city,
-            state,
-            pincode ,
-            profile_picture_url ,
-            password: hashedPassword,
-            role,
-            status 
-        });
-        // 201	Created
-        res.status(201).json({ message: "User Registered Successfully", data: newUser })
-    } catch (error) {
-        res.status(500).json({ error: error.message }); 
-    }
+  const {first_name , last_name, personal_email ,college_email , phone_number ,joined_date ,gender ,address ,city , state, pincode ,profile_picture_url,password,role ,status} = req.body;
+  try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = await User.create({
+          first_name, 
+          last_name, 
+          personal_email,
+          college_email, 
+          phone_number,
+          joined_date ,
+          gender,
+          address,
+          city,
+          state,
+          pincode ,
+          profile_picture_url ,
+          password: hashedPassword,
+          role,
+          status 
+      });
+      // 201	Created
+      res.status(201).json({ message: "User Registered Successfully", data: newUser })
+  } catch (error) {
+      res.status(500).json({ error: error.message }); 
+  }
 
 }
 
@@ -214,6 +214,28 @@ exports.protected =async (req,res) => {
     });
   }
 }
+
+exports.check = async (req, res) => {
+  const { value, type } = req.query;
+
+  if (!value || !type) {
+    return res.status(400).json({ message: 'Value and type are required' });
+  }
+
+  let where = {};
+  if (type === 'personal_email') where.personal_email = value;
+  else if (type === 'college_email') where.college_email = value;
+  else if (type === 'phone_number') where.phone_number = value;
+  else return res.status(400).json({ message: 'Invalid type' });
+
+  try {
+    const existing = await User.findOne({ where });
+    res.json({ exists: !!existing });
+  } catch (err) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 
 // exports.getAllUsersDetails = async (req, res) => {
 //     try {
