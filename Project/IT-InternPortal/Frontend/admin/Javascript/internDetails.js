@@ -10,6 +10,103 @@ document.addEventListener("DOMContentLoaded",function(){
 })
 
 
+fetch('https://raw.githubusercontent.com/mithunsasidharan/India-Pincode-Lookup/refs/heads/master/pincodes.json')
+  .then(res => {
+    if (!res.ok) throw new Error(`Failed to fetch data. Status: ${res.status}`);
+    return res.json();
+  })
+  .then(data => {
+    const stateSelect = document.getElementById('add_state');
+    const citySelect = document.getElementById('add_city');
+    const pinSelect = document.getElementById('add_pincode');
+    const stateEdit = document.getElementById('state');
+    const cityEdit = document.getElementById('city');
+    const pinEdit = document.getElementById('pincode');
+
+    const clearSelect = (selectEl) => {
+      selectEl.innerHTML = '<option value="">Select</option>';
+    };
+
+    // Populate unique sorted states
+    const states = [...new Set(data.map(item => item.stateName))].sort();
+    states.forEach(state => {
+      const option = document.createElement('option');
+      option.value = state;
+      option.textContent = state;
+      stateSelect.appendChild(option);
+      stateEdit.appendChild(option);
+    });
+
+    // On state change
+    stateSelect.addEventListener('change', () => {
+      const selectedState = stateSelect.value;
+      if (!selectedState) return;
+
+      const cities = [...new Set(
+        data.filter(item => item.stateName === selectedState)
+            .map(item => item.districtName)
+      )].sort();
+
+      clearSelect(cityEdit);
+      clearSelect(pinEdit);
+
+      clearSelect(citySelect);
+      clearSelect(pinSelect);
+
+      cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        citySelect.appendChild(option);
+        cityEdit.appendChild(option);
+      });
+    });
+
+    // On city change
+    citySelect.addEventListener('change', () => {
+      const selectedState = stateSelect.value;
+      const selectedCity = citySelect.value;
+      if (!selectedState || !selectedCity) return;
+
+      const pins = [...new Set(
+        data.filter(item =>
+          item.stateName === selectedState &&
+          item.districtName === selectedCity
+        ).map(item => item.pincode)
+      )].sort();
+
+      clearSelect(pinSelect);
+      pins.forEach(pin => {
+        const option = document.createElement('option');
+        option.value = pin;
+        option.textContent = pin;
+        pinSelect.appendChild(option);
+      });
+    });
+
+    // On pincode change: auto-fill state and city
+    pinSelect.addEventListener('change', () => {
+      const selectedPin = pinSelect.value;
+      const match = data.find(item => item.pincode === selectedPin);
+      if (match) {
+        stateSelect.value = match.stateName;
+        stateSelect.dispatchEvent(new Event('change'));
+        setTimeout(() => {
+          citySelect.value = match.districtName;
+          citySelect.dispatchEvent(new Event('change'));
+        }, 100);
+      }
+    });
+
+  })
+  .catch(error => {
+    console.error('Error loading location data:', error);
+    alert('Could not load location data. Please check your internet connection or try again later.');
+  });
+
+
+
+
 
 $(document).ready(function () {
     const table = new DataTable('#example', {
@@ -136,6 +233,7 @@ $(document).ready(function () {
 
   function openAddUserModal() {
     const modal = document.getElementById('addModal');
+    $('.modal-content h3').text('Add New User');
     modal.style.display = 'block';
   
     $('#addForm input').val('');

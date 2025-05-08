@@ -1,8 +1,8 @@
 const express = require('express');
 const sequelize = require('./config/database');
-const studyMaterialRoutes = require('./routes/studyMaterialRoutes');
-const userRoutes=require('./routes/userRoutes')
-const userProgress = require('./routes/userProgressRouter');
+const studyMaterialRoutes = require('./api/studyMaterial/index');
+const userRoutes=require('./api/user/index')
+const userProgress = require('./api/userProgress/index');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');

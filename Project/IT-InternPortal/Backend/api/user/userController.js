@@ -1,6 +1,6 @@
 // const User = require('../models/user');
 const { Op } = require("sequelize");
-const { User } = require('../models/index');
+const { User } = require('../../models/index');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -175,6 +175,7 @@ exports.loginUser = async (req,res) => {
   try {
     const {email,password} =req.body;
     const user =await User.findOne({
+      attributes:{},
       where:{personal_email:email}
     });
     if (!user){
@@ -189,11 +190,12 @@ exports.loginUser = async (req,res) => {
     const token = jwt.sign({ user_id:user.userid ,first_name: user.first_name },"f6$4Jd!p0#Wq9m@Z" ,{
       expiresIn : "1d"
     });
+
+    user.password="";
+    user.token = token;
     res.status(200).send({
-      user_id:user.userid,
-      name:user.first_name,
-      email:user.personal_email,
-      accessToken :token
+      success:true,
+      result:user,
     })
 
   } catch (error) {

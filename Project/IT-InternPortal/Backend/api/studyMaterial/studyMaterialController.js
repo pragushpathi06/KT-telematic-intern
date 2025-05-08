@@ -1,4 +1,4 @@
-const { StudyMaterial, User } = require('../models/index');
+const { StudyMaterial, User } = require('../../models/index');
 // const bcrypt = require('bcrypt');
 
 

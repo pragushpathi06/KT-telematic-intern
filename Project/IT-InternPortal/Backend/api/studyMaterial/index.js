@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/studyMaterialController');
+const controller = require('../studyMaterial/studyMaterialController');
 
 // Route to register study material
 router.post('/add', controller.registerStudyMaterial);

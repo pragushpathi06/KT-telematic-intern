@@ -56,7 +56,7 @@
         </div>
     </header>
         <section>
-          <button class="butn" onclick="openAddUserModal()"><i class="fa fa-plus" style="font-size: 15px;"></i>    Add User</button>
+          <button class="butn" onclick="openAddUserModal()"><i class="fa fa-plus" style="font-size: 16px;"></i>&nbsp; Add User</button>
             <table id="example" class="display responsive nowrap" style="width:100%">
                 <thead>
                   <tr>
@@ -126,14 +126,25 @@
                     <label for="address">Address:</label>
                     <input type="text" id="address"><br><br>
                     
-                    <label for="city">City:</label>
-                    <input type="text" id="city"><br><br>
-              
                     <label for="state">State:</label>
-                    <input type="text" id="state"><br><br>
+                    <!-- <input type="text" id="state"> -->
+                    <select id="add" class="input-box" required>
+                      <option value="">Select State</option>
+                    </select>
+                    <br><br>
+
+                    <label for="city">City:</label>
+                    <!-- <input type="text" id="city"> -->
+                    <select id="city" class="input-box" required>
+                      <option value="">Select City</option>
+                    </select>
+                    <br><br>
               
                     <label for="pincode">Pincode:</label>
-                    <input type="text" id="pincode"><br><br>
+                    <!-- <input type="text" id="pincode"> -->
+                    <select id="pincode" class="input-box" required>
+                      <option value="">Select Pincode</option>
+                    </select><br><br>
               
                     <label for="profile_picture_url">Profile Picture URL:</label>
                     <input type="url" id="profile_picture_url"><br><br>
@@ -199,15 +210,25 @@
               
                     <label for="address"><span class="important">*</span>Address:</label>
                     <input type="text" id="add_address" required><br><br>
-              
-                    <label for="city"><span class="important">*</span>City:</label>
-                    <input type="text" id="add_city" required><br><br>
-              
+                    
                     <label for="state"><span class="important">*</span>State:</label>
-                    <input type="text" id="add_state" required><br><br>
+                    <select id="add_state" class="input-box" required>
+                      <option value="">Select State</option>
+                    </select>
+                    <br><br>
+
+                    <label for="city"><span class="important">*</span>City:</label>
+                    
+                    <select id="add_city" class="input-box" required>
+                      <option value="">Select City</option>
+                    </select><br><br>
+              
               
                     <label for="pincode"><span class="important">*</span>Pincode:</label>
-                    <input type="text" id="add_pincode" required><br><br>
+                    <select id="add_pincode" class="input-box" required>
+                      <option value="">Select Pincode</option>
+                    </select>
+                    <br><br>
               
                     <label for="profile_picture_url"><span class="important">*</span>Profile Picture URL*:</label>
                     <input type="url" id="add_profile_picture_url" required><br><br>

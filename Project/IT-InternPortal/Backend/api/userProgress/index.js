@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userProgressController = require('../controllers/userProgressController');
+const userProgressController = require('../userProgress/userProgressController');
 
 router.post('/create', userProgressController.createUserProgress);
 

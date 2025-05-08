@@ -1,7 +1,7 @@
 // const { User, StudyMaterial,UserProgress } = require('../models/index'); // adjust the path if needed
-const { sequelize } = require('../models');
+const { sequelize } = require('../../models');
 const { Sequelize } = require('sequelize');
-const { User, UserProgress, StudyMaterial } = require('../models');
+const { User, UserProgress, StudyMaterial } = require('../../models');
 
 
 
