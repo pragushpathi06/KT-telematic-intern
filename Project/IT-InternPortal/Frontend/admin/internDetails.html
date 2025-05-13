@@ -127,22 +127,22 @@
                     <input type="text" id="address"><br><br>
                     
                     <label for="state">State:</label>
-                    <!-- <input type="text" id="state"> -->
-                    <select id="add" class="input-box" required>
+                    <input type="text" id="state" readonly style="display: none;">
+                    <select id="state_select" class="input-box" required>
                       <option value="">Select State</option>
                     </select>
                     <br><br>
 
                     <label for="city">City:</label>
-                    <!-- <input type="text" id="city"> -->
-                    <select id="city" class="input-box" required>
+                    <input type="text" id="city" readonly style="display: none;">
+                    <select id="city_select" class="input-box" required>
                       <option value="">Select City</option>
                     </select>
                     <br><br>
               
                     <label for="pincode">Pincode:</label>
-                    <!-- <input type="text" id="pincode"> -->
-                    <select id="pincode" class="input-box" required>
+                    <input type="text" id="pincode" readonly style="display: none;">
+                    <select id="pincode_select" class="input-box" required>
                       <option value="">Select Pincode</option>
                     </select><br><br>
               
@@ -179,7 +179,7 @@
                   <form id="addForm">
                     <label for="first_name"><span class="important">*</span>First Name:</label>
                     <input type="text" id="add_first_name" required><br><br>
-              
+                    
                     <label for="last_name"><span class="important">*</span>Last Name:</label>
                     <input type="text" id="add_last_name" required><br><br>
               

@@ -9,102 +9,128 @@ document.addEventListener("DOMContentLoaded",function(){
   });
 })
 
-
 fetch('https://raw.githubusercontent.com/mithunsasidharan/India-Pincode-Lookup/refs/heads/master/pincodes.json')
   .then(res => {
     if (!res.ok) throw new Error(`Failed to fetch data. Status: ${res.status}`);
     return res.json();
   })
   .then(data => {
-    const stateSelect = document.getElementById('add_state');
-    const citySelect = document.getElementById('add_city');
-    const pinSelect = document.getElementById('add_pincode');
-    const stateEdit = document.getElementById('state');
-    const cityEdit = document.getElementById('city');
-    const pinEdit = document.getElementById('pincode');
 
     const clearSelect = (selectEl) => {
       selectEl.innerHTML = '<option value="">Select</option>';
     };
 
-    // Populate unique sorted states
     const states = [...new Set(data.map(item => item.stateName))].sort();
-    states.forEach(state => {
-      const option = document.createElement('option');
-      option.value = state;
-      option.textContent = state;
-      stateSelect.appendChild(option);
-      stateEdit.appendChild(option);
-    });
 
-    // On state change
-    stateSelect.addEventListener('change', () => {
-      const selectedState = stateSelect.value;
-      if (!selectedState) return;
 
-      const cities = [...new Set(
-        data.filter(item => item.stateName === selectedState)
-            .map(item => item.districtName)
-      )].sort();
+    const addState = document.getElementById('add_state');
+    const addCity = document.getElementById('add_city');
+    const addPincode = document.getElementById('add_pincode');
 
-      clearSelect(cityEdit);
-      clearSelect(pinEdit);
-
-      clearSelect(citySelect);
-      clearSelect(pinSelect);
-
-      cities.forEach(city => {
+    if (addState && addCity && addPincode) {
+      states.forEach(state => {
         const option = document.createElement('option');
-        option.value = city;
-        option.textContent = city;
-        citySelect.appendChild(option);
-        cityEdit.appendChild(option);
+        option.value = state;
+        option.textContent = state;
+        addState.appendChild(option);
       });
-    });
 
-    // On city change
-    citySelect.addEventListener('change', () => {
-      const selectedState = stateSelect.value;
-      const selectedCity = citySelect.value;
-      if (!selectedState || !selectedCity) return;
+      addState.addEventListener('change', () => {
+        const selectedState = addState.value;
+        if (!selectedState) return;
 
-      const pins = [...new Set(
-        data.filter(item =>
-          item.stateName === selectedState &&
-          item.districtName === selectedCity
-        ).map(item => item.pincode)
-      )].sort();
+        const cities = [...new Set(data.filter(item => item.stateName === selectedState).map(item => item.districtName))].sort();
+        clearSelect(addCity);
+        clearSelect(addPincode);
 
-      clearSelect(pinSelect);
-      pins.forEach(pin => {
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city;
+          option.textContent = city;
+          addCity.appendChild(option);
+        });
+      });
+
+      addCity.addEventListener('change', () => {
+        const selectedState = addState.value;
+        const selectedCity = addCity.value;
+        if (!selectedState || !selectedCity) return;
+
+        const pins = [...new Set(data.filter(item => item.stateName === selectedState && item.districtName === selectedCity).map(item => item.pincode))].sort();
+        clearSelect(addPincode);
+
+        pins.forEach(pin => {
+          const option = document.createElement('option');
+          option.value = pin;
+          option.textContent = pin;
+          addPincode.appendChild(option);
+        });
+      });
+    }
+
+    const editState = document.getElementById('state_select');
+    const editCity = document.getElementById('city_select');
+    const editPincode = document.getElementById('pincode_select');
+
+    if (editState && editCity && editPincode) {
+      states.forEach(state => {
         const option = document.createElement('option');
-        option.value = pin;
-        option.textContent = pin;
-        pinSelect.appendChild(option);
+        option.value = state;
+        option.textContent = state;
+        editState.appendChild(option);
       });
-    });
 
-    // On pincode change: auto-fill state and city
-    pinSelect.addEventListener('change', () => {
-      const selectedPin = pinSelect.value;
-      const match = data.find(item => item.pincode === selectedPin);
-      if (match) {
-        stateSelect.value = match.stateName;
-        stateSelect.dispatchEvent(new Event('change'));
+      editState.addEventListener('change', () => {
+        const selectedState = editState.value;
+        if (!selectedState) return;
+
+        const cities = [...new Set(data.filter(item => item.stateName === selectedState).map(item => item.districtName))].sort();
+        clearSelect(editCity);
+        clearSelect(editPincode);
+
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city;
+          option.textContent = city;
+          editCity.appendChild(option);
+        });
+      });
+
+      editCity.addEventListener('change', () => {
+        const selectedState = editState.value;
+        const selectedCity = editCity.value;
+        if (!selectedState || !selectedCity) return;
+
+        const pins = [...new Set(data.filter(item => item.stateName === selectedState && item.districtName === selectedCity).map(item => item.pincode))].sort();
+        clearSelect(editPincode);
+
+        pins.forEach(pin => {
+          const option = document.createElement('option');
+          option.value = pin;
+          option.textContent = pin;
+          editPincode.appendChild(option);
+        });
+      });
+
+      window.populateLocationFields = function (state, city, pincode) {
+        editState.value = state;
+        editState.dispatchEvent(new Event('change'));
+
         setTimeout(() => {
-          citySelect.value = match.districtName;
-          citySelect.dispatchEvent(new Event('change'));
-        }, 100);
-      }
-    });
+          editCity.value = city;
+          editCity.dispatchEvent(new Event('change'));
 
+          setTimeout(() => {
+            editPincode.value = pincode;
+          }, 200);
+        }, 200); 
+      };
+    }
   })
   .catch(error => {
     console.error('Error loading location data:', error);
     alert('Could not load location data. Please check your internet connection or try again later.');
   });
-
-
 
 
 
@@ -210,9 +236,16 @@ $(document).ready(function () {
     $('#role_select').hide();
     $('#status_select').hide();
     $('#gender_select').hide();
+    $('#state_select').hide();
+    $('#pincode_select').hide();
+    $('#city_select').hide();
+
     $('#role_input').show();
     $('#status_input').show();
     $('#gender_input').show();
+    $('#state').show();
+    $('#pincode').show();
+    $('#city').show();
     
   
     $.ajax({
@@ -322,10 +355,17 @@ $(document).ready(function () {
     $('#role_input').hide();
     $('#status_input').hide();
     $('#gender_input').hide();
+    $('#state').hide();
+    $('#pincode').hide();
+    $('#city').hide();
+
+
     $('#role_select').show();
     $('#status_select').show();
     $('#gender_select').show();
-
+    $('#state_select').show();
+    $('#pincode_select').show();
+    $('#city_select').show();
   
     $.ajax({
       url: `http://localhost:3000/api/users/getUser/${id}`,
@@ -336,6 +376,7 @@ $(document).ready(function () {
         $('#role_select').val(data.role);
         $('#status_select').val(data.status);
         $('#gender_select').val(data.gender);
+        populateLocationFields(data.state ,data.city, data.pincode);
       },
       error: handleAjaxError
     });
@@ -369,9 +410,9 @@ $(document).ready(function () {
         joined_date: $('#joined_date').val(),
         gender: $('#gender').val(),
         address: $('#address').val(),
-        city: $('#city').val(),
-        state: $('#state').val(),
-        pincode: $('#pincode').val(),
+        city: $('#city_select').val(),
+        state: $('#state_select').val(),
+        pincode: $('#pincode_select').val(),
         profile_picture_url: $('#profile_picture_url').val(),
         role: $('#role_select').val(),
         status: $('#status_select').val()
@@ -390,8 +431,6 @@ $(document).ready(function () {
       });
     });
   }
-  
-
  
 
   function deleteUser(id) {

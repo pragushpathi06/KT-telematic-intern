@@ -171,38 +171,43 @@ exports.updateUser = async (req,res) => {
   }
 }
 
-exports.loginUser = async (req,res) => {
+exports.loginUser = async (req, res) => {
   try {
-    const {email,password} =req.body;
-    const user =await User.findOne({
-      attributes:{},
-      where:{personal_email:email}
-    });
-    if (!user){
-      return res.status(404).json('Email not found');
-    }
-
-    const passwordValid = await bcrypt.compare(password,user.password);
-    
-    if(!passwordValid){
-      return res.status(404).json('Incorrect email and password'+" "+password+user.password)
-    }
-    const token = jwt.sign({ user_id:user.userid ,first_name: user.first_name },"f6$4Jd!p0#Wq9m@Z" ,{
-      expiresIn : "1d"
+    const { email, password } = req.body;
+    const user = await User.findOne({
+      where: { personal_email: email }
     });
 
-    user.password="";
-    user.token = token;
-    res.status(200).send({
-      success:true,
-      result:user,
-    })
+    if (!user) {
+      return res.status(404).json({ message: 'Email not found' });
+    }
+
+    const passwordValid = await bcrypt.compare(password, user.password);
+    if (!passwordValid) {
+      return res.status(401).json({ message: 'Incorrect email or password' });
+    }
+
+    const token = jwt.sign(
+      { user_id: user.userid, first_name: user.first_name },
+      "f6$4Jd!p0#Wq9m@Z",
+      { expiresIn: "1d" }
+    );
+
+    const userData = user.toJSON(); 
+    userData.password = "";         
+    userData.token = token;         
+
+    res.status(200).json({
+      success: true,
+      result: userData
+    });
 
   } catch (error) {
-    console.log(error);
-    return res.status(500).send('login error');
+    console.error(error);
+    return res.status(500).json({ message: 'Login error' });
   }
-}
+};
+
 
 exports.protected =async (req,res) => {
   if (req.user && req.user.first_name) { // Check if the user data is available

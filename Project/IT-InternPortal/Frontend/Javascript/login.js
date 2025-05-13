@@ -26,11 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (response.ok) {
           const result = await response.json();  
           console.log('Login successful:', result);
-          localStorage.setItem('accessToken', result.accessToken);
-          localStorage.setItem('userId', result.user_id);
+          localStorage.setItem('accessToken', result.result.token); 
+          localStorage.setItem('userId', result.result.userid);     
           try {
-            const responseRole=await fetch(`http://localhost:3000/api/users/getRoleUser/${result.user_id}`)
+            const responseRole=await fetch(`http://localhost:3000/api/users/getRoleUser/${result.result.userid}`)
             const roleResult = await responseRole.json();
+            console.log('Role response:', roleResult);
+            console.log('Role:', roleResult.role);
+
             if (roleResult.role === 'admin') {
               window.location.href = '/Frontend/admin/admin.html'
             }
@@ -47,6 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
           alert('Login failed: ' + errorResult.message);
         }
       } catch (error) {
+        if (!passwordValid){
+          return res.status(401).json({ message: 'Incorrect email or password' });
+        }        
         console.error('Error during login:', error);
         alert('Login failed. Please try again later.');
       }

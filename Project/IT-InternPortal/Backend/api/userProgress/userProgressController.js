@@ -141,8 +141,6 @@ exports.deleteUserProgress = async (req, res) => {
 exports.getCompletedTopicCountsByUser = async (req, res) => {
   try {
     const { user_id } = req.params;
-
-    // 1. Get completed topics grouped by tech
     const completedTopics = await UserProgress.findAll({
       attributes: [
         [Sequelize.col('StudyMaterial.tech'), 'tech'],
@@ -192,7 +190,7 @@ exports.getCompletedTopicCountsByUser = async (req, res) => {
     
         const results = await UserProgress.findAll({
           attributes: [
-            [Sequelize.col('StudyMaterial.role'), 'Role'], // fixed here
+            [Sequelize.col('StudyMaterial.role'), 'Role'], 
             [Sequelize.fn('COUNT', Sequelize.col('user_progress.id')), 'completedCount']
           ],
           include: [
