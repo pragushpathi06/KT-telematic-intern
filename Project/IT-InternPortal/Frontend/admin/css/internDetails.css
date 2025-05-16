@@ -57,10 +57,6 @@
   transition: opacity 0.3s;
 }
 
-.btn-view { background-color: #2980b9; }
-.btn-edit { background-color: #f39c12; }
-.btn-delete { background-color: #e74c3c; }
-
 .btn-group button:hover {
   opacity: 0.85;
 }
@@ -109,7 +105,7 @@ option{
   margin-top: 12px;
 }
 
-.input-box,#add_role, #add_status, #role_select, #status_select , #add_gender,#gender_select{
+.input-box, #add_status,#add_role, #role_select, #status_select , #add_gender,#gender_select{
   width: 100%;
   padding: 10px;
   margin-top: 5px;
@@ -234,4 +230,24 @@ butn:hover {
 
 .important {
   color: red;
+}
+
+.btn-outline-success.btn-sm {
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn-outline-success.btn-sm i {
+  font-size: 12px;
+}
+
+.btn-outline-success.btn-sm:hover {
+  background-color: #218838;
+  color: #fff;
+  border-color: #1e7e34;
 }

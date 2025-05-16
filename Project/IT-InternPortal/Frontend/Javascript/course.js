@@ -6,6 +6,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+    document.addEventListener("DOMContentLoaded",function(){
+    const logout= document.getElementById("logout");
+    logout.addEventListener("click", function () {
+      if (confirm("Are you sure you want to log out?")) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        window.location.href = '/Frontend/index.html';
+      }
+    });
+  })
+
+
+
+function applyTopicFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const topicFromURL = params.get("topic");
+
+  if (topicFromURL) {
+    document.querySelector(".sub-title h2").textContent = decodeURIComponent(topicFromURL);
+  }
+}
+document.addEventListener("DOMContentLoaded", applyTopicFromURL);
+
 
 
   function applyTopicFilterFromURL() {
@@ -30,23 +53,15 @@ const userId = + localStorage.getItem('userId');
 
 async function fetchStudyMaterials() {
     try {
-        // localStorage.setItem('userId', result.id);
         console.log(localStorage.getItem('userId'));
-        
-        
-        // console.log(+ userId);
-        // userId=28
-        // console.log(+ userId);
         const [studyRes, progressRes] = await Promise.all([
             fetch('http://localhost:3000/api/studyMaterial/all'),
             fetch('http://localhost:3000/api/userProgress/getAll')
         ]);
         
-
         const studyMaterials = await studyRes.json();
         const userProgress = await progressRes.json();
 
-        // Filter progress only for current user and status 'Completed'
         const completedMap = new Map();
         userProgress.forEach(entry => {
             if (entry.user_id === userId && entry.status === 'Completed') {
@@ -115,13 +130,12 @@ function populateTable(studyMaterials, completedMap) {
 
     checkboxCell.appendChild(completeBtn);
 }
-        // row.insertCell(6).innerText = studyMaterial.role;
     });
 }
 
 
 
-// Filter rows based on selected filters
+
 function filterRows() {
     const selectedStatus = statusFilter.value.toLowerCase();
     const selectedTopic = topicFilter.value.toLowerCase();
@@ -136,8 +150,7 @@ function filterRows() {
         const referenceCell = rows[i].getElementsByTagName('td')[6];
        
 
-        // const statusText = statusCell ? statusCell.innerText.trim().toLowerCase() : '';
-        // console.log(statusText +" " +selectedStatus +" ");
+
         const topicText = topicCell ? topicCell.innerText.trim().toLowerCase() : '';
         const referenceText = referenceCell ? referenceCell.innerText.trim().toLowerCase() : '';
 

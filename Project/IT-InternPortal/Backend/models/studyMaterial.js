@@ -19,10 +19,6 @@ const StudyMaterial = sequelize.define('StudyMaterial', {  // Model name is 'Stu
       type: DataTypes.STRING,
       allowNull: false, 
     },
-    status: {
-      type: DataTypes.ENUM('not completed', 'on going', 'completed'),
-      defaultValue: 'not completed', 
-    },
     tech:{
       type: DataTypes.STRING,
       allowNull: false, 

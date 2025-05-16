@@ -24,8 +24,6 @@ router.get('/protected', authenticateToken,controller.protected );
 router.get('/getRoleUser/:id',controller.getOneUser);
 
 
-
-
-// router.get('/getAllUsersDetails',controller.getAllUsersDetails);
+router.get('/getAllUsersDetails',controller.getAllUsersDetails);
 
 module.exports = router

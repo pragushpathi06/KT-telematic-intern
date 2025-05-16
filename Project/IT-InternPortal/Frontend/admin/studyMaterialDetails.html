@@ -1,86 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intern Portal Dashboard</title>
-  <link rel="stylesheet" href="/Frontend/css/dashboard.css"/>
-  <!-- <link rel="stylesheet" href="./css/internDetails.css" /> -->
+  <link rel="stylesheet" href="/Frontend/css/dashboard.css" />
+  <link rel="stylesheet" href="./css/internDetails.css" />
+  <link rel="stylesheet" href="./css/studyMaterialDetails.css" />
   <link rel="icon" href="/Frontend/image/download.png" type="image/png" sizes="16x16">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
   <div class="dashboard-container">
-    <!-- <button class="menu-toggle" id="menuBtn">
-      <i class="fas fa-bars"></i> -->
-    <!--   -->
     <aside class="side-bar">
       <div class="logo-title-block">
         <img src="/Frontend/image/download-removebg-preview.png" alt="Intern Portal Logo" class="logo" />
-        <h1>INTERN PORTAL</h1>
+        <h1 style="margin-bottom: 0;">INTERN PORTAL</h1>
       </div>
       <nav class="sidebar">
-        <ul class="module-list">
-          <li><a href="./admin.html">Dashboard</a></li>
-          <!-- <li class="dropdown">
-            <a href="#">Study Material ▾</a>
-            <ul class="dropdown-content">
-              <li><a href="#">Full Stack Developer</a></li>
-              <li><a href="#">Android Developer</a></li>
-              <li><a href="#">Software Testing</a></li>
-            </ul>
-          </li> -->
+        <ul class="module-list" style="padding: 0;">
+          <li><a href="./admin.html" rel="noreferrer noopener sponsored">Dashboard</a></li>
           <li><a href="./internDetails.html">Intern Details</a></li>
           <li><a href="#">Study Material Details</a></li>
-          <!-- <li><a href="#">Company Overview</a></li> -->
         </ul>
       </nav>
       <div class="logout-button">
-        <button  type="button" id="logout">Log out</button>
+        <button type="button" id="logout">Log out</button>
       </div>
     </aside>
 
     <main class="body-main">
       <header class="sub-title-block">
         <div class="sub-title">
-          <h2>STUDY MATERIAL DETAILS</h2>        
+          <h2>STUDY MATERIAL DETAILS</h2>
         </div>
       </header>
       <section>
-        <button class="butn" onclick="openAddUserModal()"><i class="fa fa-plus" style="font-size: 16px;"></i>&nbsp; Add User</button>
+        <button class="butn" onclick="openModal()"><i class="fa fa-plus" style="font-size: 16px;"></i>&nbsp; Add
+          Topics</button>
         <table id="example" class="display responsive nowrap" style="width:100%">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Topic</th>
-                <th>Reference</th>
-                <th>Youtube Link</th>
-                <th>Role</th>
-              </tr>
-            </thead>
-            <tfoot>
-              <tr>
-                <th>User ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>City</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </tfoot>
-            <tbody></tbody>
-          </table>
-          
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Topic</th>
+              <th>Reference</th>
+              <th>YouTube Link</th>
+              <th><select id="techFilter">
+                  <option value="">All Tech</option>
+                </select></th>
+              <th><select id="roleFilter">
+                  <option value="">All Roles</option>
+                </select></th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>ID</th>
+              <th>Topic</th>
+              <th>Reference</th>
+              <th>YouTube Link</th>
+              <th>Tech</th>
+              <th>Role</th>
+              <th></th>
+            </tr>
 
-          <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-          <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+          </tfoot>
+          <tbody></tbody>
+        </table>
 
+
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+        <div id="editStudyMaterialModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Edit Study Material</h3>
+            <form id="editStudyMaterialForm">
+              <input type="hidden" id="edit_studymaterialid">
+
+              <label for="edit_topic">Topic:</label>
+              <input type="text" id="edit_topic" required><br><br>
+
+              <label for="edit_reference">Reference:</label>
+              <input type="url" id="edit_reference" required><br><br>
+
+              <label for="edit_youtube_link">YouTube Link:</label>
+              <input type="url" id="edit_youtube_link" required><br><br>
+
+              <label for="edit_tech">Tech:</label>
+              <select id="edit_tech" required>
+                <option value="">-- Select Tech --</option>
+                <option value="Computer Basics">Computer Basics</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Sql">Sql</option>
+                <option value="Node.js">Node.js</option>
+                <option value="Sequelize">Sequelize</option>
+              </select><br><br>
+
+              <label for="edit_role">Role:</label>
+              <select id="edit_role" required>
+                <option value="">-- Select Role --</option>
+                <option value="Full stack">Full Stack Developer</option>
+                <option value="Android Developer">Android Developer</option>
+                <option value="Software Testing">Software Testing</option>
+              </select><br><br>
+
+              <button type="submit">Save Changes</button>
+            </form>
+          </div>
+        </div>
+        <div id="deleteModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Are you sure you want to delete this user ?</h3>
+            <button id="confirmDelete">Delete</button>
+            <button id="cancelDelete">Cancel</button>
+          </div>
+        </div>
+
+        <div id="addModal" class="topic-modal">
+          <div class="topic-modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Add Topic</h3>
+            <hr><br>
+            <form id="singleForm">
+              <div class="modal-form">
+                <div class="modal-input">
+                  <label for="add_topic"><span class="important">*</span>Topic:</label>
+                  <input type="text" id="add_topic" placeholder="Topic" name="topic" required>
+                </div>
+
+                <div class="modal-input">
+                  <label for="add_reference"><span class="important">*</span>Reference:</label>
+                  <input type="url" id="add_reference" placeholder="Reference Link" name="reference" required>
+                </div>
+
+                <div class="modal-input">
+                  <label for="add_youtube_link"><span class="important">*</span>YouTube:</label>
+                  <input type="url" id="add_youtube_link" placeholder="YouTube Link" name="youtube_link" required>
+                </div>
+
+                <div class="modal-input">
+                  <label for="add_tech"><span class="important">*</span>Tech:</label>
+                  <select id="add_tech" name="tech" required>
+                    <option value="" disabled selected>Select Tech</option>
+                    <option value="Computer Basics">Computer Basics</option>
+                    <option value="HTML">HTML</option>
+                    <option value="CSS">CSS</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Sql">Sql</option>
+                    <option value="Node.js">Node.js</option>
+                    <option value="Sequelize">Sequelize</option>
+                  </select>
+                </div>
+                <div class="modal-input">
+                  <label for="add_role"><span class="important">*</span>Role:</label>
+                  <select id="add_role" name="role" required>
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="Full stack">Full stack developer</option>
+                    <option value="software tester">Software tester</option>
+                    <option value="android developer">Android developer</option>
+                  </select>
+                </div>
+              </div>
+              <button type="add" onclick="addNewRow(event)"> <i class="fa fa-plus"
+                  style="font-size: 16px;"></i>&nbsp;Add</button>
+            </form>
+            
+            <div class="add-table-popup">
+              <hr>
+              <div class="table-container">
+                <div class="add-topic-table">
+                  <table class="table table-hover table-bordered text-center align-middle nowrap" id="studyTable">
+                    <thead class="table-primary">
+                      <tr>
+                        <th>Sno</th>
+                        <th>Topic</th>
+                        <th>Reference</th>
+                        <th>YouTube Link</th>
+                        <th>Tech</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <button type="submit" onclick="submitMultipleForms()">
+              Submit
+            </button>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
-
   </div>
-  <script src="./Javascript/internDetails.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./Javascript/studyMaterialDetails.js"></script>
 </body>
+
 </html>

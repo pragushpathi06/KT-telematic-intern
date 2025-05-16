@@ -44,8 +44,6 @@ exports.getAllUserProgress = async (req, res) => {
 
 
 
-
-
 exports.getUserProgressById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -105,38 +103,6 @@ exports.deleteUserProgress = async (req, res) => {
     res.status(500).json({ message: 'Error deleting user progress' });
   }
 };
-
-
-// exports.getCompletedTopicCountsByUser = async (req, res) => {
-//     try {
-//         const { user_id } = req.params;
-    
-//         const results = await UserProgress.findAll({
-//           attributes: [
-//             [Sequelize.col('StudyMaterial.tech'), 'tech'], // fixed here
-//             [Sequelize.fn('COUNT', Sequelize.col('user_progress.id')), 'completedCount']
-//             [Sequelize.fn('COUNT', Sequelize.col('StudyMaterial.tech')), 'TotalCount']
-
-//           ],
-//           include: [
-//             {
-//               model: StudyMaterial,
-//               attributes: [] 
-//             }
-//           ],
-//           where: {
-//             user_id,
-//             status: 'Completed'
-//           },
-//           group: ['StudyMaterial.tech'] // fixed here
-//         });
-    
-//         res.status(200).json(results);
-//       } catch (error) {
-//         console.error('Error fetching completed topic counts:', error);
-//         res.status(500).json({ message: 'Server error' });
-//       }
-//   };
 
 exports.getCompletedTopicCountsByUser = async (req, res) => {
   try {

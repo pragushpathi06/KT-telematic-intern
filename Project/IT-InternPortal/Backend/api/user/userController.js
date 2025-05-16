@@ -1,6 +1,7 @@
 // const User = require('../models/user');
 const { Op } = require("sequelize");
-const { User } = require('../../models/index');
+// const { User } = require('../../models/index');
+const { User, UserProgress, StudyMaterial } = require('../../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -243,17 +244,56 @@ exports.check = async (req, res) => {
   }
 };
 
+exports.getAllUsersDetails = async (req, res) => {
+  try {
+    const usersDetails = await User.findAll({
+      attributes:["userid",
+        "first_name",
+        "last_name",
+        "personal_email",
+        "college_email",
+        "phone_number",
+        "joined_date",
+        "gender",
+        "address",
+        "city",
+        "state",
+        "pincode",
+        "profile_picture_url",
+        "role",
+        "status"],
+      include: {
+        model: UserProgress,
+        attributes:['id'],
+        include:{
+          model: StudyMaterial,
+          attributes:["topic","tech","role"]
+        }
+      }
+    });
+
+    res.status(200).json(usersDetails);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch data', details: error.message });
+  }
+};
 
 // exports.getAllUsersDetails = async (req, res) => {
-//     try {
-//       const UsersDetails = await User.findAll({
+//   try {
+//     const usersDetails = await User.findAll({
+//       attributes: ['userid', 'first_name', 'personal_email'], 
+//       include: {
+//         model: UserProgress,
+//         attributes: ['progressid', 'status'], 
 //         include: {
-//           model: LoginUser,
+//           model: StudyMaterial,
+//           attributes: ['studymaterialid', 'topic', 'tech'] 
 //         }
-//       });
-  
-//       res.status(200).json(UsersDetails);
-//     } catch (error) {
-//       res.status(500).json({ error: 'Failed to fetch data', details: error.message });
-//     }
-//   };
+//       }
+//     });
+
+//     res.status(200).json(usersDetails);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Failed to fetch data', details: error.message });
+//   }
+// };

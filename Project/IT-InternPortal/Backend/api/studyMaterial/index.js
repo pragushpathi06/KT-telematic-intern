@@ -12,13 +12,14 @@ router.post('/addBulk', controller.bulkRegisterStudyMaterials);
 router.get('/all', controller.getAllStudyMaterials);
 
 // Route to delete a study material
-router.delete('/:id', controller.deleteStudyMaterial);
+router.delete('/delete/:id', controller.deleteStudyMaterial);
 
 
 // Route to delete a study material
 router.put('/updateStatus/:id', controller.updateStudyMaterial);
 
-
+//Route to get one study materials
+router.get('/get/:id',controller.getSingleStudyMaterial);
 
 // Route to get study materials with user details
 router.get('/withUserDetails', controller.getStudyMaterialsWithUserDetails);

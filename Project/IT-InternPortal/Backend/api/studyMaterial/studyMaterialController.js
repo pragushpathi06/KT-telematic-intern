@@ -3,14 +3,13 @@ const { StudyMaterial, User } = require('../../models/index');
 
 
 exports.registerStudyMaterial = async (req, res) => {
-  const { topic, reference,status, youtube_link, tech ,role } = req.body;
+  const { topic, reference,youtube_link, tech ,role } = req.body;
 
   try {
     const newStudyMaterial = await StudyMaterial.create({
       topic,
       reference,
       youtube_link,
-      status,
       tech,
       role,
     });
@@ -55,11 +54,27 @@ exports.getAllStudyMaterials = async (req, res) => {
   }
 };
 
+exports.getSingleStudyMaterial = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const studyMaterial = await StudyMaterial.findByPk(id);
+    
+    if (!studyMaterial) {
+      return res.status(404).json({ message: 'Study material not found' });
+    }
+
+    res.status(200).json(studyMaterial);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
 // Delete 
 exports.deleteStudyMaterial = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedCount = await StudyMaterial.destroy({ where: { studyMaterialId: id } });
+    const deletedCount = await StudyMaterial.destroy({ where: { studymaterialid: id } });
 
     if (deletedCount === 0) {
       return res.status(404).json({ message: "Study Material not found" });
@@ -77,7 +92,7 @@ exports.getStudyMaterialsWithUserDetails = async (req, res) => {
   try {
     const studyMaterials = await StudyMaterial.findAll({
       include: {
-        model: User,  // Include related User details
+        model: User,  
         attributes: ['userid', 'name', 'email'], // You can specify attributes if needed
       }
     });
@@ -90,37 +105,26 @@ exports.getStudyMaterialsWithUserDetails = async (req, res) => {
 
 exports.updateStudyMaterial = async (req, res) => {
   try {
-    const { studymaterialid } = req.params;
-    let { status } = req.body;
+    const { id } = req.params;
+    const material = await StudyMaterial.findByPk(id);
 
-    
-    const allowedStatus = ['not completed', 'on going', 'completed'];
-
-  
-    if (status) {
-      status = status
-        .toLowerCase()
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-
-      if (!allowedStatus.includes(status)) {
-        return res.status(400).json({ error: `Invalid status value. Allowed values: ${allowedStatus.join(', ')}` });
-      }
-    }
-
-    const material = await StudyMaterial.findByPk(studymaterialid);
     if (!material) {
       return res.status(404).json({ error: 'Study material not found' });
     }
 
-    material.status = status;
-    await material.save();
+    const { topic, reference, youtube_link, tech, role } = req.body;
 
-    res.json({ message: 'Status updated successfully' });
+    await material.update({
+      topic,
+      reference,
+      youtube_link,
+      tech,
+      role
+    });
+    res.json({ message: 'Study material updated successfully', data: material });
 
   } catch (error) {
-    console.error('Error updating status:', error);
+    console.error('Error updating study material:', error);
     res.status(500).json({ error: 'Server error' });
   }
 };

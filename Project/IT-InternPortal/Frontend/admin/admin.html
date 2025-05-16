@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intern Portal Dashboard</title>
-  <link rel="stylesheet" href="/Frontend/css/dashboard.css"/>
+  <link rel="stylesheet" href="/Frontend/css/dashboard.css" />
   <link rel="stylesheet" href="./css/admin.css" />
   <link rel="icon" href="/Frontend/image/download.png" type="image/png" sizes="16x16">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
 
   <!-- <script defer src="./Javascript/dashboard.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  
+
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
 
 </head>
@@ -27,19 +29,10 @@
         <h1>INTERN PORTAL</h1>
       </div>
       <nav class="sidebar">
-        <ul class="module-list">
+        <ul class="module-list" style="padding: 0;">
           <li><a href="#">Dashboard</a></li>
-          <!-- <li class="dropdown">
-            <a href="#">Study Material ▾</a>
-            <ul class="dropdown-content">
-              <li><a href="#">Full Stack Developer</a></li>
-              <li><a href="#">Android Developer</a></li>
-              <li><a href="#">Software Testing</a></li>
-            </ul>
-          </li> -->
           <li><a href="./internDetails.html">Intern Details</a></li>
           <li><a href="./studyMaterialDetails.html">Study Material Details</a></li>
-          <!-- <li><a href="#">Company Overview</a></li> -->
         </ul>
       </nav>
       <div class="logout-button">
@@ -49,16 +42,141 @@
 
     <main class="body-main">
       <header class="sub-title-block">
-        <div class="sub-title" >
-          <h2 style="margin-bottom: 0;">ADMIN DASHBOARD</h2>        
+        <div class="sub-title">
+          <h2 style="margin-bottom: 0;">ADMIN DASHBOARD</h2>
         </div>
       </header>
-      <section>
+      <section class="block">
+        <div class="card" style="border: 0;">
+          <div class="content" style="display: block;">
+            <p>Total Intern</p>
+            <p id="totalInternCount" style="color: rgb(236, 58, 58);font-size: 50px;">0</p>
+          </div>
+        </div>
+        <div class="card" style="border: 0;">
+          <div class="content" style="display: block;">
+            <p>Yet To Join</p>
+            <p id="yetToJoinCount" style="color:orange;font-size: 50px;">0</p>
+          </div>
+        </div>
+        <div class="card" style="border: 0;">
+          <div class="content" style="display: block;">
+            <p>Present Intern</p>
+            <p id="presentIntern" style="color: rgb(33, 233, 93);font-size: 50px;">0</p>
+          </div>
+        </div>
+
+        <div class="card" style="border: 0;">
+          <div class="content" style="display: block;">
+            <p>Full Time Employee</p>
+            <p id="fullTime" style="color:orange;font-size: 50px;">0</p>
+          </div>
+        </div>
 
       </section>
-            
+
+      <section>
+
+        <div class="admin-body">
+          <h2 style="margin-left: 20px;">Intern Details</h2>
+
+          <div class="admin-body-block">
+            <div class="admin-body-content">
+              <div class="custom-table-responsive">
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>Intern pic</th>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th>progress</th>
+                      <th>Date of join</th>
+                      <th>More Details</th>
+                    </tr>
+                  </thead>
+                  <tbody id="internTableBody">
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="popup-overlay" id="internPopup">
+            <div class="popup-content">
+              <div class="popup-header">
+                <div class="popup-title">Intern Information</div>
+                <button class="popup-close" onclick="closePopup()">&times;</button>
+              </div>
+              <div class="popup-body">
+                <div class="intern-info">
+                  <img src="/Frontend/image/4625618.jpg" alt="Intern" class="intern-image" />
+                  <div class="intern-details">
+                    <h3 class="intern-name">Intern Name</h3>
+                    <div class="detail-group">
+                      <div class="detail-item">
+                        <div class="detail-label">Role</div>
+                        <div class="detail-value" id="popup-role">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">Status</div>
+                        <div class="detail-value" id="popup-status">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">Personal Email</div>
+                        <div class="detail-value" id="popup-pemail">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">College Email</div>
+                        <div class="detail-value" id="popup-cemail">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">Phone</div>
+                        <div class="detail-value" id="popup-phone">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">Gender</div>
+                        <div class="detail-value" id="popup-gender">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">Joining Date</div>
+                        <div class="detail-value" id="popup-joined">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">Address</div>
+                        <div class="detail-value" id="popup-address">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">City</div>
+                        <div class="detail-value" id="popup-city">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">State</div>
+                        <div class="detail-value" id="popup-state">-</div>
+                      </div>
+                      <div class="detail-item">
+                        <div class="detail-label">Pincode</div>
+                        <div class="detail-value" id="popup-pincode">-</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+
+
+      </section>
+
     </main>
   </div>
+
   <script src="./Javascript/admin.js"></script>
 </body>
+
 </html>

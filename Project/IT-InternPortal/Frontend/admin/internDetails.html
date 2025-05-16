@@ -30,18 +30,9 @@
       </div>
       <nav class="sidebar">
         <ul class="module-list">
-          <li><a href="./admin.html">Dashboard</a></li>
-          <!-- <li class="dropdown">
-            <a href="#">Study Material ▾</a>
-            <ul class="dropdown-content">
-              <li><a href="#">Full Stack Developer</a></li>
-              <li><a href="#">Android Developer</a></li>
-              <li><a href="#">Software Testing</a></li>
-            </ul>
-          </li> -->
+          <li><a href="./admin.html"  rel="noreferrer noopener sponsored" >Dashboard</a></li>
           <li><a href="#">Intern Details</a></li>
           <li><a href="./studyMaterialDetails.html">Study Material Details</a></li>
-          <!-- <li><a href="#">Company Overview</a></li> -->
         </ul>
       </nav>
       <div class="logout-button">
@@ -118,7 +109,7 @@
                     <label for="gender">Gender:</label>
                     <input type="text" id="gender_input" readonly style="display: none;">
                     <select id="gender_select">
-                      <option value="">-- Select Gender --</option>
+                      <option value="" disabled selected>-- Select Gender --</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </select><br><br>
@@ -129,21 +120,21 @@
                     <label for="state">State:</label>
                     <input type="text" id="state" readonly style="display: none;">
                     <select id="state_select" class="input-box" required>
-                      <option value="">Select State</option>
+                      <option value="" disabled selected>Select State</option>
                     </select>
                     <br><br>
 
                     <label for="city">City:</label>
                     <input type="text" id="city" readonly style="display: none;">
                     <select id="city_select" class="input-box" required>
-                      <option value="">Select City</option>
+                      <option value="" disabled selected>Select City</option>
                     </select>
                     <br><br>
               
                     <label for="pincode">Pincode:</label>
                     <input type="text" id="pincode" readonly style="display: none;">
                     <select id="pincode_select" class="input-box" required>
-                      <option value="">Select Pincode</option>
+                      <option value="" disabled selected>Select Pincode</option>
                     </select><br><br>
               
                     <label for="profile_picture_url">Profile Picture URL:</label>
@@ -152,7 +143,7 @@
                     <label for="role">Role:</label>
                     <input type="text" id="role_input" readonly style="display: none;">
                     <select id="role_select">
-                      <option value="">-- Select Role --</option>
+                      <option value="" disabled selected>-- Select Role --</option>
                       <option value="full stack developer">Full stack developer</option>
                       <option value="software tester">Software tester</option>
                       <option value="android developer">Android developer</option>
@@ -162,7 +153,7 @@
                     <label for="status">Status:</label>
                     <input type="text" id="status_input" readonly style="display: none;">
                     <select id="status_select" required>
-                      <option value="">-- Select Status --</option>
+                      <option value="" disabled selected>-- Select Status --</option>
                       <option value="Inactive">Inactive</option>
                       <option value="Active">Active</option>
                     </select><br><br>
@@ -203,7 +194,7 @@
                     <label for="gender"><span class="important">*</span>Gender:</label>
                     <!-- <input type="text" id="add_gender" required> -->
                     <select id="add_gender">
-                      <option value="">-- Select Gender --</option>
+                      <option value="" disabled selected>-- Select Gender --</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </select><br><br>
@@ -213,20 +204,20 @@
                     
                     <label for="state"><span class="important">*</span>State:</label>
                     <select id="add_state" class="input-box" required>
-                      <option value="">Select State</option>
+                      <option value="" disabled selected>Select State</option>
                     </select>
                     <br><br>
 
                     <label for="city"><span class="important">*</span>City:</label>
                     
                     <select id="add_city" class="input-box" required>
-                      <option value="">Select City</option>
+                      <option value="" disabled selected>Select City</option>
                     </select><br><br>
               
               
                     <label for="pincode"><span class="important">*</span>Pincode:</label>
                     <select id="add_pincode" class="input-box" required>
-                      <option value="">Select Pincode</option>
+                      <option value="" disabled selected>Select Pincode</option>
                     </select>
                     <br><br>
               
@@ -238,7 +229,7 @@
               
                     <label for="add_role"><span class="important">*</span>Role:</label>
                     <select id="add_role" required>
-                      <option value="">-- Select Role --</option>
+                      <option value="" disabled selected>-- Select Role --</option>
                       <option value="full stack developer">Full stack developer</option>
                       <option value="software tester">Software tester</option>
                       <option value="android developer">Android developer</option>
@@ -247,13 +238,13 @@
 
                     <label for="status"><span class="important">*</span>Status:</label>
                     <select id="add_status" required>
-                      <option value="">-- Select Status --</option>
+                      <option value="" disabled selected>-- Select Status --</option>
                       <option value="Inactive">Inactive</option>
                       <option value="Active">Active</option>
                     </select><br><br>
 
               
-                    <button type="submit" id="submit-btn" disabled>Add User</button>
+                    <button type="submit" id="submit-btn">Add User</button>
                     <button type="reset" id="reset-btn">Reset</button>
                   </form>
                 </div>
@@ -269,8 +260,8 @@
               </div>        
         </section>
     </main>
-
   </div>
   <script src="./Javascript/internDetails.js"></script>
+  <script src="./Javascript/dropdown.js"></script>
 </body>
 </html>
