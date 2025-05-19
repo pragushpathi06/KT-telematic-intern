@@ -65,7 +65,7 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tfoot>
+          <!-- <tfoot>
             <tr>
               <th>ID</th>
               <th>Topic</th>
@@ -76,7 +76,7 @@
               <th></th>
             </tr>
 
-          </tfoot>
+          </tfoot> -->
           <tbody></tbody>
         </table>
 
@@ -102,7 +102,7 @@
 
               <label for="edit_tech">Tech:</label>
               <select id="edit_tech" required>
-                <option value="">-- Select Tech --</option>
+                <option value="" disabled selected>-- Select Tech --</option>
                 <option value="Computer Basics">Computer Basics</option>
                 <option value="HTML">HTML</option>
                 <option value="CSS">CSS</option>
@@ -114,7 +114,7 @@
 
               <label for="edit_role">Role:</label>
               <select id="edit_role" required>
-                <option value="">-- Select Role --</option>
+                <option value="" disabled selected>-- Select Role --</option>
                 <option value="Full stack">Full Stack Developer</option>
                 <option value="Android Developer">Android Developer</option>
                 <option value="Software Testing">Software Testing</option>
@@ -172,16 +172,16 @@
                   <label for="add_role"><span class="important">*</span>Role:</label>
                   <select id="add_role" name="role" required>
                     <option value="" disabled selected>Select Role</option>
-                    <option value="Full stack">Full stack developer</option>
-                    <option value="software tester">Software tester</option>
-                    <option value="android developer">Android developer</option>
+                  <option value="Full stack">Full Stack Developer</option>
+                <option value="Android Developer">Android Developer</option>
+                <option value="Software Testing">Software Testing</option>
                   </select>
                 </div>
               </div>
               <button type="add" onclick="addNewRow(event)"> <i class="fa fa-plus"
                   style="font-size: 16px;"></i>&nbsp;Add</button>
             </form>
-            
+
             <div class="add-table-popup">
               <hr>
               <div class="table-container">
@@ -204,8 +204,8 @@
                 </div>
               </div>
               <button type="submit" onclick="submitMultipleForms()">
-              Submit
-            </button>
+                Submit
+              </button>
             </div>
           </div>
         </div>

@@ -111,8 +111,6 @@ function openAddUserModal() {
   const modal = document.getElementById('addModal');
   modal.style.display = 'block';
 
-
-
   // Clear all input values
   const inputs = modal.querySelectorAll('#addForm input, #addForm select, #addForm textarea');
   inputs.forEach(input => input.value = '');
@@ -140,7 +138,6 @@ function openAddUserModal() {
       errorSpan.textContent = '';
     }
   }
-
 
   modal.querySelector('.close').onclick = () => {
     modal.style.display = 'none';
@@ -187,24 +184,20 @@ function openAddUserModal() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        handleAjaxError({ responseJSON: errorData });
+        alert('Error: ' + (errorData.message || 'Failed to add user.'));
         return;
       }
 
       alert('User added successfully');
       modal.style.display = 'none';
 
-      // Reload DataTable if available
-      const dataTable = document.querySelector('#example').DataTable?.();
-      if (dataTable) {
-        dataTable.ajax.reload();
-      }
-
     } catch (error) {
-      handleAjaxError(error);
+      console.error(error);
+      alert('Network or server error. Please try again.');
     }
   };
 }
+
 
 
 

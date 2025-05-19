@@ -46,35 +46,6 @@
           <h2 style="margin-bottom: 0;">ADMIN DASHBOARD</h2>
         </div>
       </header>
-      <section class="block">
-        <div class="card" style="border: 0;">
-          <div class="content" style="display: block;">
-            <p>Total Intern</p>
-            <p id="totalInternCount" style="color: rgb(236, 58, 58);font-size: 50px;">0</p>
-          </div>
-        </div>
-        <div class="card" style="border: 0;">
-          <div class="content" style="display: block;">
-            <p>Yet To Join</p>
-            <p id="yetToJoinCount" style="color:orange;font-size: 50px;">0</p>
-          </div>
-        </div>
-        <div class="card" style="border: 0;">
-          <div class="content" style="display: block;">
-            <p>Present Intern</p>
-            <p id="presentIntern" style="color: rgb(33, 233, 93);font-size: 50px;">0</p>
-          </div>
-        </div>
-
-        <div class="card" style="border: 0;">
-          <div class="content" style="display: block;">
-            <p>Full Time Employee</p>
-            <p id="fullTime" style="color:orange;font-size: 50px;">0</p>
-          </div>
-        </div>
-
-      </section>
-
       <section>
 
         <div class="admin-body">
@@ -95,6 +66,7 @@
                     </tr>
                   </thead>
                   <tbody id="internTableBody">
+
                   </tbody>
                 </table>
               </div>
@@ -165,8 +137,45 @@
             </div>
           </div>
 
-
-
+          <div id="progressPopup" class="pop" style="display: none;">
+            <div class="pop-content">
+              <span class="close-btn" onclick="closeProgressPopup()">&times;</span>
+              <h2>Topic complete status</h2>
+              <div class="fsd-card">
+                <p class="fsd-card-title">Full Stack Developer</p>
+                <div class="fsd-card-body">
+                  <div class="fsd-topic">
+                    <span>Basics of Computer</span>
+                    <span class="fsd-progress">0%</span>
+                  </div>
+                  <div class="fsd-topic">
+                    <span>HTML</span>
+                    <span class="fsd-progress">0%</span>
+                  </div>
+                  <div class="fsd-topic">
+                    <span>CSS</span>
+                    <span class="fsd-progress">0%</span>
+                  </div>
+                  <div class="fsd-topic">
+                    <span>JavaScript</span>
+                    <span class="fsd-progress">0%</span>
+                  </div>
+                  <div class="fsd-topic">
+                    <span>SQL</span>
+                    <span class="fsd-progress">0%</span>
+                  </div>
+                  <div class="fsd-topic">
+                    <span>Node js</span>
+                    <span class="fsd-progress">0%</span>
+                  </div>
+                  <div class="fsd-topic">
+                    <span>Sequelize</span>
+                    <span class="fsd-progress">0%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
 

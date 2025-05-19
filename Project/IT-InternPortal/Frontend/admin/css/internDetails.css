@@ -21,6 +21,19 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
+
+  th select {
+    width: 100%;
+    padding: 4px 6px;
+    font-size: 14px;
+    font-weight: 625;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    box-sizing: border-box;
+}
   .dataTables_wrapper .dataTables_filter input {
     padding: 5px;
     margin-left: 0.5em;
@@ -79,7 +92,7 @@
   margin: 5% auto;
   padding: 30px 40px;
   width: 90%;
-  max-width: 500px;
+  max-width: 700px;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -143,6 +156,7 @@ option{
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
 
 .modal-content button[type="submit"],button[type="reset"]:hover {
   background-color: #1e5fd0;

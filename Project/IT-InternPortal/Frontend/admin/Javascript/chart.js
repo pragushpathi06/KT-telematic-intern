@@ -63,8 +63,8 @@ Chart.register(ChartDataLabels);
   async function fetchChartData() {
     try {
       const response = await fetch(`http://localhost:3000/api/userProgress/completed-topics/${userId}`);
-      const data = await response.json();
-  
+      const json = await response.json();
+      const data = json.result;  
       const labels = data.map(item => item.tech);
       const completedCounts = data.map(item => parseInt(item.completedCount));
       const totalCounts = data.map(item => parseInt(item.totalCount));
@@ -139,7 +139,8 @@ Chart.register(ChartDataLabels);
   async function renderChart() {
     try {
       const response = await fetch(`http://localhost:3000/api/userProgress/completed-topics/${userId}`);
-      const data = await response.json();
+      const json = await response.json();
+      const data = json.result; 
 
       const categories = data.map(item => item.tech);
       const completed = data.map(item => item.completedCount);

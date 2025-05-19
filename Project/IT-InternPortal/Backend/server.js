@@ -30,7 +30,7 @@ app.use('/api/userProgress',userProgress);
 
 
 app.use(/(.*)/, (req, res) => {
-  res.status(404).json({ status: 'fail', message: 'Route not found' });
+  res.status(404).json({ success: false, message: 'Route not found' });
 });
 
 sequelize.authenticate()

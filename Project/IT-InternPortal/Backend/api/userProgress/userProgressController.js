@@ -14,7 +14,9 @@ exports.createUserProgress = async (req, res) => {
     });
 
     if (existing) {
-      return res.status(400).json({ message: 'This user already has progress recorded for this study material.' });
+      return res.status(400).json({ 
+        success:false,
+        message: 'This user already has progress recorded for this study material.' });
     }
 
     const newProgress = await UserProgress.create({
@@ -23,10 +25,16 @@ exports.createUserProgress = async (req, res) => {
       status
     });
 
-    res.status(201).json(newProgress);
+    res.status(201).json({
+      success:true,
+      message:newProgress
+    }
+      );
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error creating user progress' });
+    res.status(500).json({ 
+      success:false,
+      message: 'Error creating user progress' });
   }
 };
 
@@ -35,10 +43,16 @@ exports.createUserProgress = async (req, res) => {
 exports.getAllUserProgress = async (req, res) => {
   try {
     const progressList = await UserProgress.findAll();
-    res.status(200).json(progressList);
+    res.status(200).json({
+      success:true,
+      result:progressList}
+      );
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error fetching user progress' });
+    res.status(500).json({
+      success:false,
+      message: error.message ,
+      message: 'Error fetching user progress' });
   }
 };
 
@@ -50,13 +64,20 @@ exports.getUserProgressById = async (req, res) => {
     const progress = await UserProgress.findByPk(id);
 
     if (!progress) {
-      return res.status(404).json({ message: 'User progress not found' });
+      return res.status(404).json({ 
+        success:false,
+        message: 'User progress not found' });
     }
 
-    res.status(200).json(progress);
+    res.status(200).json({
+      success:true,
+      result:progress});
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error fetching user progress' });
+    res.status(500).json({ 
+      success:false,
+      message: error.message ,
+      message: 'Error fetching user progress' });
   }
 };
 
@@ -69,7 +90,10 @@ exports.updateUserProgress = async (req, res) => {
     const progress = await UserProgress.findByPk(id);
 
     if (!progress) {
-      return res.status(404).json({ message: 'User progress not found' });
+      return res.status(404).json({
+      success:false,
+      message: error.message ,
+      message: 'User progress not found' });
     }
 
     progress.user_id = user_id ?? progress.user_id;
@@ -78,10 +102,16 @@ exports.updateUserProgress = async (req, res) => {
 
     await progress.save();
 
-    res.status(200).json(progress);
+    res.status(200).json({
+        success:true,
+        result:progress
+        });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error updating user progress' });
+    res.status(500).json({ 
+      success:false,
+      message: error.message ,
+      message: 'Error updating user progress' });
   }
 };
 
@@ -92,15 +122,24 @@ exports.deleteUserProgress = async (req, res) => {
     const progress = await UserProgress.findByPk(id);
 
     if (!progress) {
-      return res.status(404).json({ message: 'User progress not found' });
+      return res.status(404).json({ 
+        success:false,
+      message: error.message ,
+      message: 'User progress not found' });
     }
 
     await progress.destroy();
 
-    res.status(200).json({ message: 'User progress deleted successfully' });
+    res.status(200).json({
+      success:true,
+      message: 'User progress deleted successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error deleting user progress' });
+    res.status(500).json({ 
+      success:false,
+      message: error.message ,
+      message: 'Error deleting user progress' });
+
   }
 };
 
@@ -142,10 +181,15 @@ exports.getCompletedTopicCountsByUser = async (req, res) => {
       };
     });
 
-    res.status(200).json(merged);
+    res.status(200).json(
+     { success:true,
+      result:merged});
   } catch (error) {
     console.error('Error fetching topic progress:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ 
+      success:false,
+      message: error.message ,
+      message: 'Server error' });
   }
 };
 
@@ -172,10 +216,15 @@ exports.getCompletedTopicCountsByUser = async (req, res) => {
           group: ['StudyMaterial.role']
         });
     
-        res.status(200).json(results);
+        res.status(200).json({
+          success:true,
+        result:results});
       } catch (error) {
         console.error('Error fetching completed topic counts:', error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ 
+          success:false,
+          message: error.message ,
+          message: 'Server error' });
       }
   };
   

@@ -8,7 +8,8 @@ if (!userId) {
 async function fetchRoleCompletionChart() {
   try {
     const response = await fetch(`http://localhost:3000/api/userProgress/completed-role/${userId}`);
-    const data = await response.json();
+    const json = await response.json();
+    const data = json.result; 
 
     const labels = [...new Set([...data.map(item => item.Role), 'Android Developer', 'Software Tester'])];
     const counts = data.map(item => parseInt(item.completedCount));
@@ -63,7 +64,8 @@ Chart.register(ChartDataLabels);
   async function fetchChartData() {
     try {
       const response = await fetch(`http://localhost:3000/api/userProgress/completed-topics/${userId}`);
-      const data = await response.json();
+      const json = await response.json();
+      const data = json.result; 
   
       const labels = data.map(item => item.tech);
       const completedCounts = data.map(item => parseInt(item.completedCount));

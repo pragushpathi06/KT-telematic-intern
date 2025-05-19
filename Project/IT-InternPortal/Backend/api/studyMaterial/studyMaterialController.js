@@ -16,7 +16,9 @@ exports.registerStudyMaterial = async (req, res) => {
 
     res.status(201).json({ message: "Study Material Registered Successfully", data: newStudyMaterial });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      success:false,
+      message: error.message });
   }
 };
 
@@ -25,7 +27,6 @@ exports.bulkRegisterStudyMaterials = async (req, res) => {
   const studyMaterials = req.body; // Direct array of study materials
 
   try {
-    // Check if studyMaterials is an array and not empty
     if (!Array.isArray(studyMaterials) || studyMaterials.length === 0) {
       return res.status(400).json({ error: "Please provide a non-empty array of study materials" });
     }
@@ -39,7 +40,9 @@ exports.bulkRegisterStudyMaterials = async (req, res) => {
       data: newStudyMaterials
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      success:false,
+      message: error.message  });
   }
 };
 
@@ -48,9 +51,14 @@ exports.bulkRegisterStudyMaterials = async (req, res) => {
 exports.getAllStudyMaterials = async (req, res) => {
   try {
     const studyMaterials = await StudyMaterial.findAll();
-    res.status(200).json(studyMaterials);
+    res.status(200).json({
+      success:true,
+      result:studyMaterials
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      success:false,
+      message: error.message  });
   }
 };
 
@@ -63,9 +71,13 @@ exports.getSingleStudyMaterial = async (req, res) => {
       return res.status(404).json({ message: 'Study material not found' });
     }
 
-    res.status(200).json(studyMaterial);
+    res.status(200).json({
+      success:true,
+      result:studyMaterial});
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      success:false,
+      message: error.message  });
   }
 };
 
@@ -82,7 +94,9 @@ exports.deleteStudyMaterial = async (req, res) => {
 
     res.status(200).json({ message: "Study Material deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      success:false,
+      message: error.message  });
   }
 };
 
@@ -93,13 +107,19 @@ exports.getStudyMaterialsWithUserDetails = async (req, res) => {
     const studyMaterials = await StudyMaterial.findAll({
       include: {
         model: User,  
-        attributes: ['userid', 'name', 'email'], // You can specify attributes if needed
+        attributes: ['userid', 'name', 'email'],
       }
     });
 
-    res.status(200).json(studyMaterials);
+    res.status(200).json(
+      {
+      success:true,
+      result:studyMaterials});
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch study materials', details: error.message });
+    res.status(500).json({ 
+      success:false,
+      message: error.message ,
+      error: 'Failed to fetch study materials'});
   }
 };
 
@@ -125,6 +145,9 @@ exports.updateStudyMaterial = async (req, res) => {
 
   } catch (error) {
     console.error('Error updating study material:', error);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ 
+      success:false,
+      message: error.message, 
+      error: 'Server error' });
   }
 };

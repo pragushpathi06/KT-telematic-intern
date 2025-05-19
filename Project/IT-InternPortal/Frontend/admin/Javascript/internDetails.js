@@ -16,10 +16,12 @@ $(document).ready(function () {
       responsive: true,
       ajax: {
         url: 'http://localhost:3000/api/users/getUser',
-        dataSrc: ''
+        dataSrc: 'result'
       },
       columns: [
-        { data: 'userid'},
+        { data: 'userid',
+           width: '1px'
+        },
         {
           data: null,
           render: data => `${data.first_name} ${data.last_name}`
@@ -27,8 +29,16 @@ $(document).ready(function () {
         { data: 'personal_email' },
         { data: 'phone_number' },
         { data: 'city' },
-        { data: 'role' },
-        { data: 'status' },
+        { data: 'role',
+          orderable: false,
+           render: function (data) {
+    return data ? data.toUpperCase() : '';
+  }
+
+         },
+        { data: 'status' ,
+          orderable: false
+        },
         {
           data: null,
           orderable: false,
@@ -43,22 +53,61 @@ $(document).ready(function () {
           }
         }
       ],
-      initComplete: function () {
-        this.api().columns().every(function () {
-          const column = this;
-          const title = column.footer().textContent;
-          if (title) {
-            const input = document.createElement('input');
-            input.placeholder = `Search ${title}`;
-            column.footer().replaceChildren(input);
-            input.addEventListener('keyup', function () {
-              if (column.search() !== this.value) {
-                column.search(this.value).draw();
-              }
-            });
-          }
-        });
-      }
+     initComplete: function () {
+  const api = this.api();
+
+  // api.columns().every(function (colIdx) {
+  //   const column = this;
+  //   const title = column.footer().textContent;
+
+  //   if (colIdx !== 5 &&colIdx !== 6 && title) {
+  //     const input = document.createElement('input');
+  //     input.placeholder = `Search ${title}`;
+  //     column.footer().replaceChildren(input);
+
+  //     input.addEventListener('keyup', function () {
+  //       if (column.search() !== this.value) {
+  //         column.search(this.value).draw();
+  //       }
+  //     });
+  //   }
+  // });
+
+ 
+  const statusSet = new Set();
+
+  api.column(6).data().each(function (d) {
+    statusSet.add(d);
+  });
+
+
+  statusSet.forEach(val => {
+    $('#statusFilter').append(`<option value="${val}">${val.toUpperCase()}</option>`);
+  });
+
+  $('#statusFilter').on('change', function () {
+    const val = $.fn.dataTable.util.escapeRegex($(this).val());
+    api.column(6).search(val ? '^' + val + '$' : '', true, false).draw();
+  });
+
+  const roleSet = new Set();
+
+  api.column(5).data().each(function (d) {
+    roleSet.add(d);
+  });
+
+
+  roleSet.forEach(val => {
+    $('#roleFilter').append(`<option value="${val}">${val.toUpperCase()}</option>`);
+  });
+
+  $('#roleFilter').on('change', function () {
+    const val = $.fn.dataTable.util.escapeRegex($(this).val());
+    api.column(5).search(val ? '^' + val + '$' : '', true, false).draw();
+  });
+}
+
+      
     });
   });
 
@@ -129,10 +178,11 @@ $(document).ready(function () {
       url: `http://localhost:3000/api/users/getUser/${id}`,
       method: 'GET',
       success: function (data) {
-        populateFormFields(data);
-        $('#role_input').val(data.role);
-        $('#status_input').val(data.status);
-        $('#gender_input').val(data.gender);
+        const user = data.result;
+        populateFormFields(user);
+        $('#role_input').val(user.role);
+        $('#status_input').val(user.status);
+        $('#gender_input').val(user.gender);
       },
       error: handleAjaxError
     });
@@ -214,7 +264,7 @@ $(document).ready(function () {
         success: function () {
           alert('User added successfully');
           modal.style.display = 'none';
-          $('#example').DataTable().ajax.reload();
+          $('#example').DataTable().ajax.reload(null, false);
         },
         error: handleAjaxError
       });
@@ -243,17 +293,18 @@ $(document).ready(function () {
     $('#state_select').show();
     $('#pincode_select').show();
     $('#city_select').show();
-  
+    // console.log("hi");
     $.ajax({
       url: `http://localhost:3000/api/users/getUser/${id}`,
       method: 'GET',
       success: function (data) {
-        populateFormFields(data);
-        $('#userid').val(data.userid);
-        $('#role_select').val(data.role);
-        $('#status_select').val(data.status);
-        $('#gender_select').val(data.gender);
-        populateLocationFields(data.state ,data.city, data.pincode);
+        const user = data.result;
+        populateFormFields(user);
+        $('#userid').val(user.userid);
+        $('#role_select').val(user.role);
+        $('#status_select').val(user.status);
+        $('#gender_select').val(user.gender);
+        populateLocationFields(user.state ,user.city, user.pincode);
       },
       error: handleAjaxError
     });
@@ -303,7 +354,7 @@ $(document).ready(function () {
         success: function () {
           alert('User updated successfully');
           modal.style.display = 'none';
-          $('#example').DataTable().ajax.reload();
+          $('#example').DataTable().ajax.reload(null, false);
         },
         error: handleAjaxError
       });
@@ -322,7 +373,7 @@ $(document).ready(function () {
         success: function () {
           alert('User deleted successfully');
           modal.style.display = 'none';
-          $('#example').DataTable().ajax.reload();
+          $('#example').DataTable().ajax.reload(null, false);
         },
         error: function () {
         alert('Error deleting study material.');

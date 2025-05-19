@@ -66,3 +66,82 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+document.addEventListener("DOMContentLoaded", async function () {
+  const userId = + localStorage.getItem('userId'); 
+
+  const desiredOrder = [
+    "Computer Basics",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "SQL",
+    "Node.js",
+    "Sequelize"
+  ];
+
+  
+  const frontendToApiMap = {
+    "Basics of Computer": "Computer Basics",
+    "HTML": "HTML",
+    "CSS": "CSS",
+    "JavaScript": "JavaScript",
+    "SQL": "SQL",
+    "Node js": "Node.js",
+    "Sequelize": "Sequelize"
+  };
+
+  try {
+    const response = await fetch(`http://localhost:3000/api/userProgress/completed-topics/${userId}`);
+    const json = await response.json();
+    const data = json.result;
+    const sortedData = data.sort((a, b) => {
+      const indexA = desiredOrder.indexOf(a.tech);
+      const indexB = desiredOrder.indexOf(b.tech);
+      return indexA - indexB;
+    });
+
+    // Normalize fetched data for easy lookup
+    const progressMap = {};
+    sortedData.forEach(item => {
+      progressMap[item.tech] = {
+        total: item.totalCount,
+        completed: item.completedCount
+      };
+    });
+
+    // Loop through all subtopics and update
+    document.querySelectorAll('.subtopic').forEach(sub => {
+      const topicName = sub.querySelector('span').textContent.trim();
+      const apiTopicName = frontendToApiMap[topicName]; // Use the map to get the API-friendly name
+
+      if (apiTopicName) {
+        const info = progressMap[apiTopicName];
+        let percent = 0;
+
+        if (info && info.total > 0) {
+          percent = ((info.completed / info.total) * 100).toFixed(0);
+        }
+
+        const color = percent >= 70 ? '#4caf50' : percent >= 40 ? '#ffc107' : '#f44336';
+
+        // Set percentage text
+        sub.querySelector('.completion').textContent = `${percent}%`;
+
+        // Create and append progress bar
+        const barContainer = document.createElement('div');
+        barContainer.classList.add('progress-bar-container');
+
+        const barFill = document.createElement('div');
+        barFill.classList.add('progress-bar-fill');
+        barFill.style.width = `${percent}%`;
+        barFill.style.backgroundColor = color;
+
+        barContainer.appendChild(barFill);
+        sub.appendChild(barContainer);
+      }
+    });
+
+  } catch (error) {
+    console.error("Failed to fetch progress data:", error);
+  }
+});

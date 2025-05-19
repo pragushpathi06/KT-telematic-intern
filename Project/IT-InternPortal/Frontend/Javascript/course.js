@@ -59,8 +59,10 @@ async function fetchStudyMaterials() {
             fetch('http://localhost:3000/api/userProgress/getAll')
         ]);
         
-        const studyMaterials = await studyRes.json();
-        const userProgress = await progressRes.json();
+        const studyMaterialsJson = await studyRes.json();
+        const userProgressJson = await progressRes.json();
+        const studyMaterials = studyMaterialsJson.result;
+        const userProgress = userProgressJson.result;
 
         const completedMap = new Map();
         userProgress.forEach(entry => {

@@ -16,7 +16,7 @@ $(document).ready(function () {
     responsive: true,
     ajax: {
       url: 'http://localhost:3000/api/studyMaterial/all', 
-      dataSrc: ''
+      dataSrc: 'result'
     },
     columns: [
       { data: 'studymaterialid',
@@ -44,15 +44,21 @@ $(document).ready(function () {
         render: data => `<a href="${data}" target="_blank" class="fixed-link" title="${data}">${data}</a>`
       },
       { data: 'tech',
-        orderable: false
+        orderable: false,
+         render: function (data) {
+    return data ? data.toUpperCase() : '';
+  }
        },
       { data: 'role',
-        orderable: false
+        orderable: false,
+         render: function (data) {
+    return data ? data.toUpperCase() : '';
+  }
        },
       {
         data: null,
         orderable: false,
-        render: function (data, type, row) {
+        render: function (row) {
           return `
             <div class="btn-group">
               <button class="btn-edit" onclick="editMaterial(${row.studymaterialid})">Edit</button>
@@ -66,20 +72,20 @@ $(document).ready(function () {
   const api = this.api();
 
  
-  api.columns().every(function (colIdx) {
-    const column = this;
-    const title = column.footer().textContent;
-    if (colIdx !== 4 && colIdx !== 5 && title) {
-      const input = document.createElement('input');
-      input.placeholder = `Search ${title}`;
-      column.footer().replaceChildren(input);
-      input.addEventListener('keyup', function () {
-        if (column.search() !== this.value) {
-          column.search(this.value).draw();
-        }
-      });
-    }
-  });
+  // api.columns().every(function (colIdx) {
+  //   const column = this;
+  //   const title = column.footer().textContent;
+  //   if (colIdx !== 4 && colIdx !== 5 && title) {
+  //     const input = document.createElement('input');
+  //     input.placeholder = `Search ${title}`;
+  //     column.footer().replaceChildren(input);
+  //     input.addEventListener('keyup', function () {
+  //       if (column.search() !== this.value) {
+  //         column.search(this.value).draw();
+  //       }
+  //     });
+  //   }
+  // });
 
   const techSet = new Set();
   api.column(4).data().each(function (d) {
@@ -116,6 +122,7 @@ function editMaterial(id) {
     url: `http://localhost:3000/api/studyMaterial/get/${id}`,
     method: 'GET',
     success: function (data) {
+      data = data.result;
       document.getElementById('edit_studymaterialid').value = data.studymaterialid;
       document.getElementById('edit_topic').value = data.topic;
       document.getElementById('edit_reference').value = data.reference;
@@ -158,7 +165,7 @@ $('#editStudyMaterialForm').on('submit', function (e) {
     success: function () {
       alert('Study material updated successfully.');
       document.getElementById("editStudyMaterialModal").style.display = "none";
-      $('#example').DataTable().ajax.reload();
+      $('#example').DataTable().ajax.reload(null, false);
     },
     error: function () {
       alert('Error updating study material.');
@@ -188,7 +195,7 @@ function deleteMaterial(id) {
       success: function () {
         alert('Study material deleted successfully');
         modal.style.display = 'none';
-        $('#example').DataTable().ajax.reload();
+        $('#example').DataTable().ajax.reload(null, false);
       },
       error: function () {
         alert('Error deleting study material.');
@@ -294,8 +301,8 @@ function editRow(button) {
 
   roleCell.innerHTML = `
     <select class="edit-select">
-      <option ${role === 'Full stack developer' ? 'selected' : ''}>Full stack developer</option>
-      <option ${role === 'Software tester' ? 'selected' : ''}>Software tester</option>
+      <option ${role === 'Full stack' ? 'selected' : ''}>Full stack developer</option>
+      <option ${role === 'Software Testing' ? 'selected' : ''}>Software tester</option>
       <option ${role === 'Android developer' ? 'selected' : ''}>Android developer</option>
     </select>`;
 
@@ -399,7 +406,8 @@ function submitMultipleForms() {
       alert("Study materials submitted successfully!");
       document.querySelector("#studyTable tbody").innerHTML = "";
       rowCount = 0;
-      $('#example').DataTable().ajax.reload();
+      $('#example').DataTable().ajax.reload(null, false);
+      document.getElementById('addModal').style.display = 'none';
       document.querySelector('.add-table-popup').style.display = 'none';
     } else {
       return res.json().then(data => {

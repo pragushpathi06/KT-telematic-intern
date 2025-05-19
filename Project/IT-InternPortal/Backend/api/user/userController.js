@@ -1,5 +1,6 @@
 // const User = require('../models/user');
 const { Op } = require("sequelize");
+const { Sequelize } = require('sequelize')
 // const { User } = require('../../models/index');
 const { User, UserProgress, StudyMaterial } = require('../../models');
 const bcrypt = require('bcrypt');
@@ -31,7 +32,9 @@ exports.registerUser = async (req,res) => {
       // 201	Created
       res.status(201).json({ message: "User Registered Successfully", data: newUser })
   } catch (error) {
-      res.status(500).json({ error: error.message }); 
+      res.status(500).json({ 
+        success:false,
+        message: error.message  }); 
   }
 
 }
@@ -59,6 +62,7 @@ exports.BulkRegisterUser = async (req, res) => {
     );
     if (filteredUsers.length === 0) {
       return res.status(409).json({
+        success:false,
         message: "All provided emails already exist",
         existingEmails
       });
@@ -80,9 +84,9 @@ exports.BulkRegisterUser = async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
     res.status(500).json({
-      error: error.message,
+      success:false,
+      message: error.message ,
       details: error.errors || error
     });
   }
@@ -92,10 +96,14 @@ exports.BulkRegisterUser = async (req, res) => {
 exports.getAllUsers = async (req,res) => {
     try {
         const getUser = await User.findAll();
-        res.status(200).json(getUser)
+        res.status(200).json({
+          success:true,
+          result:getUser
+        })
     } catch (error) {
         res.status(500).json({
-            error:error.message
+            success:false,
+            message: error.message 
         })
     }
   }
@@ -104,10 +112,16 @@ exports.getSingleUser = async (req,res) => {
     try {
         const {id} = req.params;
         const getUser = await User.findByPk(id);
-        res.status(200).json(getUser)
+        res.status(200).json(
+          {
+            success:true,
+            result: getUser
+          }
+         )
     } catch (error) {
         res.status(500).json({
-            error:error.message
+            success:false,
+            message: error.message 
         })
     }
   }
@@ -124,11 +138,16 @@ exports.getOneUser = async (req, res) => {
         return res.status(404).json({ message: 'User progress not found' });
       }
       res.status(200).json({
-        role:user.role
+        success:true,
+        result:{
+          role:user.role
+        }
       });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Error fetching user' });
+      res.status(500).json({ 
+        success:false,
+        message: error.message });
   }
 };
 
@@ -141,7 +160,10 @@ exports.deleteUser = async (req,res) => {
           }
           res.status(200).json({ message: "User deleted successfully" });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ 
+          success:false,
+        message: error.message 
+         });
     }
   }
 
@@ -165,10 +187,17 @@ exports.updateUser = async (req,res) => {
     }
 
     const updatedUser = await User.findByPk(id);
-    res.status(200).json(updatedUser);
+    res.status(200).json(
+      {
+        success:true,
+        result:updatedUser
+      });
 
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      success:false,
+      message: error.message 
+     });
   }
 }
 
@@ -180,12 +209,16 @@ exports.loginUser = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(404).json({ message: 'Email not found' });
+      return res.status(404).json({ 
+        success:false,
+        message: 'Email not found' });
     }
 
     const passwordValid = await bcrypt.compare(password, user.password);
     if (!passwordValid) {
-      return res.status(401).json({ message: 'Incorrect email or password' });
+      return res.status(401).json({
+        success:false,
+        message: 'Incorrect email or password' });
     }
 
     const token = jwt.sign(
@@ -205,20 +238,24 @@ exports.loginUser = async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Login error' });
+    return res.status(500).json({ 
+      success:false,
+      message: error.message  });
   }
 };
 
 
 exports.protected =async (req,res) => {
-  if (req.user && req.user.first_name) { // Check if the user data is available
+  if (req.user && req.user.first_name) { 
     res.json({
       message: 'This is a protected route!',
-      name:req.user.first_name  // Send the user's first name from the token
+      name:req.user.first_name 
     });
   } else {
     res.status(400).json({
-      message: 'User data is missing in the token.'
+      success:false,
+      message: 'User data is missing in the token.',
+       message: error.message
     });
   }
 }
@@ -227,73 +264,75 @@ exports.check = async (req, res) => {
   const { value, type } = req.query;
 
   if (!value || !type) {
-    return res.status(400).json({ message: 'Value and type are required' });
+    return res.status(400).json({ 
+      success:false,
+      essage: 'Value and type are required' ,
+    message: error.message});
   }
 
   let where = {};
   if (type === 'personal_email') where.personal_email = value;
   else if (type === 'college_email') where.college_email = value;
   else if (type === 'phone_number') where.phone_number = value;
-  else return res.status(400).json({ message: 'Invalid type' });
+  else return res.status(400).json({
+    success:false,
+    message: 'Invalid type' ,
+  message: error.message});
 
   try {
     const existing = await User.findOne({ where });
     res.json({ exists: !!existing });
   } catch (err) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ 
+      success:false,
+      message: 'Internal server error' });
   }
 };
 
 exports.getAllUsersDetails = async (req, res) => {
   try {
     const usersDetails = await User.findAll({
-      attributes:["userid",
-        "first_name",
-        "last_name",
-        "personal_email",
-        "college_email",
-        "phone_number",
-        "joined_date",
-        "gender",
-        "address",
-        "city",
-        "state",
-        "pincode",
-        "profile_picture_url",
-        "role",
-        "status"],
+      attributes: [
+        "userid", "first_name", "last_name", "personal_email", "college_email",
+        "phone_number", "joined_date", "gender", "address", "city", "state",
+        "pincode", "profile_picture_url", "role", "status"
+      ],
       include: {
         model: UserProgress,
-        attributes:['id'],
-        include:{
+        attributes: ['id'],
+        include: {
           model: StudyMaterial,
-          attributes:["topic","tech","role"]
+          attributes: ["topic", "tech", "role"]
         }
       }
     });
 
-    res.status(200).json(usersDetails);
+    const totalTopics = await StudyMaterial.findAll({
+      attributes: [
+        ['role', 'role'],
+        [Sequelize.fn('COUNT', Sequelize.col('role')), 'totalCount']
+      ],
+      group: ['role']
+    });
+
+    const totalCountMap = {};
+    totalTopics.forEach(topic => {
+      totalCountMap[topic.dataValues.role] = parseInt(topic.dataValues.totalCount);
+    });
+
+    res.status(200).json({
+      success:true,
+      result:{
+      usersDetails,
+      total_count: totalCountMap
+      }
+      
+    });
+
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch data', details: error.message });
+    res.status(500).json({ 
+      success:false,
+      error: 'Failed to fetch data', 
+      message: error.message });
   }
 };
-
-// exports.getAllUsersDetails = async (req, res) => {
-//   try {
-//     const usersDetails = await User.findAll({
-//       attributes: ['userid', 'first_name', 'personal_email'], 
-//       include: {
-//         model: UserProgress,
-//         attributes: ['progressid', 'status'], 
-//         include: {
-//           model: StudyMaterial,
-//           attributes: ['studymaterialid', 'topic', 'tech'] 
-//         }
-//       }
-//     });
-
-//     res.status(200).json(usersDetails);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch data', details: error.message });
-//   }
-// };

@@ -67,8 +67,11 @@
         <span id="check-phone"></span><br><br>
 
 
-        <label for="joined_date"><span class="important">*</span>Joined Date:</label>
-        <input type="date" id="add_joined_date" required><br><br>
+        <label for="add_joined_date"><span class="important">*</span> Joined Date:</label>
+        <input type="date" id="add_joined_date" required>
+        <span id="add_joined_date_error" style="color: red; font-size: 0.9em;"></span>
+        <br><br>
+
 
         <label for="gender"><span class="important">*</span>Gender:</label>
         <!-- <input type="text" id="add_gender" required> -->
@@ -123,7 +126,7 @@
         </select><br><br>
 
 
-        <button type="submit" id="submit-btn" disabled>Add User</button>
+        <button type="submit" id="submit-btn">Add User</button>
         <button type="reset" id="reset-btn">Reset</button>
       </form>
     </div>
